@@ -1,0 +1,5 @@
+name: Sector
+main: xyz.rokkiitt.sector.Main
+version: "0.1"
+api: ["1.0.9"]
+author: Rokkkit
