@@ -197,7 +197,7 @@ package xyz.rokkiitt.sector.objects.network;
 //                if (pa7.sector.equalsIgnoreCase(Config.getInstance().Sector)) {
 //                    final Player p = Server.getInstance().getPlayerExact(pa7.sender.toLowerCase());
 //                    if (p != null) {
-//                        final Item safe = new ItemBuilder(54, 1, 0).setTitle("&r&l&6Sejf id: &r&7" + pa7.id).setLore(new String[] { "", "&r &eOpis: &7brak", "&r &eWlasciciel: &7" + p.getName().toLowerCase(), "&r &eOstatnio otwarty: &7nigdy", "&r &eW sejfie znajduje sie &70 &eprzedmiotow", "", "&r&6Kliknij &7PPM &6aby otworzyc!" }).build();
+//                        final Item safe = new ItemBuilder(54, 1, 0).setTitle("&r&6Sejf id: &r&7" + pa7.id).setLore(new String[] { "", "&r &eOpis: &7brak", "&r &eWlasciciel: &7" + p.getName().toLowerCase(), "&r &eOstatnio otwarty: &7nigdy", "&r &eW sejfie znajduje sie &70 &eprzedmiotow", "", "&r&6Kliknij &7PPM &6aby otworzyc!" }).build();
 //                        Util.addNBTTag(safe, "safe");
 //                        Util.addNBTTagWithValue(safe, "id", String.valueOf(pa7.id));
 //                        Util.addNBTTagWithValue(safe, "owner", p.getName().toLowerCase());

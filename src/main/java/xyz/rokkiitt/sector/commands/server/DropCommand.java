@@ -2,6 +2,7 @@ package xyz.rokkiitt.sector.commands.server;
 
 import xyz.rokkiitt.sector.ServerCommand;
 import xyz.rokkiitt.sector.objects.drop.DropInventory;
+import xyz.rokkiitt.sector.objects.drop.gui.MainDropInventory;
 import xyz.rokkiitt.sector.objects.user.User;
 import xyz.rokkiitt.sector.objects.user.UserManager;
 import xyz.rokkiitt.sector.utils.Util;
@@ -18,7 +19,7 @@ public class DropCommand extends ServerCommand
     public boolean onCommand(final Player p, final String[] args) {
         final User u = UserManager.getUser(p.getName());
         if (u != null) {
-            new DropInventory(p, u);
+            new MainDropInventory(p, u);
             return false;
         }
         p.kick(Util.fixColor("&9not properly loaded user data - DropCommand"));

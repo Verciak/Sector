@@ -20,7 +20,7 @@ public class GuildRegenerationGUI extends HopperFakeInventory
     public GuildRegenerationGUI(final Guild g) {
         super(null, Util.fixColor("&6Regeneracja"));
         this.g = g;
-        this.setItem(0, new ItemBuilder(339, 1).setTitle("&r&6Informacje").setLore(new String[] { "&r&7Regeneracja odnawia bloki zniszczone przez &eTNT", "&r&7Kosztem regeneracji sa &eBloki diamentow", "", "&6Regeneracja nie odnawia:", "&r&8&l- &e rudy diamentu, szmaragdu, zlota, zelaza", "&8&l- &e bloku diamentu, szmaragdu, zlota, zelaza", "&r&8&l- &e biblioteczki, enchantu, beacona, kowadel itd.", "&8&l- &e TNT, tabliczek, drabinek, lozek" }).build());
+        this.setItem(0, new ItemBuilder(339, 1).setTitle("&r&6Informacje").setLore(new String[] { "&r&7Regeneracja odnawia bloki zniszczone przez &eTNT", "&r&7Kosztem regeneracji sa &eBloki diamentow", "", "&6Regeneracja nie odnawia:", "&r&8- &e rudy diamentu, szmaragdu, zlota, zelaza", "&8- &e bloku diamentu, szmaragdu, zlota, zelaza", "&r&8- &e biblioteczki, enchantu, beacona, kowadel itd.", "&8- &e TNT, tabliczek, drabinek, lozek" }).build());
         this.setItem(1, new ItemBuilder(339, 1).setTitle("&r&6Cennik").setLore(new String[] { "&r&7Koszt regeneracji &e50 blokow = 1 blok diamentu" }).build());
         this.setItem(2, new ItemBuilder(101, 1).setTitle(" ").build());
         this.setItem(3, new ItemBuilder(35, 1, g.isRegen() ? 14 : 5).setTitle(" ").setLore(new String[] { " ", g.isRegen() ? "&r&eRegeneracja jest aktywna" : "&r&eRegeneracja jest nie aktywna" }).build());

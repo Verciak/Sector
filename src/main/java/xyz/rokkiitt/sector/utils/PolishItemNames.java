@@ -17,6 +17,7 @@ public class PolishItemNames
         if (material.getId() == 466) {
             return "kox";
         }
+
         if (material.getId() == 3) {
             return "dirt";
         }
@@ -92,6 +93,9 @@ public class PolishItemNames
         if (material.getId() == 33) {
             return "tlok";
         }
+        if (material.getId() == 332) {
+            return "Sniezka";
+        }
         if (material.getId() == 39) {
             return "brazowy grzyb";
         }
@@ -117,7 +121,7 @@ public class PolishItemNames
             return "zarosniety mchem bruk";
         }
         if (material.getId() == 49) {
-            return "obsydian";
+            return "Obsydian";
         }
         if (material.getId() == 50) {
             return "pochodnia";
@@ -300,16 +304,16 @@ public class PolishItemNames
             return "zaplaniczka";
         }
         if (material.getId() == 260) {
-            return "jablko";
+            return "Jablko";
         }
         if (material.getId() == 261) {
             return "luk";
         }
         if (material.getId() == 262) {
-            return "strzala";
+            return "Strzala";
         }
         if (material.getId() == 263) {
-            return "wegiel";
+            return "Wegiel";
         }
         if (material.getId() == 264) {
             return "Diament";
@@ -348,8 +352,9 @@ public class PolishItemNames
             return "miska";
         }
         if (material.getId() == 287) {
-            return "nic";
+            return "Linka";
         }
+
         if (material.getId() == 288) {
             return "piorko";
         }
@@ -495,7 +500,7 @@ public class PolishItemNames
             return "zgnila stopa srutupufa";
         }
         if (material.getId() == 368) {
-            return "oko endermana";
+            return "Perla";
         }
         if (material.getId() == 369) {
             return "rozdzka plomienia";
@@ -543,7 +548,7 @@ public class PolishItemNames
             return "zlota marchw";
         }
         if (material.getId() == 399) {
-            return "&4&lGwiazde Netherowa! GZ!";
+            return "&4Gwiazde Netherowa! GZ!";
         }
         if (material.getId() == 400) {
             return "placek z dynii";

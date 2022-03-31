@@ -29,14 +29,14 @@ public class StatusCommand extends ServerCommand
         final Server server = sender.getServer();
         final long usedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 2L / 1048576L;
         final long allocatedMemory = Runtime.getRuntime().totalMemory() / 1048576L;
-        Util.sendMessage(sender, "         &6&lSERVER");
+        Util.sendMessage(sender, "         &6SERVER");
         Util.sendMessage(sender, " &f Current TPS: &e" + NukkitMath.round(server.getTicksPerSecond(), 2));
         Util.sendMessage(sender, " &f Load: &e" + server.getTickUsage() + "%");
         Util.sendMessage(sender, " &f Online: &e" + server.getOnlinePlayers().size() + "/" + server.getMaxPlayers());
         Util.sendMessage(sender, " &f Memory: &e" + usedMemory + "&7/&e" + allocatedMemory + " MB");
         Util.sendMessage(sender, " &f Uptime: &e" + Util.formatTime(System.currentTimeMillis() - ManagementFactory.getRuntimeMXBean().getStartTime()));
         Util.sendMessage(sender, " &f Thread count: &e" + Thread.getAllStackTraces().size());
-        Util.sendMessage(sender, "         &6&lWORLD");
+        Util.sendMessage(sender, "         &6WORLD");
         final Level level = server.getDefaultLevel();
         Util.sendMessage(sender, " &f Chunks: &e" + level.getChunks().size());
         Util.sendMessage(sender, " &f Entities: &e" + level.getEntities().length);

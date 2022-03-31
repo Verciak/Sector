@@ -47,7 +47,6 @@ public class GamemodeCommand extends SectorCommand
         }
     }
     
-    @Override
     public boolean onCallback(final String s) {
         return false;
     }

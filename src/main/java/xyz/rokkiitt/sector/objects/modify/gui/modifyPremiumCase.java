@@ -2,38 +2,38 @@ package xyz.rokkiitt.sector.objects.modify.gui;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.inventory.Inventory;
 import cn.nukkit.inventory.InventoryHolder;
 import cn.nukkit.item.Item;
 import com.jsoniter.output.JsonStream;
+import xyz.rokkiitt.sector.Main;
+import xyz.rokkiitt.sector.objects.inventory.FakeSlotChangeEvent;
+import xyz.rokkiitt.sector.objects.inventory.inventories.DoubleChestFakeInventory;
+import xyz.rokkiitt.sector.objects.modify.PandoraItem;
+import xyz.rokkiitt.sector.objects.pandora.Pandora;
+import xyz.rokkiitt.sector.objects.pandora.PandoraManager;
+import xyz.rokkiitt.sector.objects.premiumcase.PremiumCase;
+import xyz.rokkiitt.sector.objects.premiumcase.PremiumCaseManager;
+import xyz.rokkiitt.sector.packets.PacketModifyDrop;
+import xyz.rokkiitt.sector.packets.serializedObjects.SerializedPandoraItem;
+import xyz.rokkiitt.sector.utils.DyeColor;
+import xyz.rokkiitt.sector.utils.ItemSerializer;
+import xyz.rokkiitt.sector.utils.Util;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import xyz.rokkiitt.sector.objects.drop.Drop;
-import xyz.rokkiitt.sector.objects.drop.DropManager;
-import xyz.rokkiitt.sector.packets.PacketModifyDrop;
-import xyz.rokkiitt.sector.Main;
-import xyz.rokkiitt.sector.objects.inventory.FakeSlotChangeEvent;
-import xyz.rokkiitt.sector.objects.inventory.inventories.DoubleChestFakeInventory;
-import xyz.rokkiitt.sector.objects.modify.DropItem;
-import xyz.rokkiitt.sector.packets.serializedObjects.SerializedDropItem;
-import xyz.rokkiitt.sector.packets.serializedObjects.SerializedPandoraItem;
-import xyz.rokkiitt.sector.utils.DyeColor;
-import xyz.rokkiitt.sector.utils.ItemBuilder;
-import xyz.rokkiitt.sector.utils.Util;
-
-public class modifyDrop extends DoubleChestFakeInventory {
-    public modifyDrop(Player p) {
-        super(null, Util.fixColor("&6Modyfikujesz drop"));
+public class modifyPremiumCase extends DoubleChestFakeInventory {
+    public modifyPremiumCase(Player p) {
+        super(null, Util.fixColor("&6Modyfikujesz premiumcase"));
         this.state = State.MAIN;
         this.drops = ConcurrentHashMap.newKeySet();
         this.holder = (InventoryHolder)p;
-        for (Drop d : DropManager.getItems()) {
-            DropItem item = new DropItem();
+        for (PremiumCase d : PremiumCaseManager.getItems()) {
+            PandoraItem item = new PandoraItem();
             item.chance = d.getChance();
-            item.exp = d.getExp();
             item.guislot = d.getSlot();
             item.maxAmount = d.getMaxAmount();
             item.minAmount = d.getMinAmount();
@@ -41,22 +41,24 @@ public class modifyDrop extends DoubleChestFakeInventory {
             this.drops.add(item);
         }
         sendGui();
-        p.addWindow(this);
+        p.addWindow((Inventory)this);
     }
 
-    static List<Integer> available_slots = Arrays.asList(10, 11, 12, 13, 14, 15, 16, 19, 20, 21,
-            22, 23, 24, 25);
+    static List<Integer> available_slots = Arrays.asList(new Integer[] {
+            Integer.valueOf(10), Integer.valueOf(11), Integer.valueOf(12), Integer.valueOf(13), Integer.valueOf(14), Integer.valueOf(15), Integer.valueOf(16), Integer.valueOf(19), Integer.valueOf(20), Integer.valueOf(21),
+            Integer.valueOf(22), Integer.valueOf(23), Integer.valueOf(24), Integer.valueOf(25), Integer.valueOf(28), Integer.valueOf(29), Integer.valueOf(30), Integer.valueOf(31), Integer.valueOf(32), Integer.valueOf(33),
+            Integer.valueOf(34), Integer.valueOf(37), Integer.valueOf(38), Integer.valueOf(39), Integer.valueOf(40), Integer.valueOf(41), Integer.valueOf(42), Integer.valueOf(43) });
 
-    private DropItem selected;
+    private PandoraItem selected;
 
     private State state;
 
-    private final Set<DropItem> drops;
+    private final Set<PandoraItem> drops;
 
     protected void onSlotChange(FakeSlotChangeEvent e) {
         e.setCancelled();
         if (this.state == State.MAIN) {
-            if (!available_slots.contains(e.getAction().getSlot()))
+            if (!available_slots.contains(Integer.valueOf(e.getAction().getSlot())))
                 return;
             if (e.getAction().getSourceItem() != null && e.getAction().getSourceItem().getId() != 0) {
                 this.drops.forEach(s -> {
@@ -72,13 +74,12 @@ public class modifyDrop extends DoubleChestFakeInventory {
             target.setCount(1);
             if (target.hasCustomName())
                 target.setCustomName(Util.fixColor(target.getCustomName()));
-            DropItem item = new DropItem();
+            PandoraItem item = new PandoraItem();
             item.guislot = e.getAction().getSlot();
             item.what = target;
             item.maxAmount = 1;
             item.minAmount = 1;
             item.chance = 0.0D;
-            item.exp = 0;
             this.state = State.EDIT;
             this.selected = item;
             sendGui();
@@ -88,15 +89,16 @@ public class modifyDrop extends DoubleChestFakeInventory {
                     this.drops.forEach(s -> {
                         if (s.equals(this.selected)) {
                             this.drops.remove(s);
-                            this.state = State.MAIN;
                             SerializedPandoraItem drop = new SerializedPandoraItem();
                             drop.chance = s.chance;
                             drop.guislot = s.guislot;
                             drop.maxAmount = s.maxAmount;
                             drop.minAmount = s.minAmount;
                             s.what.setCount(1);
-                            Main.getDatabase().addQueue("DELETE FROM `drops` WHERE `drop` = '" + JsonStream.serialize(drop) + "'");
 
+                            Main.getDatabase().addQueue("DELETE FROM `pcdrops` WHERE `drop` = '" + JsonStream.serialize(drop) + "'");
+
+                            this.state = State.MAIN;
                             sendGui();
                         }
                     });
@@ -125,10 +127,10 @@ public class modifyDrop extends DoubleChestFakeInventory {
                     setItem(22, parseItem(this.selected));
                 } else if (e.getAction().getSlot() == 39) {
                     this.selected = null;
-                    this.state = State.MAIN;
+                    this.state = State.EDIT;
                     sendGui();
                 } else if (e.getAction().getSlot() == 41) {
-                    this.state = State.EXP;
+                    this.state = State.MINAMOUNT;
                     sendGui();
                 } else if (e.getAction().getSlot() == 19) {
                     if (this.selected.chance - 0.1D <= 0.0D) {
@@ -143,26 +145,6 @@ public class modifyDrop extends DoubleChestFakeInventory {
                         this.selected.chance = 100.0D;
                     this.selected.chance += 0.1D;
                     setItem(22, parseItem(this.selected));
-                }
-        } else if (this.state == State.EXP) {
-            if (this.selected != null)
-                if (e.getAction().getSlot() == 20) {
-                    if (this.selected.exp <= 0) {
-                        this.selected.exp = 0;
-                        setItem(22, parseItem(this.selected));
-                        return;
-                    }
-                    this.selected.exp--;
-                    setItem(22, parseItem(this.selected));
-                } else if (e.getAction().getSlot() == 24) {
-                    this.selected.exp++;
-                    setItem(22, parseItem(this.selected));
-                } else if (e.getAction().getSlot() == 39) {
-                    this.state = State.CHANCE;
-                    sendGui();
-                } else if (e.getAction().getSlot() == 41) {
-                    this.state = State.MINAMOUNT;
-                    sendGui();
                 }
         } else if (this.state == State.MINAMOUNT) {
             if (this.selected != null)
@@ -180,7 +162,7 @@ public class modifyDrop extends DoubleChestFakeInventory {
                         this.selected.maxAmount = this.selected.minAmount;
                     setItem(22, parseItem(this.selected));
                 } else if (e.getAction().getSlot() == 39) {
-                    this.state = State.EXP;
+                    this.state = State.CHANCE;
                     sendGui();
                 } else if (e.getAction().getSlot() == 41) {
                     this.state = State.MAXAMOUNT;
@@ -218,115 +200,100 @@ public class modifyDrop extends DoubleChestFakeInventory {
         if (this.drops.isEmpty()) {
             pa.data = "brak";
         } else {
-            Main.getDatabase().addQueue("TRUNCATE drops;");
+            Main.getDatabase().addQueue("TRUNCATE pcdrops;");
             this.drops.forEach(s -> {
-                SerializedDropItem drop = new SerializedDropItem();
+                SerializedPandoraItem drop = new SerializedPandoraItem();
                 drop.chance = s.chance;
-                drop.exp = s.exp;
                 drop.guislot = s.guislot;
                 drop.maxAmount = s.maxAmount;
                 drop.minAmount = s.minAmount;
                 s.what.setCount(1);
-                drop.what = s.what.getId();
-                Main.getDatabase().addQueue("INSERT INTO `drops`(`id`, `drop`) VALUES (NULL, '" + JsonStream.serialize(drop) + "')");
+
+                String wath = ItemSerializer.itemToString(s.what);
+
+                String data = JsonStream.serialize(drop);
+                pa.data = data;
+                Main.getDatabase().addQueue("INSERT INTO pcdrops(`id`, `drop`, `item`) VALUES (NULL, '" + pa.data + "', '"+wath+"')");
             });
         }
         super.onClose(p);
-        Server.getInstance().getScheduler().scheduleDelayedTask(Main.getPlugin(), () -> DropManager.load(), 100);
+        Server.getInstance().getScheduler().scheduleDelayedTask(Main.getPlugin(), () -> PremiumCaseManager.load(), 100);
+
     }
 
     private void sendGui() {
         clearAll();
         setServerGui();
         if (this.state == State.MAIN) {
-            int[] disabled = {
-                    28, 29, 30, 31, 32, 33, 34, 37, 38, 39,
-                    40, 41, 42, 43 };
-            for (int i : disabled)
-                setItem(i, (new ItemBuilder(-161)).setTitle("&r&6Strefa wylaczona od mozliwosci ustawienia dropu").build());
             this.drops.forEach(v -> setItem(v.guislot, parseItem(v)));
         } else if (this.state == State.EDIT) {
             if (this.selected != null) {
                 setItem(22, parseItem(this.selected));
-                setItem(31, DyeColor.get(DyeColor.RED).setCustomName(Util.fixColor("&r")).setLore(Util.fixColor("&r&fKliknij aby usunac!"), ""));
-                setItem(39, Item.get(77).setCustomName(Util.fixColor("&r")).setLore(Util.fixColor("&r&cKliknij aby cofnac"), " "));
-                setItem(41, Item.get(77).setCustomName(Util.fixColor("&r")).setLore(Util.fixColor("&r&aKliknij aby potwierdzic"), " "));
+                setItem(31, DyeColor.get(DyeColor.RED).setCustomName(Util.fixColor("&r")).setLore(new String[] { Util.fixColor("&r&fKliknij aby usunac!"), "" }));
+                setItem(39, Item.get(77).setCustomName(Util.fixColor("&r")).setLore(new String[] { Util.fixColor("&r&cKliknij aby cofnac"), " " }));
+                setItem(41, Item.get(77).setCustomName(Util.fixColor("&r")).setLore(new String[] { Util.fixColor("&r&aKliknij aby potwierdzic"), " " }));
             }
         } else if (this.state == State.CHANCE) {
             if (this.selected != null) {
                 setItem(22, parseItem(this.selected));
                 setItem(20,
                         DyeColor.get(DyeColor.RED).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby odjac &e0.01 &fdo szansy"), " "));
+                                .setLore(new String[] { Util.fixColor("&r&fKliknij aby odjac &e0.01 &fdo szansy"), " " }));
                 setItem(24,
                         DyeColor.get(DyeColor.LIME).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby dodac &e0.01 &fod szansy"), " "));
+                                .setLore(new String[] { Util.fixColor("&r&fKliknij aby dodac &e0.01 &fod szansy"), " " }));
                 setItem(19,
                         DyeColor.get(DyeColor.RED).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby odjac &e0.1 &fdo szansy"), " "));
+                                .setLore(new String[] { Util.fixColor("&r&fKliknij aby odjac &e0.1 &fdo szansy"), " " }));
                 setItem(25,
                         DyeColor.get(DyeColor.LIME).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby dodac &e0.1 &fod szansy"), " "));
+                                .setLore(new String[] { Util.fixColor("&r&fKliknij aby dodac &e0.1 &fod szansy"), " " }));
                 setItem(39, Item.get(77).setCustomName(Util.fixColor("&r"))
-                        .setLore(Util.fixColor("&r&cKliknij aby cofnac"), " "));
+                        .setLore(new String[] { Util.fixColor("&r&cKliknij aby cofnac"), " " }));
                 setItem(41, Item.get(77).setCustomName(Util.fixColor("&r"))
-                        .setLore(Util.fixColor("&r&aKliknij aby potwierdzic"), " "));
-            }
-        } else if (this.state == State.EXP) {
-            if (this.selected != null) {
-                setItem(22, parseItem(this.selected));
-                setItem(20,
-                        DyeColor.get(DyeColor.RED).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby odjac &e1 &fexpa"), " "));
-                setItem(24,
-                        DyeColor.get(DyeColor.LIME).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby dodac &e1 &fexpa"), " "));
-                setItem(39, Item.get(77).setCustomName(Util.fixColor("&r"))
-                        .setLore(Util.fixColor("&r&cKliknij aby cofnac"), " "));
-                setItem(41, Item.get(77).setCustomName(Util.fixColor("&r"))
-                        .setLore(Util.fixColor("&r&aKliknij aby potwierdzic"), " "));
+                        .setLore(new String[] { Util.fixColor("&r&aKliknij aby potwierdzic"), " " }));
             }
         } else if (this.state == State.MINAMOUNT) {
             if (this.selected != null) {
                 setItem(22, parseItem(this.selected));
                 setItem(20,
                         DyeColor.get(DyeColor.RED).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby odjac &e1 &fdo minimalnej ilosci"), " "));
+                                .setLore(new String[] { Util.fixColor("&r&fKliknij aby odjac &e1 &fdo minimalnej ilosci"), " " }));
                 setItem(24,
                         DyeColor.get(DyeColor.LIME).setCustomName(Util.fixColor("&r"))
-                                .setLore(Util.fixColor("&r&fKliknij aby dodac &e1 &fdo minimalnej ilosci"), " "));
+                                .setLore(new String[] { Util.fixColor("&r&fKliknij aby dodac &e1 &fdo minimalnej ilosci"), " " }));
                 setItem(39, Item.get(77).setCustomName(Util.fixColor("&r"))
-                        .setLore(Util.fixColor("&r&cKliknij aby cofnac"), " "));
+                        .setLore(new String[] { Util.fixColor("&r&cKliknij aby cofnac"), " " }));
                 setItem(41, Item.get(77).setCustomName(Util.fixColor("&r"))
-                        .setLore(Util.fixColor("&r&aKliknij aby potwierdzic"), " "));
+                        .setLore(new String[] { Util.fixColor("&r&aKliknij aby potwierdzic"), " " }));
             }
         } else if (this.state == State.MAXAMOUNT &&
                 this.selected != null) {
             setItem(22, parseItem(this.selected));
             setItem(20,
                     DyeColor.get(DyeColor.RED).setCustomName(Util.fixColor("&r"))
-                            .setLore(Util.fixColor("&r&fKliknij aby odjac &e1 &fdo maxymalnej ilosci"), " "));
+                            .setLore(new String[] { Util.fixColor("&r&fKliknij aby odjac &e1 &fdo maxymalnej ilosci"), " " }));
             setItem(24,
                     DyeColor.get(DyeColor.LIME).setCustomName(Util.fixColor("&r"))
-                            .setLore(Util.fixColor("&r&fKliknij aby dodac &e1 &fdo maxymalnej ilosci"), " "));
+                            .setLore(new String[] { Util.fixColor("&r&fKliknij aby dodac &e1 &fdo maxymalnej ilosci"), " " }));
             setItem(39, Item.get(77).setCustomName(Util.fixColor("&r"))
-                    .setLore(Util.fixColor("&r&cKliknij aby cofnac"), " "));
+                    .setLore(new String[] { Util.fixColor("&r&cKliknij aby cofnac"), " " }));
             setItem(41, Item.get(77).setCustomName(Util.fixColor("&r"))
-                    .setLore(Util.fixColor("&r&aKliknij aby zakonczyc"), " "));
+                    .setLore(new String[] { Util.fixColor("&r&aKliknij aby zakonczyc"), " " }));
         }
     }
 
-    private Item parseItem(DropItem v) {
+    private Item parseItem(PandoraItem v) {
         Item what = getCopyItem(v.what.clone());
-        what.setLore(parseLore(v.what.getLore(), new String[] { "", "&r&fSzansa: &e{CHANCE}", "&r&fExp: &e{EXP}", "&r&fMin: &e{MIN}", "&r&fMax: &e{MAX}", "" }, v));
+        what.setLore(parseLore(v.what.getLore(), new String[] { "", "&r&fSzansa: &e{CHANCE}", "&r&fMin: &e{MIN}", "&r&fMax: &e{MAX}", "" }, v));
         if (what.hasCustomName())
             what.setCustomName(what.getCustomName());
         what.setCount(1);
-        return what;
+        return what.clone();
     }
 
     private Item getCopyItem(Item i) {
-        Item item = Item.get(i.getId(), i.getDamage(), 1);
+        Item item = Item.get(i.getId(), Integer.valueOf(i.getDamage()), 1);
         if ((i.getLore()).length > 0)
             item.setLore(i.getLore());
         if (i.hasCustomName())
@@ -338,7 +305,7 @@ public class modifyDrop extends DoubleChestFakeInventory {
         return item;
     }
 
-    private String[] parseLore(String[] oldlore, String[] t, DropItem v) {
+    private String[] parseLore(String[] oldlore, String[] t, PandoraItem v) {
         String[] lor = new String[oldlore.length + t.length];
         int i = 0;
         for (String s : oldlore) {
@@ -352,15 +319,14 @@ public class modifyDrop extends DoubleChestFakeInventory {
         return lor;
     }
 
-    private String parseLore(String msg, DropItem v) {
+    private String parseLore(String msg, PandoraItem v) {
         msg = msg.replace("{CHANCE}", String.valueOf(Util.round(v.chance)));
-        msg = msg.replace("{EXP}", String.valueOf(v.exp));
         msg = msg.replace("{MAX}", String.valueOf(v.maxAmount));
         msg = msg.replace("{MIN}", String.valueOf(v.minAmount));
         return Util.fixColor(msg);
     }
 
     private enum State {
-        MAIN, EDIT, CHANCE, EXP, MINAMOUNT, MAXAMOUNT;
+        MAIN, EDIT, CHANCE, MINAMOUNT, MAXAMOUNT;
     }
 }

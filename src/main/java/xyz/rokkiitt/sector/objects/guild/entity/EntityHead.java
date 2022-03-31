@@ -64,7 +64,7 @@ public class EntityHead extends EntityHuman
                     }
                     if (this.g.getTag().equalsIgnoreCase(u.getTag()) && !CombatManager.isContains(((Player)damager).getName())) {
                         if (u.hasPermission("22")) {
-                            ((Player)damager).addWindow((Inventory)new GuildHeartGUI(this.g));
+                            ((Player)damager).addWindow(new GuildHeartGUI(this.g));
                         }
                         else {
                             Util.sendMessage((CommandSender)damager, Settings.getMessage("guildpermission").replace("{TYPE}", "zarzadzania sercem gildii!"));

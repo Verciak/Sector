@@ -38,7 +38,6 @@ public class GuildWarCommand extends SectorCommand
         return false;
     }
     
-    @Override
     public boolean onCallback(final String s) {
         final PacketGuildWar pa = JsonIterator.deserialize(s, PacketGuildWar.class);
             final Player p = Server.getInstance().getPlayerExact(pa.player);

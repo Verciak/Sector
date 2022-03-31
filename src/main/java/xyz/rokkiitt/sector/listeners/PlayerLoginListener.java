@@ -1,6 +1,7 @@
 package xyz.rokkiitt.sector.listeners;
 
 import cn.nukkit.event.*;
+import xyz.rokkiitt.sector.DiscordWebhook;
 import xyz.rokkiitt.sector.Main;
 import xyz.rokkiitt.sector.objects.Permissions;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
@@ -26,6 +27,8 @@ import cn.nukkit.*;
 import cn.nukkit.item.*;
 import cn.nukkit.event.player.*;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class PlayerLoginListener implements Listener {
@@ -42,6 +45,18 @@ public class PlayerLoginListener implements Listener {
     @EventHandler
     public void onJoin(final PlayerJoinEvent e) {
         e.setJoinMessage("");
+        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958721718388654114/DO8k2jBPB2_Oy7_MCbGjLSsc8zfO8V-p4aPa3_cGBvUYfx57oRj8IONjvEwIrAOUKiCJ");
+        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+        embedObject.setAuthor("LOGI JOIN", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+        embedObject.setColor(new Color(0x00FF00));
+        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** dolaczyl na serwer!");
+        embedObject.setTitle("");
+        webhook.addEmbed(embedObject);
+        try {
+            webhook.execute();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -254,6 +269,18 @@ public class PlayerLoginListener implements Listener {
     @EventHandler
     public void onQuit(final PlayerQuitEvent e) {
         e.setQuitMessage("");
+        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958722112493875250/SaJ12Vw5aTO2X0rUL71dICuorBrgJHtOTivhl582vHMEmrhdkHEZWDvshYymILuvoWT2");
+        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+        embedObject.setAuthor("LOGI LEFT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+        embedObject.setColor(new Color(0x00FF00));
+        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** opuscil serwer!");
+        embedObject.setTitle("");
+        webhook.addEmbed(embedObject);
+        try {
+            webhook.execute();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         final Player p = e.getPlayer();
         TeleportManager.removePlayer(p);
         Permissions.removePermissions(p);

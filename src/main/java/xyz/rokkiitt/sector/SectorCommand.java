@@ -2,8 +2,11 @@ package xyz.rokkiitt.sector;
 
 import cn.nukkit.command.*;
 import cn.nukkit.*;
+import org.apache.commons.lang3.StringUtils;
 import xyz.rokkiitt.sector.utils.Util;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 
 public abstract class SectorCommand extends Command
@@ -30,7 +33,21 @@ public abstract class SectorCommand extends Command
             sender.sendMessage(Util.fixColor("&3Komenda sektorowa nie moze zostac uzyta z konsoli!"));
             return false;
         }
-        return this.onCommand((Player)sender, args);
+        this.onCommand((Player)sender, args);
+        String cmd = StringUtils.join(args, " ");
+        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/957107354380406784/zN2FnI_Mo6XItWf-urM1SB5t0ASZzQGh_S0j7aqafozrl6ar_qbpYeVascPBUZ2wqK6L");
+        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+        embedObject.setAuthor("LOGI KOMEND", "", "http://cravatar.eu/avatar/"+ sender.getName() +"/64.png");
+        embedObject.setColor(new Color(0x00FF00));
+        embedObject.setDescription("Gracz **" + sender.getName() + "** uzyl komendy: **/"+ getName() +" " + cmd + "**");
+        embedObject.setTitle("");
+        webhook.addEmbed(embedObject);
+        try {
+            webhook.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
     
     public static SectorCommand getCommand(final String s) {
@@ -55,9 +72,7 @@ public abstract class SectorCommand extends Command
     public boolean sendCorrectUsage(final Player p) {
         return Util.sendMessage((CommandSender)p, Settings.getMessage("correctusage").replace("{USAGE}", this.usageMessage));
     }
-    
-    public abstract boolean onCallback(final String p0);
-    
+
     public abstract boolean onCommand(final Player p0, final String[] p1);
     
     public String getDescription() {

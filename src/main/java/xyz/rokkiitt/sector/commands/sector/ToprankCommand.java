@@ -30,7 +30,7 @@ public class ToprankCommand extends SectorCommand
         return false;
     }
     
-    @Override
+
     public boolean onCallback(final String s) {
         final PacketToprankCommand pa = JsonIterator.deserialize(s, PacketToprankCommand.class);
             final Player p = Server.getInstance().getPlayerExact(pa.sender.toLowerCase());

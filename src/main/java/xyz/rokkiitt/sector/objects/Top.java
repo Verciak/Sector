@@ -38,13 +38,13 @@ public class Top extends ChestFakeInventory
     private void show() {
         this.clearAll();
         this.setSmallServerGui();
-        this.setItem(10, new ItemBuilder(323).setTitle("&r&l&ePUNKTY\u270b").setLore(this.sortPoints()).build());
-        this.setItem(11, new ItemBuilder(315).setTitle("&r&l&eZABOJSTWA\u270b").setLore(this.sortKills()).build());
-        this.setItem(12, new ItemBuilder(397).setTitle("&r&l&eSMIERCI\u270b").setLore(this.sortDeaths()).build());
-        this.setItem(13, new ItemBuilder(267).setTitle("&r&l&eASYSTY\u270b").setLore(this.sortAssists()).build());
-        this.setItem(14, new ItemBuilder(347).setTitle("&r&l&eSPEDZONY CZAS\u270b").setLore(this.sortTime()).build());
-        this.setItem(15, new ItemBuilder(399).setTitle("&r&l&eGILDIE\u270b").setLore(this.sortGuilds()).build());
-        this.setItem(16, new ItemBuilder(278).setTitle("&r&l&eWYKOPANE BLOKI\u270b").setLore(this.sortBroken()).build());
+        this.setItem(10, new ItemBuilder(323).setTitle("&r&ePUNKTY\u270b").setLore(this.sortPoints()).build());
+        this.setItem(11, new ItemBuilder(315).setTitle("&r&eZABOJSTWA\u270b").setLore(this.sortKills()).build());
+        this.setItem(12, new ItemBuilder(397).setTitle("&r&eSMIERCI\u270b").setLore(this.sortDeaths()).build());
+        this.setItem(13, new ItemBuilder(267).setTitle("&r&eASYSTY\u270b").setLore(this.sortAssists()).build());
+        this.setItem(14, new ItemBuilder(347).setTitle("&r&eSPEDZONY CZAS\u270b").setLore(this.sortTime()).build());
+        this.setItem(15, new ItemBuilder(399).setTitle("&r&eGILDIE\u270b").setLore(this.sortGuilds()).build());
+        this.setItem(16, new ItemBuilder(278).setTitle("&r&eWYKOPANE BLOKI\u270b").setLore(this.sortBroken()).build());
     }
     
     @Override
@@ -58,10 +58,10 @@ public class Top extends ChestFakeInventory
         for (final String s : this.points) {
             final String[] split = s.split(Pattern.quote("|&|"));
             if (split.length > 1) {
-                x[b] = "&r&l&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
             }
             else {
-                x[b] = "&r&l&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
             }
             ++b;
         }
@@ -74,10 +74,10 @@ public class Top extends ChestFakeInventory
         for (final String s : this.kills) {
             final String[] split = s.split(Pattern.quote("|&|"));
             if (split.length > 1) {
-                x[b] = "&r&l&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
             }
             else {
-                x[b] = "&r&l&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
             }
             ++b;
         }
@@ -90,10 +90,10 @@ public class Top extends ChestFakeInventory
         for (final String s : this.deaths) {
             final String[] split = s.split(Pattern.quote("|&|"));
             if (split.length > 1) {
-                x[b] = "&r&l&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
             }
             else {
-                x[b] = "&r&l&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
             }
             ++b;
         }
@@ -106,10 +106,10 @@ public class Top extends ChestFakeInventory
         for (final String s : this.assist) {
             final String[] split = s.split(Pattern.quote("|&|"));
             if (split.length > 1) {
-                x[b] = "&r&l&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
             }
             else {
-                x[b] = "&r&l&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
             }
             ++b;
         }
@@ -122,10 +122,10 @@ public class Top extends ChestFakeInventory
         for (final String s : this.time) {
             final String[] split = s.split(Pattern.quote("|&|"));
             if (split.length > 1) {
-                x[b] = "&r&l&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + Util.formatTime(Long.valueOf(split[1])) + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + Util.formatTime(Long.valueOf(split[1])) + "&8]\u270b";
             }
             else {
-                x[b] = "&r&l&8>> &f" + b + ". &eBRAK &8[&40s&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40s&8]\u270b";
             }
             ++b;
         }
@@ -138,10 +138,10 @@ public class Top extends ChestFakeInventory
         for (final String s : this.guild) {
             final String[] split = s.split(Pattern.quote("|&|"));
             if (split.length > 1) {
-                x[b] = "&r&l&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
             }
             else {
-                x[b] = "&r&l&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
             }
             ++b;
         }
@@ -154,10 +154,10 @@ public class Top extends ChestFakeInventory
         for (final String s : this.broken) {
             final String[] split = s.split(Pattern.quote("|&|"));
             if (split.length > 1) {
-                x[b] = "&r&l&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
             }
             else {
-                x[b] = "&r&l&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
             }
             ++b;
         }

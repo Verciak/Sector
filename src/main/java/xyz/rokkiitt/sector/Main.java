@@ -11,6 +11,7 @@ import xyz.rokkiitt.sector.commands.server.admins.StatusCommand;
 import xyz.rokkiitt.sector.commands.server.admins.StopCommand;
 import xyz.rokkiitt.sector.commands.server.admins.TimeCommand;
 import xyz.rokkiitt.sector.commands.server.admins.WeatherCommand;
+import xyz.rokkiitt.sector.commands.server.guild.GuildHomeCommand;
 import xyz.rokkiitt.sector.config.Config;
 import xyz.rokkiitt.sector.database.mysql.MySQL;
 import xyz.rokkiitt.sector.database.threads.DatabaseThread;
@@ -119,7 +120,6 @@ public class Main extends PluginBase
     
     public void onDisable() {
         MeteoriteManager.forceCancel();
-        RouteFinderThreadPool.shutDownNow();
         for (final Guild g : GuildManager.guilds) {
             g.saveRegeneration();
             g.saveLogblock();
@@ -236,7 +236,7 @@ public class Main extends PluginBase
     
     private void registerCommands() {
         final long startTime = System.nanoTime();
-        List<Command> cmd = Arrays.asList(new GuildCreateCommand(), new GuildWarCommand(), new IncognitoCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
+        List<Command> cmd = Arrays.asList(new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new IncognitoCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
                 new GodCommand(), new FlyCommand(), new VanishCommand(), new DropCommand(), new DepositCommand(), new KitCommand(), new HealCommand(), new FeedCommand(), new SpawnCommand(), new CxCommand(),
                 new HelpCommand(), new VipCommand(), new SvipCommand(), new SponsorCommand(), new YouTubeCommand(), new TnTCommand(), new StatuteCommand(), new AlertCommand(), new DescriptionCommand(), new RepairCommand(),
                 new TopCommand(), new EffectsCommand(), new HelpopCommand(), new ResetRankingCommand(), new EnderCommand(), new BlocksCommand(), new IgnoreCommand(), new UnIgnoreCommand(), new IgnoreListCommand(), new CraftingsCommand(),

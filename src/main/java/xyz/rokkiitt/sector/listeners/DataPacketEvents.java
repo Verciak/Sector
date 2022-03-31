@@ -1,5 +1,6 @@
 package xyz.rokkiitt.sector.listeners;
 
+import xyz.rokkiitt.sector.DiscordWebhook;
 import xyz.rokkiitt.sector.Main;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.config.Config;
@@ -21,7 +22,11 @@ import cn.nukkit.network.protocol.*;
 import cn.nukkit.item.food.*;
 import cn.nukkit.inventory.transaction.data.*;
 import cn.nukkit.item.*;
+
+import java.awt.*;
+import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 public class DataPacketEvents implements Listener
 {
@@ -227,6 +232,18 @@ public class DataPacketEvents implements Listener
                     Util.sendLog(e.getPlayer().getName(), " " + e.getPlayer().getName() + " -> maxpackets");
                     e.setCancelled(true);
                     e.getPlayer().close(Util.fixColor(Settings.getMessage("maxpackets")));
+                    DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                    DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                    embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                    embedObject.setColor(new Color(0x00FF00));
+                    embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **maxpackets** i zostal wyrzucony!");
+                    embedObject.setTitle("");
+                    webhook.addEmbed(embedObject);
+                    try {
+                        webhook.execute();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                     return;
                 }
                 final UseItemOnEntityData data = (UseItemOnEntityData)pa.transactionData;
@@ -272,6 +289,18 @@ public class DataPacketEvents implements Listener
                         Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "Speedmine - C (BANNED)"));
                         Cooldown.getInstance().add(e.getPlayer(), "speedmine2", 10.0f);
                         Cooldown.getInstance().add(e.getPlayer(), "speedmineban", 10.0f);
+                        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                        embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                        embedObject.setColor(new Color(0x00FF00));
+                        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **Speedmine C** ZBANUJ GO!");
+                        embedObject.setTitle("");
+                        webhook.addEmbed(embedObject);
+                        try {
+                            webhook.execute();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                     e.setCancelled(true);
                     return;
@@ -283,6 +312,18 @@ public class DataPacketEvents implements Listener
                     Util.sendLog(e.getPlayer().getName(), " " + e.getPlayer().getName() + " -> maxpackets");
                     e.getPlayer().close(Util.fixColor(Settings.getMessage("maxpackets")));
                     Util.kickPlayer(e.getPlayer(), Settings.getMessage("maxpackets"));
+                    DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                    DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                    embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                    embedObject.setColor(new Color(0x00FF00));
+                    embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **maxpackets** i zostal wyrzucony!");
+                    embedObject.setTitle("");
+                    webhook.addEmbed(embedObject);
+                    try {
+                        webhook.execute();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                     return;
                 }
                 final UseItemOnEntityData data = (UseItemOnEntityData)pa.transactionData;
@@ -302,6 +343,18 @@ public class DataPacketEvents implements Listener
                             Util.banAC(e.getPlayer(), "3d", "gildie");
                             Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "SH - A (BANNED)"));
                             Cooldown.getInstance().add(e.getPlayer(), "selfhit", 10.0f);
+                            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                            embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                            embedObject.setColor(new Color(0x00FF00));
+                            embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **Selfhit (BANNED)** ZBANUJ GO!");
+                            embedObject.setTitle("");
+                            webhook.addEmbed(embedObject);
+                            try {
+                                webhook.execute();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                         return;
                     }
@@ -315,6 +368,18 @@ public class DataPacketEvents implements Listener
                             Util.sendLog(e.getPlayer().getName(), " Reach: " + Util.round(dist, 3));
                             Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "Reach - Distance: " + Util.round(dist, 3)));
                             Cooldown.getInstance().add(e.getPlayer(), "reach", 3.0f);
+                            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                            embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                            embedObject.setColor(new Color(0x00FF00));
+                            embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **Reach - Distance: " + Util.round(dist, 3) + "** ZBANUJ GO!");
+                            embedObject.setTitle("");
+                            webhook.addEmbed(embedObject);
+                            try {
+                                webhook.execute();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -328,6 +393,18 @@ public class DataPacketEvents implements Listener
             Util.sendLog(e.getPlayer().getName(), " " + e.getPlayer().getName() + " -> maxpackets");
             e.getPlayer().close(Util.fixColor(Settings.getMessage("maxpackets")));
             Util.kickPlayer(e.getPlayer(), Settings.getMessage("maxpackets"));
+            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+            embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+            embedObject.setColor(new Color(0x00FF00));
+            embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **maxpackets** i zostal wyrzucony!");
+            embedObject.setTitle("");
+            webhook.addEmbed(embedObject);
+            try {
+                webhook.execute();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             return;
         }
         if (e.getPacket() instanceof LevelSoundEventPacket) {
@@ -339,10 +416,37 @@ public class DataPacketEvents implements Listener
                         Util.sendLog(e.getPlayer().getName(), " " + e.getPlayer().getName() + " -> maxpackets");
                         e.getPlayer().close(Util.fixColor(Settings.getMessage("maxpackets")));
                         Util.kickPlayer(e.getPlayer(), Settings.getMessage("maxpackets"));
+                        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                        embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                        embedObject.setColor(new Color(0x00FF00));
+                        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **maxpackets** i zostal wyrzucony!");
+                        embedObject.setTitle("");
+                        webhook.addEmbed(embedObject);
+                        try {
+                            webhook.execute();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                         return;
                     }
                     if (u.macroLimit()) {
-                        e.getPlayer().sendTitle(Util.fixColor("&l&4LIMIT CPS"), Util.fixColor("&cMaksymalna ilosc CPS: " + Settings.LIMIT_MACRO));
+                        if(!Cooldown.getInstance().has(e.getPlayer(), "macro1")){
+                            Cooldown.getInstance().add(e.getPlayer(), "macro1", 5.0f);
+                            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958718782698831912/TUWSp4wrAIY2oBpT0AVl0D1vpavhRGsbPFwvgtw33HGDG4-ufA4TjgFe1-EInEz6EAqu");
+                            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                            embedObject.setAuthor("LOGI ANTY-MACRO", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                            embedObject.setColor(new Color(0x00FF00));
+                            embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** posiada: **macro**!");
+                            embedObject.setTitle("");
+                            webhook.addEmbed(embedObject);
+                            try {
+                                webhook.execute();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                        e.getPlayer().sendTitle(Util.fixColor("&4LIMIT CPS"), Util.fixColor("&cMaksymalna ilosc CPS: " + Settings.LIMIT_MACRO));
                     }
                 }
                 else {
@@ -359,10 +463,36 @@ public class DataPacketEvents implements Listener
                         Util.sendLog(e.getPlayer().getName(), " " + e.getPlayer().getName() + " -> maxpackets");
                         e.getPlayer().close(Util.fixColor(Settings.getMessage("maxpackets")));
                         Util.kickPlayer(e.getPlayer(), Settings.getMessage("maxpackets"));
+                        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                        embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                        embedObject.setColor(new Color(0x00FF00));
+                        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **maxpackets** i zostal wyrzucony!");
+                        embedObject.setTitle("");
+                        webhook.addEmbed(embedObject);
+                        try {
+                            webhook.execute();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                         return;
                     }
                     if (u.macroLimit()) {
-                        e.getPlayer().sendTitle(Util.fixColor("&l&4LIMIT CPS"), Util.fixColor("&cMaksymalna ilosc CPS: " + Settings.LIMIT_MACRO));
+                        if(!Cooldown.getInstance().has(e.getPlayer(), "macro1")){
+                            Cooldown.getInstance().add(e.getPlayer(), "macro1", 5.0f);
+                            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958718782698831912/TUWSp4wrAIY2oBpT0AVl0D1vpavhRGsbPFwvgtw33HGDG4-ufA4TjgFe1-EInEz6EAqu");
+                            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                            embedObject.setAuthor("LOGI ANTY-MACRO", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                            embedObject.setColor(new Color(0x00FF00));
+                            embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** posiada: **macro**!");
+                            embedObject.setTitle("");
+                            webhook.addEmbed(embedObject);
+                            try {
+                                webhook.execute();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
                     }
                 }
                 else {

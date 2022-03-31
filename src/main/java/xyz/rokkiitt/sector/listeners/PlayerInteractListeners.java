@@ -12,6 +12,9 @@ import xyz.rokkiitt.sector.objects.enchant.EnchantInventory;
 import xyz.rokkiitt.sector.objects.meteorite.MeteoriteManager;
 import xyz.rokkiitt.sector.objects.meteorite.MeteoriteRegion;
 import xyz.rokkiitt.sector.objects.pandora.PandoraManager;
+import xyz.rokkiitt.sector.objects.premiumcase.CaseInv;
+import xyz.rokkiitt.sector.objects.premiumcase.CaseManager;
+import xyz.rokkiitt.sector.objects.premiumcase.PremiumCaseGUI;
 import xyz.rokkiitt.sector.objects.user.User;
 import xyz.rokkiitt.sector.objects.user.UserManager;
 import xyz.rokkiitt.sector.utils.DepositUtil;
@@ -164,6 +167,17 @@ public class PlayerInteractListeners implements Listener
         }
         final Player p = e.getPlayer();
         final Item item = e.getItem();
+        if (item.getId() == Item.CHEST && Util.hasNBTTag(item, "premiumcase")) {
+            e.setCancelled(true);
+            if (CaseManager.isInCase(p)) {
+                System.out.printf("error");
+//                p.sendMessage(ChatUtil.fixColor(CasePlugin.getPlugin().getConfig().getString("error.already-opening")));
+                return;
+            }
+
+            new PremiumCaseGUI(p);
+
+        }
         if (item.getId() == 122) {
             if (Util.hasNBTTag(item, "pandora")) {
                 e.setCancelled(true);

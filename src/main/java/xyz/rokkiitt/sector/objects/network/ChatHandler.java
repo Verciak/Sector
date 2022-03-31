@@ -13,7 +13,7 @@ import xyz.rokkiitt.sector.objects.user.*;
 //        for (final Player p : Server.getInstance().getOnlinePlayers().values()) {
 //            if (pa.guild.equalsIgnoreCase("NIEPOSIADA")) {
 //                String format = Util.fixColor(pa.format);
-//                format = format.replace("{MESSAGE}", Util.fixColor("&l") + pa.message);
+//                format = format.replace("{MESSAGE}", Util.fixColor("") + pa.message);
 //                p.sendMessage(format);
 //            }
 //            else {
@@ -22,7 +22,7 @@ import xyz.rokkiitt.sector.objects.user.*;
 //                    String gff = pa.format;
 //                    final String color = Util.getChatColor(pa.guild, u);
 //                    gff = Util.fixColor(gff.replace("{COLOR}", color));
-//                    gff = gff.replace("{MESSAGE}", Util.fixColor("&l") + pa.message);
+//                    gff = gff.replace("{MESSAGE}", Util.fixColor("") + pa.message);
 //                    p.sendMessage(gff);
 //                }
 //                else {

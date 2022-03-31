@@ -75,7 +75,6 @@ public class IncognitoCommand extends SectorCommand
         return false;
     }
     
-    @Override
     public boolean onCallback(final String s) {
         final PacketIncognitoCommand pa = JsonIterator.deserialize(s, PacketIncognitoCommand.class);
             final Player p = Server.getInstance().getPlayerExact(pa.sender.toLowerCase());

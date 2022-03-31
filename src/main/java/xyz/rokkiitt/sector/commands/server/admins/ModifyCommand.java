@@ -9,7 +9,7 @@ import cn.nukkit.command.*;
 public class ModifyCommand extends ServerCommand
 {
     public ModifyCommand() {
-        super("modyfikuj", "modyfikowanie zestawow", "/modyfikuj [drop|pandora|cx|meteoryt|gracz|vip|svip|sponsor|itemy]", Perms.CMD_MODIFY.getPermission());
+        super("modyfikuj", "modyfikowanie zestawow", "/modyfikuj [drop|pandora|cx|meteoryt|premiumcase|gracz|vip|svip|sponsor|itemy]", Perms.CMD_MODIFY.getPermission());
     }
     
     @Override
@@ -51,6 +51,10 @@ public class ModifyCommand extends ServerCommand
                 }
                 case "meteoryt": {
                     new modifyMeteor(p);
+                    break;
+                }
+                case "premiumcase": {
+                    new modifyPremiumCase(p);
                     break;
                 }
                 default: {

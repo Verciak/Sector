@@ -10,6 +10,7 @@ import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.objects.Perms;
 import xyz.rokkiitt.sector.objects.cobblex.Cobblex;
 import xyz.rokkiitt.sector.objects.cobblex.CobblexManager;
+import xyz.rokkiitt.sector.objects.drop.DropInventory;
 import xyz.rokkiitt.sector.objects.inventory.FakeSlotChangeEvent;
 import xyz.rokkiitt.sector.objects.inventory.inventories.DoubleChestFakeInventory;
 import xyz.rokkiitt.sector.objects.meteorite.MeteoriteDrop;
@@ -42,39 +43,49 @@ public class MainDropInventory extends DoubleChestFakeInventory {
 
     @Override
     protected void onSlotChange(final FakeSlotChangeEvent e) {
+        int slot = e.getAction().getSlot();
+        Player p = e.getPlayer();
+        if(slot == 20){
+            new PremiumCaseDropInventory(p, u);
+        }
+        if(slot == 22){
+            new DropInventory(p, u);
+        }
+        if(slot == 24){
+            new PandoraDropInventory(p, u);
+        }
+        if(slot == 39){
+            new CXDropInventory(p, u);
+        }
+        if(slot == 41){
+            new MeteorDropInventory(p, u);
+        }
         e.setCancelled(true);
     }
 
     private void refreshGui() {
         this.clearAll();
+        this.fill();
         this.setServerGui();
-        this.setItem(34,
+        this.setItem(22,
                 new ItemBuilder(Item.STONE)
                         .setTitle("&r&l&6DROP Z KAMIENIA")
-                        .setLore(Util.fixColor(new String[]{"", "&7Kliknij, aby zobaczyc drop!"})).build());
-        this.setItem(42,
+                        .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
+        this.setItem(24,
                 new ItemBuilder(Item.DRAGON_EGG)
                         .setTitle("&r&l&6DROP Z PANDORY")
-                        .setLore(Util.fixColor(new String[]{"", "&7Kliknij, aby zobaczyc drop!"})).build());
-        this.setItem(29,
+                        .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
+        this.setItem(39,
                 new ItemBuilder(Item.MOSSY_STONE)
                         .setTitle("&r&l&6DROP Z COBBLEXA")
-                        .setLore(Util.fixColor(new String[]{"", "&7Kliknij, aby zobaczyc drop!"})).build());
-        this.setItem(11,
+                        .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
+        this.setItem(20,
                 new ItemBuilder(Item.CHEST)
-                        .setTitle("&r&l&6DROP Z SKRZYNKI &8[50%/50% BEACONA&8]")
-                        .setLore(Util.fixColor(new String[]{"", "&7Kliknij, aby zobaczyc drop!"})).build());
-        this.setItem(15,
-                new ItemBuilder(Item.CHEST)
-                        .setTitle("&r&l&DROP Z SKRZYNKI &8[50%/50% 6/3/3&8]")
-                        .setLore(Util.fixColor(new String[]{"", "&7Kliknij, aby zobaczyc drop!"})).build());
-        this.setItem(22,
-                new ItemBuilder(Item.CHEST)
-                        .setTitle("&r&l&6DROP Z MAGICZNEJ SKRZYNI")
-                        .setLore(Util.fixColor(new String[]{"", "&7Kliknij, aby zobaczyc drop!"})).build());
-        this.setItem(39,
+                        .setTitle("&r&l&6DROP Z PREMIUMCASE")
+                        .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
+        this.setItem(41,
                 new ItemBuilder(Item.CHORUS_FRUIT)
                         .setTitle("&r&l&6DROP Z METEORYTU")
-                        .setLore(Util.fixColor(new String[]{"", "&7Kliknij, aby zobaczyc drop!"})).build());
+                        .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
     }
 }

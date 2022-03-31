@@ -47,13 +47,6 @@ public class MoveHeartListener implements Listener
                 }
                 to.getHead().spawnTo(p);
             }
-            else if (from != null && to == null && from.getHead() != null) {
-                from.getHead().despawnFrom(p);
-                if (from.getHead().getViewers().isEmpty()) {
-                    from.getHead().close();
-                    to.setHead(null);
-                }
-            }
         }
     }
 }

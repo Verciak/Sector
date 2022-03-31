@@ -2,7 +2,11 @@ package xyz.rokkiitt.sector;
 
 import cn.nukkit.command.*;
 import cn.nukkit.*;
+import org.apache.commons.lang3.StringUtils;
 import xyz.rokkiitt.sector.utils.Util;
+
+import java.awt.*;
+import java.io.IOException;
 
 public abstract class ServerCommand extends Command
 {
@@ -26,7 +30,21 @@ public abstract class ServerCommand extends Command
         if (!(sender instanceof Player)) {
             return this.onConsoleCommand(sender, args);
         }
-        return this.onCommand((Player)sender, args);
+        this.onCommand((Player)sender, args);
+        String cmd = StringUtils.join(args, " ");
+        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/957107354380406784/zN2FnI_Mo6XItWf-urM1SB5t0ASZzQGh_S0j7aqafozrl6ar_qbpYeVascPBUZ2wqK6L");
+        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+        embedObject.setAuthor("LOGI KOMEND", "", "http://cravatar.eu/avatar/"+ sender.getName() +"/64.png");
+        embedObject.setColor(new Color(0x00FF00));
+        embedObject.setDescription("Gracz **" + sender.getName() + "** uzyl komendy: **/"+ getName() +" " + cmd + "**");
+        embedObject.setTitle("");
+        webhook.addEmbed(embedObject);
+        try {
+            webhook.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
     
     private static void registerCommand(final Command cmd, final String fallback) {

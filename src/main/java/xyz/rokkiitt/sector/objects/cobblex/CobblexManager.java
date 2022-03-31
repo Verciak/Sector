@@ -64,7 +64,7 @@ public class CobblexManager
             final int a = (d2.getMinAmount() == d2.getMaxAmount()) ? d2.getMinAmount() : RandomUtil.getRandInt(d2.getMinAmount(), d2.getMaxAmount());
             final Item itemDrop = d2.getWhat().clone();
             itemDrop.setCount(a);
-            p.sendTitle(Util.fixColor("&l&6WYLOSOWALES"), (itemDrop.hasCustomName() ? itemDrop.getCustomName() : itemDrop.getName()) + " x" + itemDrop.getCount());
+            p.sendTitle(Util.fixColor("&6WYLOSOWALES"), (itemDrop.hasCustomName() ? itemDrop.getCustomName() : itemDrop.getName()) + " x" + itemDrop.getCount());
             Util.giveItem(p, itemDrop);
         }
         else if (possibleDrops.size() > 1) {
@@ -73,11 +73,11 @@ public class CobblexManager
             final int a = (d2.getMinAmount() == d2.getMaxAmount()) ? d2.getMinAmount() : RandomUtil.getRandInt(d2.getMinAmount(), d2.getMaxAmount());
             final Item itemDrop = d2.getWhat().clone();
             itemDrop.setCount(a);
-            p.sendTitle(Util.fixColor("&l&6WYLOSOWALES"), (itemDrop.hasCustomName() ? itemDrop.getCustomName() : itemDrop.getName()) + " x" + itemDrop.getCount());
+            p.sendTitle(Util.fixColor("&6WYLOSOWALES"), (itemDrop.hasCustomName() ? itemDrop.getCustomName() : itemDrop.getName()) + " x" + itemDrop.getCount());
             Util.giveItem(p, itemDrop);
         }
         else {
-            p.sendTitle(" ", Util.fixColor("&l&6NIC NIE WYLOSOWALES"));
+            p.sendTitle(" ", Util.fixColor("&6NIC NIE WYLOSOWALES"));
         }
     }
     

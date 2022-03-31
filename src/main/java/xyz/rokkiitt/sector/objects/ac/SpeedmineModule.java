@@ -1,10 +1,13 @@
 package xyz.rokkiitt.sector.objects.ac;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 import cn.nukkit.event.player.*;
 import cn.nukkit.event.block.*;
 import cn.nukkit.event.*;
+import xyz.rokkiitt.sector.DiscordWebhook;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.objects.Perms;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
@@ -62,10 +65,34 @@ public class SpeedmineModule implements Listener
                             Util.banAC(e.getPlayer(), "3d", "gildie");
                             Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "Speedmine - A (Banned)"));
                             Cooldown.getInstance().add(e.getPlayer(), "speedmine2", 10.0f);
+                            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                            embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                            embedObject.setColor(new Color(0x00FF00));
+                            embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **speedmine**!");
+                            embedObject.setTitle("");
+                            webhook.addEmbed(embedObject);
+                            try {
+                                webhook.execute();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                         else if (!Cooldown.getInstance().has(e.getPlayer(), "speedmine")) {
                             Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "Speedmine - A " + (e.getPlayer().hasEffect(3) ? "HASTE" : "") + " Eff: " + (item.isNull() ? "0" : (item.hasEnchantment(15) ? Integer.valueOf(item.getEnchantment(15).getLevel()) : "0"))));
                             Cooldown.getInstance().add(e.getPlayer(), "speedmine", ((eff != null && eff.getLevel() >= 6) || p.hasEffect(3)) ? 6.0f : 3.0f);
+                            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                            embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                            embedObject.setColor(new Color(0x00FF00));
+                            embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **speedmine**!");
+                            embedObject.setTitle("");
+                            webhook.addEmbed(embedObject);
+                            try {
+                                webhook.execute();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                     }
                     else {
@@ -119,6 +146,18 @@ public class SpeedmineModule implements Listener
                     if (u2 != null && !Cooldown.getInstance().has(e.getPlayer(), "speedmine3")) {
                         Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", p.getName()).replace("{WHAT}", "Speedmine - B " + (p.hasEffect(3) ? "HASTE" : "") + " Eff: " + (item.isNull() ? "0" : (item.hasEnchantment(15) ? Integer.valueOf(item.getEnchantment(15).getLevel()) : "0"))));
                         Cooldown.getInstance().add(e.getPlayer(), "speedmine3", 3.0f);
+                        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                        embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                        embedObject.setColor(new Color(0x00FF00));
+                        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **speedmine**!");
+                        embedObject.setTitle("");
+                        webhook.addEmbed(embedObject);
+                        try {
+                            webhook.execute();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
                 return;

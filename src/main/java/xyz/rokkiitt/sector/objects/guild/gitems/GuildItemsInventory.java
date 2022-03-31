@@ -10,7 +10,7 @@ public class GuildItemsInventory extends DoubleChestFakeInventory
         super(null, Util.fixColor("&6Itemy"));
         this.setServerGui();
         for (final GuildItems id : GuildItemsManager.getItems()) {
-            this.setItem(id.getSlot(), id.getWhat().setLore("\u270b", Util.fixColor("&r&l&8%> &fIlosc: &e" + id.getAmount()), ""));
+            this.setItem(id.getSlot(), id.getWhat().setLore("\u270b", Util.fixColor("&r&8>> &fIlosc: &e" + id.getAmount()), ""));
         }
     }
     

@@ -167,7 +167,7 @@ public class BackupInventory extends DoubleChestFakeInventory
         this.clearAll();
         this.setServerGui();
         for (int i = 0; i < 28 && this.isLoading; ++i) {
-            this.addOneItem(new ItemBuilder(-161).setTitle("&r\u270b").setLore(new String[] { "&r&l&cTrwa ladowanie backupow!", "" }).build());
+            this.addOneItem(new ItemBuilder(-161).setTitle("&r\u270b").setLore(new String[] { "&r&cTrwa ladowanie backupow!", "" }).build());
         }
     }
     
@@ -227,7 +227,7 @@ public class BackupInventory extends DoubleChestFakeInventory
         this.setItem(51, new ItemBuilder(77).setTitle((this.selectedPage >= this.pages.size() - 1) ? "&r&cBrak nastepnej strony" : (" &r&aNastepna strona (" + (this.selectedPage + 2) + ")")).build());
         if (this.pages.size() > 0) {
             for (final Backup log : this.pages.get(page)) {
-                this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(389).setTitle("&r&6&lBackup: " + log.id).setLore(new String[] { "&r&6Zabojca: &e" + (log.killer.equalsIgnoreCase("brak") ? "Brak" : log.killer), "&r&6Punkty: &e" + log.points, "&r&6Data: &e" + DateUtil.formatDate(log.date), "&r&6Usuwa sie za: &e" + Util.formatTime(log.date - System.currentTimeMillis()) }).build(), "id", "" + log.id));
+                this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(389).setTitle("&r&6Backup: " + log.id).setLore(new String[] { "&r&6Zabojca: &e" + (log.killer.equalsIgnoreCase("brak") ? "Brak" : log.killer), "&r&6Punkty: &e" + log.points, "&r&6Data: &e" + DateUtil.formatDate(log.date), "&r&6Usuwa sie za: &e" + Util.formatTime(log.date - System.currentTimeMillis()) }).build(), "id", "" + log.id));
             }
         }
         this.selectedPage = page;

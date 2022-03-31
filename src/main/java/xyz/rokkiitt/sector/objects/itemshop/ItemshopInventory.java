@@ -124,7 +124,7 @@ public class ItemshopInventory extends DoubleChestFakeInventory
                                     break;
                                 }
                             }
-                            Util.sendInformation("CHAT||\n&l&8[&7==============&8[&6ITEMSHOP&8]&7==============&8]" + "\n&r&8* &e{P} &7zakupil usluge &e{S}".replace("{S}", ac.getType()).replace("{P}", this.holder.getName()) + "\n&r&8* &7Chcesz tez cos kupic? Wejdz na: &6blazepe.pl\n&l&8[&7==============&8[&6ITEMSHOP&8]&7==============&8]\n ");
+                            Util.sendInformation("CHAT||\n&8[&7==============&8[&6ITEMSHOP&8]&7==============&8]" + "\n&r&8* &e{P} &7zakupil usluge &e{S}".replace("{S}", ac.getType()).replace("{P}", this.holder.getName()) + "\n&r&8* &7Chcesz tez cos kupic? Wejdz na: &6blazepe.pl\n&8[&7==============&8[&6ITEMSHOP&8]&7==============&8]\n ");
                             this.calculatePages();
                             this.openPage(this.validatePage(this.selectedPage));
                         }
@@ -163,7 +163,7 @@ public class ItemshopInventory extends DoubleChestFakeInventory
         this.clearAll();
         this.setServerGui();
         for (int i = 0; i < 28 && this.isLoading; ++i) {
-            this.addOneItem(new ItemBuilder(-161).setTitle("&r\u270b").setLore(new String[] { "&r&l&cTrwa ladowanie itemshopu!", "" }).build());
+            this.addOneItem(new ItemBuilder(-161).setTitle("&r\u270b").setLore(new String[] { "&r&cTrwa ladowanie itemshopu!", "" }).build());
         }
     }
     
@@ -224,43 +224,43 @@ public class ItemshopInventory extends DoubleChestFakeInventory
         if (this.pages.size() > 0) {
             for (final ItemShop log : this.pages.get(page)) {
                 if (log.type == 0) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(339).setTitle("&r&6&lRanga vip").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(339).setTitle("&r&6Ranga vip").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 1) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(339).setTitle("&r&6&lRanga svip").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(339).setTitle("&r&6Ranga svip").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 2) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(339).setTitle("&r&6&lRanga sponsor").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(339).setTitle("&r&6Ranga sponsor").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 3) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(54).setTitle("&r&6&lSejf").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(54).setTitle("&r&6Sejf").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 4) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(280).setTitle("&r&6&lLom").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(280).setTitle("&r&6Lom").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 5) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(340).setTitle("&r&6&lTurbodrop 1h").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(340).setTitle("&r&6Turbodrop 1h").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 6) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6&lPandora x16").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6Pandora x16").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 7) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6&lPandora x32").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6Pandora x32").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 8) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6&lPandora x64").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6Pandora x64").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 9) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6&lPandora x128").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6Pandora x128").build(), "idis", "" + log.id));
                 }
                 else if (log.type == 10) {
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6&lPandora x256").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6Pandora x256").build(), "idis", "" + log.id));
                 }
                 else {
                     if (log.type != 11) {
                         continue;
                     }
-                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6&lPandora x512").build(), "idis", "" + log.id));
+                    this.addOneItem(Util.addNBTTagWithValue(new ItemBuilder(122).setTitle("&r&6Pandora x512").build(), "idis", "" + log.id));
                 }
             }
         }

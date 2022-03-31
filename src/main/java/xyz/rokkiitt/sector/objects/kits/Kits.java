@@ -62,28 +62,28 @@ public class Kits extends DoubleChestFakeInventory {
         } else if (this.state == State.GRACZ) {
             setServerGui();
             for (KitData kit : KitManager.getPlayer()) {
-                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&l&8%> &fIlosc: &e{AMOUNT}", ""}, kit)));
+                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&8>> &fIlosc: &e{AMOUNT}", ""}, kit)));
             }
             setItem(49, back);
             setItem(53, claim);
         } else if (this.state == State.VIP) {
             setServerGui();
             for (KitData kit : KitManager.getVip()) {
-                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&l&8%> &fIlosc: &e{AMOUNT}", ""}, kit)));
+                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&8>> &fIlosc: &e{AMOUNT}", ""}, kit)));
             }
             setItem(49, back);
             setItem(53, claim);
         } else if (this.state == State.SVIP) {
             setServerGui();
             for (KitData kit : KitManager.getSvip()) {
-                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&l&8%> &fIlosc: &e{AMOUNT}", ""}, kit)));
+                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&8>> &fIlosc: &e{AMOUNT}", ""}, kit)));
             }
             setItem(49, back);
             setItem(53, claim);
         } else if (this.state == State.SPONSOR) {
             setServerGui();
             for (KitData kit : KitManager.getSponsor()) {
-                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&l&8%> &fIlosc: &e{AMOUNT}", ""}, kit)));
+                setItem(kit.getSlot(), kit.getWhat().clone().setLore(parseLore(kit.getWhat().getLore(), new String[]{"", "&r&8>> &fIlosc: &e{AMOUNT}", ""}, kit)));
             }
             setItem(49, back);
             setItem(53, claim);
@@ -237,17 +237,17 @@ public class Kits extends DoubleChestFakeInventory {
         }
     }
 
-    static Item zestawjedzenie = (new ItemBuilder(320)).setTitle("&r&6&lZestaw jedznie").build();
+    static Item zestawjedzenie = (new ItemBuilder(320)).setTitle("&r&6Zestaw jedznie").build();
 
-    static Item zestawender = (new ItemBuilder(130)).setTitle("&r&6&lZestaw enderchest").build();
+    static Item zestawender = (new ItemBuilder(130)).setTitle("&r&6Zestaw enderchest").build();
 
-    static Item gracz = (new ItemBuilder(299)).setTitle("&r&6&lZestaw gracz").build();
+    static Item gracz = (new ItemBuilder(299)).setTitle("&r&6Zestaw gracz").build();
 
-    static Item vip = (new ItemBuilder(307)).setTitle("&r&6&lZestaw vip").build();
+    static Item vip = (new ItemBuilder(307)).setTitle("&r&6Zestaw vip").build();
 
-    static Item svip = (new ItemBuilder(315)).setTitle("&r&6&lZestaw svip").build();
+    static Item svip = (new ItemBuilder(315)).setTitle("&r&6Zestaw svip").build();
 
-    static Item sponsor = (new ItemBuilder(311)).setTitle("&r&6&lZestaw sponsor").build();
+    static Item sponsor = (new ItemBuilder(311)).setTitle("&r&6Zestaw sponsor").build();
 
     static Item ender = (new ItemBuilder(130)).build();
 

@@ -123,27 +123,27 @@ public class LogblockInventory extends DoubleChestFakeInventory {
             for (Logblock log : this.pages.get(page)) {
                 if (this.type.equalsIgnoreCase("break")) {
                     addOneItem((new ItemBuilder(389)).setTitle("&r")
-                            .setLore(new String[] { "&r&l&fKto: &e" + log.who, "&r&l&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&l&fZniszczyl: &e" + log.what, "" }).build());
+                            .setLore(new String[] { "&r&fKto: &e" + log.who, "&r&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&fZniszczyl: &e" + log.what, "" }).build());
                     continue;
                 }
                 if (this.type.equalsIgnoreCase("place")) {
                     addOneItem((new ItemBuilder(389)).setTitle("&r")
-                            .setLore(new String[] { "&r&l&fKto: &e" + log.who, "&r&l&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&l&fPostawil: &e" + log.what, "" }).build());
+                            .setLore(new String[] { "&r&fKto: &e" + log.who, "&r&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&fPostawil: &e" + log.what, "" }).build());
                     continue;
                 }
                 if (this.type.equalsIgnoreCase("takenout")) {
                     addOneItem((new ItemBuilder(389)).setTitle("&r")
-                            .setLore(new String[] { "&r&l&fKto: &e" + log.who, "&r&l&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&l&fWyjal: &e" + log.what, "" }).build());
+                            .setLore(new String[] { "&r&fKto: &e" + log.who, "&r&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&fWyjal: &e" + log.what, "" }).build());
                     continue;
                 }
                 if (this.type.equalsIgnoreCase("putin")) {
                     addOneItem((new ItemBuilder(389)).setTitle("&r")
-                            .setLore(new String[] { "&r&l&fKto: &e" + log.who, "&r&l&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&l&fWlozyl: &e" + log.what, "" }).build());
+                            .setLore(new String[] { "&r&fKto: &e" + log.who, "&r&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&fWlozyl: &e" + log.what, "" }).build());
                     continue;
                 }
                 if (this.type.equalsIgnoreCase("liquid"))
                     addOneItem((new ItemBuilder(389)).setTitle("&r")
-                            .setLore(new String[] { "&r&l&fKto: &e" + log.who, "&r&l&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&l&fCo zrobil: &e" + log.what, "" }).build());
+                            .setLore(new String[] { "&r&fKto: &e" + log.who, "&r&fKiedy: &e" + DateUtil.formatDate(log.time), "&r&fCo zrobil: &e" + log.what, "" }).build());
             }
         this.selectedPage = page;
     }
@@ -219,14 +219,14 @@ public class LogblockInventory extends DoubleChestFakeInventory {
         clearAll();
         setServerGui();
         if (this.type.equalsIgnoreCase("unknown")) {
-            setItem(20, (new ItemBuilder(4)).setTitle("&r").setLore(new String[] { "&r&l&fKliknij aby sprawdzic logblock &ezniszczonych &fblokow w tym miejscu", "" }).build());
-                    setItem(30, (new ItemBuilder(54)).setTitle("&r").setLore(new String[] { "&r&l&fKliknij aby sprawdzic logblock &ewyjetych itemow ze &fskrzynki/hoppera w tym miejscu", "" }).build());
-                            setItem(31, (new ItemBuilder(325)).setTitle("&r").setLore(new String[] { "&r&l&fKliknij aby sprawdzic logblock &ewylania/zebrania wody/lavy &fw tym miejscu", "" }).build());
-                                    setItem(32, (new ItemBuilder(54)).setTitle("&r").setLore(new String[] { "&r&l&fKliknij aby sprawdzic logblock &ewlozonych itemow do &fskrzynki/hoppera w tym miejscu", "" }).build());
-            setItem(24, (new ItemBuilder(1)).setTitle("&r").setLore(new String[] { "&r&l&fKliknij aby sprawdzic logblock &epostawionych &fblokow w tym miejscu", "" }).build());
+            setItem(20, (new ItemBuilder(4)).setTitle("&r").setLore(new String[] { "&r&fKliknij aby sprawdzic logblock &ezniszczonych &fblokow w tym miejscu", "" }).build());
+                    setItem(30, (new ItemBuilder(54)).setTitle("&r").setLore(new String[] { "&r&fKliknij aby sprawdzic logblock &ewyjetych itemow ze &fskrzynki/hoppera w tym miejscu", "" }).build());
+                            setItem(31, (new ItemBuilder(325)).setTitle("&r").setLore(new String[] { "&r&fKliknij aby sprawdzic logblock &ewylania/zebrania wody/lavy &fw tym miejscu", "" }).build());
+                                    setItem(32, (new ItemBuilder(54)).setTitle("&r").setLore(new String[] { "&r&fKliknij aby sprawdzic logblock &ewlozonych itemow do &fskrzynki/hoppera w tym miejscu", "" }).build());
+            setItem(24, (new ItemBuilder(1)).setTitle("&r").setLore(new String[] { "&r&fKliknij aby sprawdzic logblock &epostawionych &fblokow w tym miejscu", "" }).build());
         } else {
             for (int i = 0; i < 28; i++) {
-                addOneItem((new ItemBuilder(-161)).setTitle("&r").setLore(new String[] { "&r&l&cTrwa ladowanie logblocka!", "" }).build());
+                addOneItem((new ItemBuilder(-161)).setTitle("&r").setLore(new String[] { "&r&cTrwa ladowanie logblocka!", "" }).build());
                         }
                         setItem(49, (new ItemBuilder(-161))
                                 .setTitle(" &r&cKliknij aby cofnac").build());

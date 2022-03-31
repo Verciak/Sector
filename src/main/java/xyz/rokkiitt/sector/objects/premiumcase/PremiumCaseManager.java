@@ -1,5 +1,7 @@
-package xyz.rokkiitt.sector.objects.pandora;
+package xyz.rokkiitt.sector.objects.premiumcase;
 
+import cn.nukkit.Player;
+import cn.nukkit.item.Item;
 import com.jsoniter.JsonIterator;
 import xyz.rokkiitt.sector.Main;
 import xyz.rokkiitt.sector.Settings;
@@ -9,41 +11,38 @@ import xyz.rokkiitt.sector.packets.serializedObjects.SerializedPandoraItem;
 import xyz.rokkiitt.sector.utils.ItemSerializer;
 import xyz.rokkiitt.sector.utils.RandomUtil;
 import xyz.rokkiitt.sector.utils.Util;
-import cn.nukkit.*;
-import cn.nukkit.item.*;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class PandoraManager
+public class PremiumCaseManager
 {
-    private static final Set<Pandora> pandora;
+    private static final Set<PremiumCase> pandora;
     public static String[] PANDORA_LORE;
     
     public static void load() {
-        Main.getProvider().update("CREATE TABLE IF NOT EXISTS `pandoradrops` (" +
+        Main.getProvider().update("CREATE TABLE IF NOT EXISTS `pcdrops` (" +
                 "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
                 "`drop` varchar(9000) NOT NULL," +
                 "`item` varchar(9000) NOT NULL);");
-        PandoraManager.pandora.clear();
+        PremiumCaseManager.pandora.clear();
         try {
-            ResultSet query = Main.getProvider().query("SELECT * FROM `pandoradrops`");
+            ResultSet query = Main.getProvider().query("SELECT * FROM `pcdrops`");
             while (query.next()) {
                 SerializedPandoraItem drop = JsonIterator.deserialize(query.getString("drop"), SerializedPandoraItem.class);
 
                 Item i = ItemSerializer.itemFromString(query.getString("item"));
-                pandora.add(new Pandora(i, drop.guislot, drop.chance, drop.minAmount, drop.maxAmount));
+                pandora.add(new PremiumCase(i, drop.guislot, drop.chance, drop.minAmount, drop.maxAmount));
             }
             query.close();
-            Main.getPlugin().getLogger().info("Loaded " + pandora.size() + " drops from 'pandoradrops'");
+            Main.getPlugin().getLogger().info("Loaded " + pandora.size() + " drops from 'pcdrops'");
         } catch (SQLException ex) {
-            Main.getPlugin().getLogger().info("Nie mozna zaladowac tabeli pandoradrops");
+            Main.getPlugin().getLogger().info("Nie mozna zaladowac tabeli pcdrops");
             ex.printStackTrace();
         }
     }
@@ -65,13 +64,13 @@ public class PandoraManager
         return pan;
     }
     
-    public static Set<Pandora> getItems() {
-        return PandoraManager.pandora;
+    public static Set<PremiumCase> getItems() {
+        return PremiumCaseManager.pandora;
     }
     
     public static void getDrop(final Player p) {
-        final List<Pandora> possibleDrops = new ArrayList<Pandora>();
-        for (final Pandora d : PandoraManager.pandora) {
+        final List<PremiumCase> possibleDrops = new ArrayList<PremiumCase>();
+        for (final PremiumCase d : PremiumCaseManager.pandora) {
             final double chance = d.getChance();
             if (!RandomUtil.getChance(chance)) {
                 continue;
@@ -79,7 +78,7 @@ public class PandoraManager
             possibleDrops.add(d);
         }
         if (possibleDrops.size() == 1) {
-            final Pandora d2 = possibleDrops.get(0);
+            final PremiumCase d2 = possibleDrops.get(0);
             final int a = (d2.getMinAmount() == d2.getMaxAmount()) ? d2.getMinAmount() : RandomUtil.getRandInt(d2.getMinAmount(), d2.getMaxAmount());
             final Item itemDrop = d2.getWhat().clone();
             itemDrop.setCount(a);
@@ -88,7 +87,7 @@ public class PandoraManager
         }
         else if (possibleDrops.size() > 1) {
             Collections.shuffle(possibleDrops);
-            final Pandora d2 = possibleDrops.get(RandomUtil.getRandInt(0, possibleDrops.size() - 1));
+            final PremiumCase d2 = possibleDrops.get(RandomUtil.getRandInt(0, possibleDrops.size() - 1));
             final int a = (d2.getMinAmount() == d2.getMaxAmount()) ? d2.getMinAmount() : RandomUtil.getRandInt(d2.getMinAmount(), d2.getMaxAmount());
             final Item itemDrop = d2.getWhat().clone();
             itemDrop.setCount(a);
@@ -101,9 +100,9 @@ public class PandoraManager
     }
     
     public static String[] parsePandora(final User u) {
-        final String[] fin = new String[PandoraManager.PANDORA_LORE.length];
+        final String[] fin = new String[PremiumCaseManager.PANDORA_LORE.length];
         for (int i = 0; i < fin.length; ++i) {
-            fin[i] = parsePandora(PandoraManager.PANDORA_LORE[i], u);
+            fin[i] = parsePandora(PremiumCaseManager.PANDORA_LORE[i], u);
         }
         return fin;
     }
@@ -116,6 +115,6 @@ public class PandoraManager
     
     static {
         pandora = ConcurrentHashMap.newKeySet();
-        PandoraManager.PANDORA_LORE = new String[] { "\u270b", "&r&8>> &7Szansa: &9{CHANCE}", "&r&8>> &7Drop: &9{STATUS}" };
+        PremiumCaseManager.PANDORA_LORE = new String[] { "\u270b", "&r&8>> &7Szansa: &9{CHANCE}", "&r&8>> &7Drop: &9{STATUS}" };
     }
 }

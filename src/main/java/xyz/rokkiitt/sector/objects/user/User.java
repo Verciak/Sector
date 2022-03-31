@@ -663,13 +663,13 @@ public class User {
                 dirVec.z *= multiplier;
                 Position position1 = player.getPosition().clone().subtract(dirVec);
                 position1.setComponents(position1.getX(), player.getPosition().getY() + 1.0D, position1.getZ());
-                wp.setNameTag(Util.fixColor("&l&e" + wp.waypointname + "&r&f (" + Util.round(player.getPosition().distance(destination), 2) + "m)"));
+                wp.setNameTag(Util.fixColor("&e" + wp.waypointname + "&r&f (" + Util.round(player.getPosition().distance(destination), 2) + "m)"));
                 wp.setPosition(position1);
             } else {
                 Vector3 position = destination.clone();
                 if (Math.abs(player.getPosition().getY() - position.getY()) >= 3.0D)
                     position.setComponents(position.getX(), (player.getPosition().getY() > position.getY()) ? (player.getPosition().getY() - 3.0D) : (player.getPosition().getY() + 3.0D), position.getZ());
-                wp.setNameTag(Util.fixColor("&l&e" + wp.waypointname + "&r&f (" + Util.round(player.getPosition().distance(destination), 2) + "m)"));
+                wp.setNameTag(Util.fixColor("&e" + wp.waypointname + "&r&f (" + Util.round(player.getPosition().distance(destination), 2) + "m)"));
                 wp.setPosition(position);
             }
             if (!wp.getViewers().containsValue(player))

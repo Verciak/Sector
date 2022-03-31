@@ -42,6 +42,12 @@ public abstract class ChestFakeInventory extends FakeInventory
             this.setItem(b, GlassColor.get(GlassColor.LIME).setCustomName(Util.fixColor("&r")));
         }
     }
+
+    public void fill() {
+        for(int i = 0; i < this.getSize(); i++) {
+            this.setItem(i, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
+        }
+    }
     
     public void setServerGui() {
         final int[] array;

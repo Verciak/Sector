@@ -1,6 +1,7 @@
 package xyz.rokkiitt.sector.objects.ac;
 
 import cn.nukkit.event.player.*;
+import xyz.rokkiitt.sector.DiscordWebhook;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.objects.Perms;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
@@ -10,6 +11,9 @@ import cn.nukkit.level.*;
 import cn.nukkit.math.*;
 import cn.nukkit.utils.*;
 import cn.nukkit.block.*;
+
+import java.awt.*;
+import java.io.IOException;
 
 public class PhaseModule implements Listener
 {
@@ -27,6 +31,18 @@ public class PhaseModule implements Listener
             if (!Cooldown.getInstance().has(e.getPlayer(), "phase1")) {
                 Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "movement was too distant"));
                 Cooldown.getInstance().add(e.getPlayer(), "phase1", 2.0f);
+                DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                embedObject.setColor(new Color(0x00FF00));
+                embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **phase**!");
+                embedObject.setTitle("");
+                webhook.addEmbed(embedObject);
+                try {
+                    webhook.execute();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
         else if (e.getFrom().getFloorX() != e.getTo().getFloorX() || e.getFrom().getFloorZ() != e.getTo().getFloorZ() || e.getFrom().getFloorY() != e.getTo().getFloorY()) {
@@ -35,6 +51,18 @@ public class PhaseModule implements Listener
                 if (!Cooldown.getInstance().has(e.getPlayer(), "phase2")) {
                     Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "trying to walk too wall when he is in wall"));
                     Cooldown.getInstance().add(e.getPlayer(), "phase2", 2.0f);
+                    DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                    DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                    embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                    embedObject.setColor(new Color(0x00FF00));
+                    embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **phase**!");
+                    embedObject.setTitle("");
+                    webhook.addEmbed(embedObject);
+                    try {
+                        webhook.execute();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
                 return;
             }
@@ -43,6 +71,18 @@ public class PhaseModule implements Listener
                 if (!Cooldown.getInstance().has(e.getPlayer(), "phase3")) {
                     Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", "trying to walk too wall"));
                     Cooldown.getInstance().add(e.getPlayer(), "phase3", 2.0f);
+                    DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+                    DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+                    embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+                    embedObject.setColor(new Color(0x00FF00));
+                    embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** jest podjerzany o: **phase**!");
+                    embedObject.setTitle("");
+                    webhook.addEmbed(embedObject);
+                    try {
+                        webhook.execute();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         }

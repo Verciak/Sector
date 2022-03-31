@@ -150,7 +150,7 @@ public class GuildManager {
                 "`hearts` int(100) NOT NULL, " +
                 "`skarbiec` varchar(8000) NOT NULL, " +
                 "`collections` varchar(8000) NOT NULL, " +
-                "`hoppers` int(8000) NOT NULL);");
+                "`hoppers` int(255) NOT NULL);");
         try {
             ResultSet query = Main.getProvider().query("SELECT * FROM `guilds`");
             while (query.next()) {

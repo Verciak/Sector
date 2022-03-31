@@ -1,9 +1,12 @@
 package xyz.rokkiitt.sector.objects.ac;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 import cn.nukkit.item.*;
 import cn.nukkit.event.*;
 import cn.nukkit.event.player.*;
+import xyz.rokkiitt.sector.DiscordWebhook;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
 import xyz.rokkiitt.sector.utils.Util;
@@ -42,62 +45,22 @@ public class EatModule implements Listener
         if (!Cooldown.getInstance().has(player, "eat")) {
             Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", player.getName()).replace("{WHAT}", "Fasteat"));
             Cooldown.getInstance().add(player, "eat", 2.0f);
-        }
-    }
-    
-    @EventHandler
-    public void onEffect(final PlayerCustomAddEffect e) {
-        final Effect effect = e.getReason();
-        final Player p = e.getPlayer();
-        if (effect.getId() == 5) {
-            if (effect.getAmplifier() <= 0) {
-                if (!Settings.ENABLE_STRENGHT1) {
-                    e.setCancelled();
-                    return;
-                }
-            }
-            else if (!Settings.ENABLE_STRENGHT2) {
-                e.setCancelled();
-                return;
-            }
-            if (effect.getAmplifier() > 1) {
-                effect.setAmplifier(1);
-            }
-        }
-        if (effect.getId() == 1) {
-            if (effect.getAmplifier() <= 0) {
-                if (!Settings.ENABLE_SPEED1) {
-                    e.setCancelled();
-                    return;
-                }
-            }
-            else if (!Settings.ENABLE_SPEED2) {
-                e.setCancelled();
-                return;
-            }
-            if (effect.getAmplifier() > 1) {
-                effect.setAmplifier(1);
+            DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958717437501661216/yqAzCBYi51G04MViNUgKN4otJQfNyvtqOEP8IlQzGGIjNui3eFzTz6zmd0OSSKZmVOQl");
+            DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+            embedObject.setAuthor("LOGI ANTY-CHEAT", "", "http://cravatar.eu/avatar/"+ player.getName() +"/64.png");
+            embedObject.setColor(new Color(0x00FF00));
+            embedObject.setDescription("Gracz **" + event.getPlayer().getName() + "** jest podjerzany o: **fast-eat**!");
+            embedObject.setTitle("");
+            webhook.addEmbed(embedObject);
+            try {
+                webhook.execute();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }
     
-    @EventHandler
-    public void onKick(final PlayerAntycheatKick e) {
-        if (e.getPlayer() != null && e.getReason() != null) {
-            Server.getInstance().getScheduler().scheduleTask(() -> {
-                Util.kickPlayer(e.getPlayer(), e.getReason());
-                Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", e.getReason()));
-            });
-        }
-    }
-    
-    @EventHandler
-    public void onNotify(final PlayerAntyCheatNotify e) {
-        if (!Cooldown.getInstance().has(e.getPlayer(), "acnotify")) {
-            Cooldown.getInstance().add(e.getPlayer(), "acnotify", 2.0f);
-            Util.sendInformation("infoadmin||" + Settings.getMessage("antycheat").replace("{PLAYER}", e.getPlayer().getName()).replace("{WHAT}", e.getReason()));
-        }
-    }
+
     
     static {
         times = new ConcurrentHashMap<String, Long>();
