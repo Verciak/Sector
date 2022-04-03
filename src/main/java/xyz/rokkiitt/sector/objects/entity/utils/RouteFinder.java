@@ -1,139 +1,138 @@
 package xyz.rokkiitt.sector.objects.entity.utils;
 
+import cn.nukkit.level.Level;
+import cn.nukkit.math.Vector3;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import xyz.rokkiitt.sector.objects.entity.WalkingEntity;
-import cn.nukkit.math.*;
-import cn.nukkit.level.*;
-import java.util.concurrent.locks.*;
-import java.util.*;
 
-public abstract class RouteFinder
-{
-    protected ArrayList<Node> nodes;
-    protected boolean finished;
-    protected boolean searching;
-    protected int current;
+public abstract class RouteFinder {
+
+    protected ArrayList<Node> nodes = new ArrayList<>();
+    protected boolean finished = false;
+    protected boolean searching = false;
+
+    protected int current = 0;
+
     public WalkingEntity entity;
+
     protected Vector3 start;
     protected Vector3 destination;
+
     protected Level level;
-    protected boolean interrupt;
-    private ReentrantReadWriteLock lock;
-    protected boolean reachable;
-    
-    RouteFinder(final WalkingEntity entity) {
-        this.nodes = new ArrayList<Node>();
-        this.finished = false;
-        this.searching = false;
-        this.current = 0;
-        this.interrupt = false;
-        this.lock = new ReentrantReadWriteLock();
-        this.reachable = true;
-        Objects.requireNonNull(entity, "RouteFinder: entity can not be null");
+
+    protected boolean interrupt = false;
+
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+
+    protected boolean reachable = true;
+
+    RouteFinder(WalkingEntity entity) {
+        Objects.requireNonNull(entity,"RouteFinder: entity can not be null");
         this.entity = entity;
         this.level = entity.getLevel();
     }
-    
+
     public WalkingEntity getEntity() {
-        return this.entity;
+        return entity;
     }
-    
+
     public Vector3 getStart() {
         return this.start;
     }
-    
-    public void setStart(final Vector3 start) {
+
+    public void setStart(Vector3 start) {
         if (!this.isSearching()) {
             this.start = start;
         }
     }
-    
+
     public Vector3 getDestination() {
         return this.destination;
     }
-    
-    public void setDestination(final Vector3 destination) {
+
+    public void setDestination(Vector3 destination) {
         this.destination = destination;
         if (this.isSearching()) {
             this.interrupt = true;
             this.research();
         }
     }
-    
+
     public boolean isFinished() {
-        return this.finished;
+        return finished;
     }
-    
+
     public boolean isSearching() {
-        return this.searching;
+        return searching;
     }
-    
-    public void addNode(final Node node) {
+
+    public void addNode(Node node) {
         try {
-            this.lock.writeLock().lock();
-            this.nodes.add(node);
-        }
-        finally {
-            this.lock.writeLock().unlock();
+            lock.writeLock().lock();
+            nodes.add(node);
+        } finally {
+            lock.writeLock().unlock();
         }
     }
-    
-    public void addNode(final ArrayList<Node> node) {
+
+    public void addNode(ArrayList<Node> node) {
         try {
-            this.lock.writeLock().lock();
-            this.nodes.addAll(node);
+            lock.writeLock().lock();
+            nodes.addAll(node);
+        } finally {
+            lock.writeLock().unlock();
         }
-        finally {
-            this.lock.writeLock().unlock();
-        }
+
     }
-    
+
     public boolean isReachable() {
-        return this.reachable;
+        return reachable;
     }
-    
+
     public Node getCurrentNode() {
         try {
-            this.lock.readLock().lock();
+            lock.readLock().lock();
             if (this.hasCurrentNode()) {
-                return this.nodes.get(this.current);
+                return nodes.get(current);
             }
             return null;
+        } finally {
+            lock.readLock().unlock();
         }
-        finally {
-            this.lock.readLock().unlock();
-        }
+
     }
-    
     public boolean hasCurrentNode() {
-        return this.current < this.nodes.size();
+        return current < this.nodes.size();
     }
-    
+
+
     public Level getLevel() {
         return this.level;
     }
-    
-    public void setLevel(final Level level) {
+
+    public void setLevel(Level level) {
         this.level = level;
     }
-    
+
     public int getCurrent() {
         return this.current;
     }
-    
-    public boolean hasArrivedNode(final Vector3 vec) {
+
+    public boolean hasArrivedNode(Vector3 vec) {
         try {
-            this.lock.readLock().lock();
-            if (this.hasNext() && this.getCurrentNode().getVector3() != null) {
-                final Vector3 cur = this.getCurrentNode().getVector3();
+            lock.readLock().lock();
+            if (this.hasNext() &&  this.getCurrentNode().getVector3()!=null) {
+                Vector3 cur = this.getCurrentNode().getVector3();
                 return vec.getX() == cur.getX() && vec.getZ() == cur.getZ();
             }
             return false;
-        }
-        finally {
-            this.lock.readLock().unlock();
+        } finally {
+            lock.readLock().unlock();
         }
     }
-    
+
     public void resetNodes() {
         try {
             this.lock.writeLock().lock();
@@ -141,46 +140,44 @@ public abstract class RouteFinder
             this.current = 0;
             this.interrupt = false;
             this.destination = null;
-        }
-        finally {
+        } finally {
             this.lock.writeLock().unlock();
         }
     }
-    
+
     public abstract boolean search();
-    
+
     public void research() {
         this.resetNodes();
         this.search();
     }
-    
+
     public boolean hasNext() {
         try {
-            if (this.current + 1 < this.nodes.size()) {
+            if (this.current + 1 < nodes.size()) {
                 return this.nodes.get(this.current + 1) != null;
             }
-        }
-        catch (Exception ex) {}
+        } catch (Exception ignore) {}
         return false;
     }
-    
+
     public Vector3 next() {
         try {
-            this.lock.readLock().lock();
+            lock.readLock().lock();
             if (this.hasNext()) {
-                return this.nodes.get(++this.current).getVector3();
+                return this.nodes.get(++current).getVector3();
             }
             return null;
+        } finally {
+            lock.readLock().unlock();
         }
-        finally {
-            this.lock.readLock().unlock();
-        }
+
     }
-    
+
     public boolean isInterrupted() {
         return this.interrupt;
     }
-    
+
     public boolean interrupt() {
         return this.interrupt ^= true;
     }

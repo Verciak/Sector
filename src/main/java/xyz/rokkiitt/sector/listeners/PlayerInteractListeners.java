@@ -1,6 +1,8 @@
 package xyz.rokkiitt.sector.listeners;
 
+import bimopower.musiccontroller.api.MusicControllerApi;
 import cn.nukkit.event.block.BlockPlaceEvent;
+import cn.nukkit.network.protocol.PlaySoundPacket;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.config.Config;
 import xyz.rokkiitt.sector.objects.PItemsGUI;
@@ -170,11 +172,11 @@ public class PlayerInteractListeners implements Listener
         if (item.getId() == Item.CHEST && Util.hasNBTTag(item, "premiumcase")) {
             e.setCancelled(true);
             if (CaseManager.isInCase(p)) {
-                System.out.printf("error");
-//                p.sendMessage(ChatUtil.fixColor(CasePlugin.getPlugin().getConfig().getString("error.already-opening")));
+                p.sendMessage(Util.fixColor("&cOtwierasz juz magiczna skrzynke!"));
                 return;
             }
-
+            item.setCount(item.getCount() - 1);
+            p.getInventory().setItemInHand(item);
             new PremiumCaseGUI(p);
 
         }

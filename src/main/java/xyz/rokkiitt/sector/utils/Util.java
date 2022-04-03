@@ -1,5 +1,6 @@
 package xyz.rokkiitt.sector.utils;
 
+import cn.nukkit.entity.Entity;
 import org.apache.commons.lang3.StringUtils;
 import xyz.rokkiitt.sector.objects.user.User;
 import xyz.rokkiitt.sector.objects.wings.Wings;
@@ -299,6 +300,17 @@ public class Util
             }
         }
         return "&c";
+    }
+
+
+    public static List<Player> getPlayersInRadius(final Entity b, final Location location, final int size) {
+        final List<Player> players = new ArrayList<Player>();
+        for (final Player p : location.getLevel().getPlayers().values()) {
+            if (b.distance(p.getLocation()) <= size) {
+                players.add(p);
+            }
+        }
+        return players;
     }
     
     public static List<Player> getNearbyPlayers(final Location l, final int distance) {

@@ -1,11 +1,16 @@
 package xyz.rokkiitt.sector.objects.premiumcase;
 
+import bimopower.musiccontroller.api.MusicControllerApi;
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.item.Item;
+import cn.nukkit.level.Sound;
+import cn.nukkit.network.protocol.PlaySoundPacket;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.scheduler.NukkitRunnable;
 import com.google.common.collect.Maps;
 import xyz.rokkiitt.sector.Main;
+import xyz.rokkiitt.sector.utils.PolishItemNames;
 import xyz.rokkiitt.sector.utils.RandomUtil;
 import xyz.rokkiitt.sector.utils.Util;
 
@@ -13,14 +18,15 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CaseManager {
-    public static Map<Integer, PremiumCase> drop = new ConcurrentHashMap<>();
-    static {
-        int i = 0;
+    public static List<PremiumCase> drop = new ArrayList<>();
+
+    public static void onLoad(){
+        drop.clear();
         for (PremiumCase premiumCase : PremiumCaseManager.getItems()){
-            drop.put(i, premiumCase);
-            i++;
+            drop.add(premiumCase);
         }
     }
+
     private static ConcurrentHashMap<Player, CaseInv> cases = new ConcurrentHashMap<>();
 
     public static boolean isInCase(Player p) {
@@ -34,63 +40,61 @@ public class CaseManager {
     public static void addCase(final Player p, final CaseInv inv) {
         if (isInCase(p))
             return;
-
-
         cases.put(p, inv);
-        (new NukkitRunnable() {
+        new NukkitRunnable() {
             public void run() {
                 if (!CaseManager.isInCase(p)) {
                     cancel();
                     return;
                 }
-                if (p.getInventory().getItemInHand().getId() != Item.CHEST && !Util.hasNBTTag(p.getInventory().getItemInHand(), "premiumcase")) {
-                    cancel();
-                    return;
-                }
+                int x = RandomUtil.getRandInt(0, CaseManager.drop.size() - 1);
+                PremiumCase premiumCasee = CaseManager.drop.get(x);
+
                 if (inv.getRool() >= inv.getRoolMax()) {
                     Item win = inv.getInv().getItem(13);
-//                    if (RandomUtil.getChance(100.0D - PremiumCaseGUI.drops.get())) {
-//                        inv.setRool(inv.getRool() - 1);
-//                        return;
-//                    }
-                    cancel();
-                    Item item = p.getInventory().getItemInHand();
-                    item.setCount(item.getCount() - 1);
-                    p.getInventory().setItemInHand(item);
-//                    Bukkit.broadcastMessage(ChatUtil.fixColor(CasePlugin.getPlugin().getConfig().getString("place.wylosowano-item")).replace("{NICK}", p.getName()).replace("{ILOSC}", String.valueOf(win.getAmount())).replace("{ITEM}", PolishItemNames.getPolishName(win.getType(), win.getData().getData())));
+                    PremiumCase premiumCase = PremiumCaseManager.get(win.getId());
+                    final int a = (premiumCase.getMinAmount() == premiumCase.getMaxAmount()) ? premiumCase.getMinAmount() : RandomUtil.getRandInt(premiumCase.getMinAmount(), premiumCase.getMaxAmount());
+                    win.setCount(a);
                     Util.giveItem(p, win);
+                    cancel();
                     CaseManager.removeCase(p);
-                    (new NukkitRunnable() {
-                        public void run() {
-                            p.getInventory().onClose(p);
-                        }
-                    }).runTaskLater((Plugin) Main.getPlugin(), 40);
+                    p.getInventory().onClose(p);
                     return;
                 }
                 inv.setRool(inv.getRool() + 1);
-                new PremiumCaseGUI(p);
-//                p.playSound(p.getLocation(), Sound.CLICK, 10.0F, 10.0F);
+                if (!inv.getInv().getTitle().equalsIgnoreCase(Util.fixColor("&f&oOtwieranie &8..."))) {
+                    new PremiumCaseGUI(p);
+                }
+                PlaySoundPacket pk = new PlaySoundPacket();
+                pk.name = Sound.BLOCK_CLICK.getSound();
+                pk.volume = 1;
+                pk.pitch = 1;
+                pk.x = (int) p.x;
+                pk.y = (int) p.y;
+                pk.z = (int) p.z;
+                p.dataPacket(pk);
 
-                    Item i = CaseManager.drop.get(RandomUtil.getRandInt(0, CaseManager.drop.size() - 1)).getWhat();
-                    Item i1 = inv.getInv().getItem(10);
-                    Item i2 = inv.getInv().getItem(11);
-                    Item i3 = inv.getInv().getItem(12);
-                    Item i4 = inv.getInv().getItem(13);
-                    Item i5 = inv.getInv().getItem(14);
-                    Item i6 = inv.getInv().getItem(15);
-                    Item i7 = inv.getInv().getItem(16);
-                    Item i8 = inv.getInv().getItem(17);
-                    inv.getInv().setItem(9, i1);
-                    inv.getInv().setItem(10, i2);
-                    inv.getInv().setItem(11, i3);
-                    inv.getInv().setItem(12, i4);
-                    inv.getInv().setItem(13, i5);
-                    inv.getInv().setItem(14, i6);
-                    inv.getInv().setItem(15, i7);
-                    inv.getInv().setItem(16, i8);
-                    inv.getInv().setItem(17, i);
+//                p.playSound(p.getLocation(), Sound.CLICK, 10.0F, 10.0F);
+                Item i = premiumCasee.getWhat();
+                Item i1 = inv.getInv().getItem(10);
+                Item i2 = inv.getInv().getItem(11);
+                Item i3 = inv.getInv().getItem(12);
+                Item i4 = inv.getInv().getItem(13);
+                Item i5 = inv.getInv().getItem(14);
+                Item i6 = inv.getInv().getItem(15);
+                Item i7 = inv.getInv().getItem(16);
+                Item i8 = inv.getInv().getItem(17);
+                inv.getInv().setItem(9, i1);
+                inv.getInv().setItem(10, i2);
+                inv.getInv().setItem(11, i3);
+                inv.getInv().setItem(12, i4);
+                inv.getInv().setItem(13, i5);
+                inv.getInv().setItem(14, i6);
+                inv.getInv().setItem(15, i7);
+                inv.getInv().setItem(16, i8);
+                inv.getInv().setItem(17, i);
             }
-        }).runTaskTimer((Plugin)Main.getPlugin(), 5, 5);
+        }.runTaskTimer((Plugin) Main.getPlugin(), 5, 5);
     }
 
     public static void removeCase(Player p) {

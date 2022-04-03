@@ -57,6 +57,15 @@ public class PremiumCaseManager
             }
         }
     }
+
+    public static PremiumCase get(final Integer name) {
+        for (final PremiumCase drop : getItems()) {
+            if (drop.getWhat().getId() == name) {
+                return drop;
+            }
+        }
+        return null;
+    }
     
     public static Item getItem(final int amount) {
         final Item pan = PItemsGUI.pandora.clone();

@@ -12,6 +12,7 @@ import xyz.rokkiitt.sector.objects.inventory.inventories.DoubleChestFakeInventor
 import xyz.rokkiitt.sector.objects.modify.PandoraItem;
 import xyz.rokkiitt.sector.objects.pandora.Pandora;
 import xyz.rokkiitt.sector.objects.pandora.PandoraManager;
+import xyz.rokkiitt.sector.objects.premiumcase.CaseManager;
 import xyz.rokkiitt.sector.objects.premiumcase.PremiumCase;
 import xyz.rokkiitt.sector.objects.premiumcase.PremiumCaseManager;
 import xyz.rokkiitt.sector.packets.PacketModifyDrop;
@@ -218,6 +219,8 @@ public class modifyPremiumCase extends DoubleChestFakeInventory {
         }
         super.onClose(p);
         Server.getInstance().getScheduler().scheduleDelayedTask(Main.getPlugin(), () -> PremiumCaseManager.load(), 100);
+        Server.getInstance().getScheduler().scheduleDelayedTask(Main.getPlugin(), () -> CaseManager.onLoad(), 120);
+        Server.getInstance().getScheduler().scheduleDelayedTask(Main.getPlugin(), () -> p.sendMessage(Util.fixColor("&aDrop zostal przeladowany")), 120);
 
     }
 

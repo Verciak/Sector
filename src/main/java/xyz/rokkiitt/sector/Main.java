@@ -24,12 +24,9 @@ import xyz.rokkiitt.sector.objects.ac.SpeedmineModule;
 import xyz.rokkiitt.sector.objects.antigrief.AntiGrief;
 import xyz.rokkiitt.sector.objects.backup.BackupInventory;
 import xyz.rokkiitt.sector.objects.enchants.CustomKnockback;
+import xyz.rokkiitt.sector.objects.entity.Zombie;
 import xyz.rokkiitt.sector.objects.entity.blockentity.ChestTile;
 import xyz.rokkiitt.sector.objects.entity.blockentity.FixedHopperTile;
-import xyz.rokkiitt.sector.objects.entity.monster.Creeper;
-import xyz.rokkiitt.sector.objects.entity.monster.Enderman;
-import xyz.rokkiitt.sector.objects.entity.monster.WitherSkeleton;
-import xyz.rokkiitt.sector.objects.entity.utils.RouteFinderThreadPool;
 import xyz.rokkiitt.sector.objects.guild.Guild;
 import xyz.rokkiitt.sector.objects.guild.GuildManager;
 import xyz.rokkiitt.sector.objects.guild.GuildPanelGUI;
@@ -180,11 +177,9 @@ public class Main extends PluginBase
     
     private void registerEntity() {
         final long startTime = System.nanoTime();
+        Entity.registerEntity(Zombie.class.getSimpleName(), Zombie.class);
         Entity.registerEntity("EntityHead", EntityHead.class);
         Entity.registerEntity("Waypoint", Waypoint.class);
-        Entity.registerEntity(Enderman.class.getSimpleName(), Enderman.class);
-        Entity.registerEntity(Creeper.class.getSimpleName(), Creeper.class);
-        Entity.registerEntity(WitherSkeleton.class.getSimpleName(), WitherSkeleton.class);
         Entity.registerEntity(Snowball.class.getSimpleName(), Snowball.class);
         Entity.registerEntity("PrimedTnt", PrimedTNT.class);
         Entity.registerEntity(Egg.class.getSimpleName(), Egg.class);
@@ -237,7 +232,7 @@ public class Main extends PluginBase
     private void registerCommands() {
         final long startTime = System.nanoTime();
         List<Command> cmd = Arrays.asList(new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new IncognitoCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
-                new GodCommand(), new FlyCommand(), new VanishCommand(), new DropCommand(), new DepositCommand(), new KitCommand(), new HealCommand(), new FeedCommand(), new SpawnCommand(), new CxCommand(),
+                new GodCommand(), new FlyCommand(), new BossCommand(), new VanishCommand(), new DropCommand(), new DepositCommand(), new KitCommand(), new HealCommand(), new FeedCommand(), new SpawnCommand(), new CxCommand(),
                 new HelpCommand(), new VipCommand(), new SvipCommand(), new SponsorCommand(), new YouTubeCommand(), new TnTCommand(), new StatuteCommand(), new AlertCommand(), new DescriptionCommand(), new RepairCommand(),
                 new TopCommand(), new EffectsCommand(), new HelpopCommand(), new ResetRankingCommand(), new EnderCommand(), new BlocksCommand(), new IgnoreCommand(), new UnIgnoreCommand(), new IgnoreListCommand(), new CraftingsCommand(),
                 new InvseeCommand(), new EnderseeCommand(), new AlertACCommand(), new PermsListCommand(), new RandomTpCommand(), new WingsCommand(), new StopCommand(), new GcCommand(), new TimingsCommand("timings"),

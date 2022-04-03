@@ -16,7 +16,7 @@ public class CaseInv {
     public CaseInv(Player player, ChestFakeInventory inv) {
         this.player = player;
         this.rool = 0;
-        this.roolMax = RandomUtil.getRandInt(18, 27);
+        this.roolMax = 22;
         this.inv = inv;
     }
 

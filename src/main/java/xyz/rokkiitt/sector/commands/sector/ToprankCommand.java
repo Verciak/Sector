@@ -1,7 +1,12 @@
 package xyz.rokkiitt.sector.commands.sector;
 
+import bimopower.musiccontroller.api.MusicControllerApi;
 import xyz.rokkiitt.sector.SectorCommand;
 import xyz.rokkiitt.sector.objects.Top;
+import xyz.rokkiitt.sector.objects.guild.Guild;
+import xyz.rokkiitt.sector.objects.guild.GuildManager;
+import xyz.rokkiitt.sector.objects.user.User;
+import xyz.rokkiitt.sector.objects.user.UserManager;
 import xyz.rokkiitt.sector.packets.commands.PacketToprankCommand;
 
 import java.util.*;
@@ -17,6 +22,7 @@ public class ToprankCommand extends SectorCommand
     
     @Override
     public boolean onCommand(final Player p, final String[] args) {
+        MusicControllerApi.play(p, "song.waitgame");
         final PacketToprankCommand pa = new PacketToprankCommand();
         pa.sender = p.getName();
         pa.assist = new ArrayList<String>();
@@ -26,6 +32,18 @@ public class ToprankCommand extends SectorCommand
         pa.guild = new ArrayList<String>();
         pa.points = new ArrayList<String>();
         pa.time = new ArrayList<String>();
+        for (Guild g : GuildManager.guilds){
+            pa.guild.add(g.getTag() + "|&|0");
+        }
+        for (User u : UserManager.users){
+            pa.assist.add(u.getNickname() + "|&|" + u.getAssist());
+            pa.kills.add(u.getNickname() + "|&|" + u.getKills());
+            pa.deaths.add(u.getNickname() + "|&|" + u.getDeaths());
+            pa.broken.add(u.getNickname() + "|&|" + u.getBroken());
+            pa.points.add(u.getNickname() + "|&|" + u.getPoints());
+            pa.time.add(u.getNickname() + "|&|" + u.getOnlineoverall());
+        }
+
         new Top(p, pa);
         return false;
     }

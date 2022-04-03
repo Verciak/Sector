@@ -2,6 +2,7 @@ package xyz.rokkiitt.sector.tasks;
 
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.config.Config;
+import xyz.rokkiitt.sector.objects.entity.Zombie;
 import xyz.rokkiitt.sector.objects.meteorite.MeteoriteManager;
 import xyz.rokkiitt.sector.objects.meteorite.MeteoriteRegion;
 import xyz.rokkiitt.sector.utils.SpaceUtil;
@@ -75,7 +76,7 @@ public class SecondTask implements Runnable
             final Entity[] entities;
             final Entity[] ee = entities = w.next().getEntities();
             for (final Entity e : entities) {
-                if (e instanceof EntityItem || e instanceof EntityXPOrb || e instanceof EntityEnderman || e instanceof EntityCreeper) {
+                if (e instanceof EntityItem || e instanceof EntityXPOrb || e instanceof EntityEnderman || e instanceof EntityCreeper|| e instanceof Zombie) {
                     ++amount;
                 }
             }

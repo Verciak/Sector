@@ -5,6 +5,7 @@ import xyz.rokkiitt.sector.objects.cobblex.CobblexManager;
 import xyz.rokkiitt.sector.objects.kits.KitManager;
 import xyz.rokkiitt.sector.objects.meteorite.MeteoriteManager;
 import xyz.rokkiitt.sector.objects.pandora.PandoraManager;
+import xyz.rokkiitt.sector.objects.premiumcase.CaseManager;
 import xyz.rokkiitt.sector.objects.premiumcase.PremiumCaseManager;
 
 public class ModifyManager {
@@ -18,5 +19,6 @@ public class ModifyManager {
         KitManager.load("vip");
         KitManager.load("svip");
         KitManager.load("sponsor");
+        CaseManager.onLoad();
     }
 }

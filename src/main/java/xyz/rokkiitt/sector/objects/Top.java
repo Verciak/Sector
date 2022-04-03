@@ -1,17 +1,22 @@
 package xyz.rokkiitt.sector.objects;
 
+import cn.nukkit.item.Item;
+import org.apache.commons.lang3.ArrayUtils;
 import xyz.rokkiitt.sector.objects.inventory.FakeSlotChangeEvent;
 import xyz.rokkiitt.sector.objects.inventory.inventories.ChestFakeInventory;
+import xyz.rokkiitt.sector.objects.inventory.inventories.DoubleChestFakeInventory;
 import xyz.rokkiitt.sector.packets.commands.PacketToprankCommand;
 import xyz.rokkiitt.sector.utils.ItemBuilder;
 import xyz.rokkiitt.sector.utils.Util;
 import cn.nukkit.*;
 import cn.nukkit.inventory.*;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class Top extends ChestFakeInventory
+public class Top extends DoubleChestFakeInventory
 {
     private final List<String> points;
     private final List<String> kills;
@@ -37,129 +42,190 @@ public class Top extends ChestFakeInventory
     
     private void show() {
         this.clearAll();
-        this.setSmallServerGui();
-        this.setItem(10, new ItemBuilder(323).setTitle("&r&ePUNKTY\u270b").setLore(this.sortPoints()).build());
-        this.setItem(11, new ItemBuilder(315).setTitle("&r&eZABOJSTWA\u270b").setLore(this.sortKills()).build());
-        this.setItem(12, new ItemBuilder(397).setTitle("&r&eSMIERCI\u270b").setLore(this.sortDeaths()).build());
-        this.setItem(13, new ItemBuilder(267).setTitle("&r&eASYSTY\u270b").setLore(this.sortAssists()).build());
-        this.setItem(14, new ItemBuilder(347).setTitle("&r&eSPEDZONY CZAS\u270b").setLore(this.sortTime()).build());
-        this.setItem(15, new ItemBuilder(399).setTitle("&r&eGILDIE\u270b").setLore(this.sortGuilds()).build());
-        this.setItem(16, new ItemBuilder(278).setTitle("&r&eWYKOPANE BLOKI\u270b").setLore(this.sortBroken()).build());
+        this.fill();
+        this.setServerGui();
+        this.setItem(13, new ItemBuilder(Item.SKULL, 1, 3).setTitle("&r&ePUNKTY\u270b").setLore(this.sortPoints()).build());
+        this.setItem(30, new ItemBuilder(Item.SKULL).setTitle("&r&eZABOJSTWA\u270b").setLore(this.sortKills()).build());
+        this.setItem(31, new ItemBuilder(397).setTitle("&r&eSMIERCI\u270b").setLore(this.sortDeaths()).build());
+        this.setItem(22, new ItemBuilder(Item.GOLDEN_SWORD).setTitle("&r&eASYSTY\u270b").setLore(this.sortAssists()).build());
+        this.setItem(28, new ItemBuilder(Item.CLOCK).setTitle("&r&eSPEDZONY CZAS\u270b").setLore(this.sortTime()).build());
+        this.setItem(32, new ItemBuilder(399).setTitle("&r&eGILDIE\u270b").setLore(this.sortGuilds()).build());
+        this.setItem(29, new ItemBuilder(Item.STONE).setTitle("&r&eWYKOPANE BLOKI\u270b").setLore(this.sortBroken()).build());
     }
     
     @Override
     protected void onSlotChange(final FakeSlotChangeEvent e) {
         e.setCancelled(true);
     }
-    
+
+    public static <K, V extends Comparable<? super V>> LinkedHashMap<K, V> sortValue(LinkedHashMap<K, V> map) {
+        return map.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(10).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
     private String[] sortPoints() {
-        final String[] x = { "", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "" };
-        int b = 1;
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
         for (final String s : this.points) {
             final String[] split = s.split(Pattern.quote("|&|"));
-            if (split.length > 1) {
-                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
-            }
-            else {
-                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
-            }
-            ++b;
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+                x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+                ++b;
+
         }
         return x;
     }
     
     private String[] sortKills() {
-        final String[] x = { "", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "" };
-        int b = 1;
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
         for (final String s : this.kills) {
             final String[] split = s.split(Pattern.quote("|&|"));
-            if (split.length > 1) {
-                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
-            }
-            else {
-                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
-            }
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
             ++b;
+
         }
         return x;
     }
     
     private String[] sortDeaths() {
-        final String[] x = { "", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "" };
-        int b = 1;
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
         for (final String s : this.deaths) {
             final String[] split = s.split(Pattern.quote("|&|"));
-            if (split.length > 1) {
-                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
-            }
-            else {
-                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
-            }
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
             ++b;
+
         }
         return x;
     }
     
     private String[] sortAssists() {
-        final String[] x = { "", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "" };
-        int b = 1;
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
         for (final String s : this.assist) {
             final String[] split = s.split(Pattern.quote("|&|"));
-            if (split.length > 1) {
-                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
-            }
-            else {
-                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
-            }
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
             ++b;
+
         }
         return x;
     }
     
     private String[] sortTime() {
-        final String[] x = { "", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "" };
-        int b = 1;
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
         for (final String s : this.time) {
             final String[] split = s.split(Pattern.quote("|&|"));
-            if (split.length > 1) {
-                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + Util.formatTime(Long.valueOf(split[1])) + "&8]\u270b";
-            }
-            else {
-                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40s&8]\u270b";
-            }
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + Util.formatTime(Long.parseLong(String.valueOf(s.getValue()))) + "&8]\u270b";
             ++b;
+
         }
         return x;
     }
     
     private String[] sortGuilds() {
-        final String[] x = { "", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "" };
-        int b = 1;
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
         for (final String s : this.guild) {
             final String[] split = s.split(Pattern.quote("|&|"));
-            if (split.length > 1) {
-                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
-            }
-            else {
-                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
-            }
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
             ++b;
+
         }
         return x;
     }
     
     private String[] sortBroken() {
-        final String[] x = { "", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "" };
-        int b = 1;
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
         for (final String s : this.broken) {
             final String[] split = s.split(Pattern.quote("|&|"));
-            if (split.length > 1) {
-                x[b] = "&r&8>> &f" + b + ". &e" + split[0].toUpperCase() + " &8[&4" + split[1] + "&8]\u270b";
-            }
-            else {
-                x[b] = "&r&8>> &f" + b + ". &eBRAK &8[&40000&8]\u270b";
-            }
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
             ++b;
+
         }
         return x;
     }

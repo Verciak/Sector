@@ -160,6 +160,7 @@ public class modifyMeteor extends DoubleChestFakeInventory {
         if (this.drops.isEmpty()) {
             pa.data = "brak";
         } else {
+            Main.getDatabase().addQueue("TRUNCATE meteordrops;");
             this.drops.forEach(s -> {
                 SerializedPandoraItem drop = new SerializedPandoraItem();
                 drop.chance = 0.0D;
