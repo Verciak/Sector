@@ -603,7 +603,9 @@ public class Util
     }
     
     public static boolean sendInformation(final String s) {
-//        Main.getNats().publish("information", s);
+        for(Player p : Server.getInstance().getOnlinePlayers().values()){
+            p.sendMessage(fixColor(s));
+        }
         return false;
     }
     

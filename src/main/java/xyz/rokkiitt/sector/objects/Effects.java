@@ -65,6 +65,7 @@ public class Effects extends DoubleChestFakeInventory
     
     private void sendGui() {
         this.clearAll();
+        this.fill();
         this.setServerGui();
         this.clear(18);
         this.clear(27);

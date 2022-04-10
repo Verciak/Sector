@@ -107,10 +107,7 @@ public class IncognitoInventory extends ChestFakeInventory
     
     public void refreshGui() {
         this.clearAll();
-        this.setSmallServerGui();
-        this.setItem(10, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
-        this.setItem(16, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
-        this.setItem(13, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
+        this.setIncoServerGui();
         this.setItem(11, new ItemBuilder(421).setTitle((this.user.isIncognito() ? "&r&a" : "&r&c") + "Ukrywanie nazwy oraz tagu").setLore(new String[] { "\u270b", "&r&f Ukrywa twoj nick/tag dla wrogow", "&r&f Czlonkowie twojej gildii ", "&r&f widza twoj prawdziny nick" }).build());
         this.setItem(12, new ItemBuilder(421).setTitle((this.user.isIncognitoAlliance() ? "&r&a" : "&r&c") + "Ukrywanie przed sojuszami").setLore(new String[] { "\u270b", "&r&f Ukrywa twoj nick/tag dla sojuszy" }).build());
         this.setItem(13, new ItemBuilder(-161).setTitle("&r&6Resetuje twoj nickname").setLore(new String[] { "\u270b", "&r&f Resetuje twoj nickname incognito", "", "&r&fWygenerowany nick: &e" + (this.user.getIncognito().equalsIgnoreCase("brak") ? "&cBrak - Wygeneruj swoj nickname!" : this.user.getIncognito()) }).build());

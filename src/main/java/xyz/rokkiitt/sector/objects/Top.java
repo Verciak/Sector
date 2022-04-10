@@ -25,6 +25,9 @@ public class Top extends DoubleChestFakeInventory
     private final List<String> time;
     private final List<String> guild;
     private final List<String> broken;
+    private final List<String> eatKox;
+    private final List<String> eatRef;
+    private final List<String> throwPearl;
     
     public Top(final Player p, final PacketToprankCommand pa) {
         super(null, Util.fixColor("&6Rankingi"));
@@ -36,6 +39,9 @@ public class Top extends DoubleChestFakeInventory
         this.time = pa.time;
         this.guild = pa.guild;
         this.broken = pa.broken;
+        this.eatKox = pa.eatKox;
+        this.eatRef = pa.eatRef;
+        this.throwPearl = pa.throwPearl;
         this.show();
         p.addWindow((Inventory)this);
     }
@@ -45,12 +51,14 @@ public class Top extends DoubleChestFakeInventory
         this.fill();
         this.setServerGui();
         this.setItem(13, new ItemBuilder(Item.SKULL, 1, 3).setTitle("&r&ePUNKTY\u270b").setLore(this.sortPoints()).build());
-        this.setItem(30, new ItemBuilder(Item.SKULL).setTitle("&r&eZABOJSTWA\u270b").setLore(this.sortKills()).build());
-        this.setItem(31, new ItemBuilder(397).setTitle("&r&eSMIERCI\u270b").setLore(this.sortDeaths()).build());
         this.setItem(22, new ItemBuilder(Item.GOLDEN_SWORD).setTitle("&r&eASYSTY\u270b").setLore(this.sortAssists()).build());
         this.setItem(28, new ItemBuilder(Item.CLOCK).setTitle("&r&eSPEDZONY CZAS\u270b").setLore(this.sortTime()).build());
-        this.setItem(32, new ItemBuilder(399).setTitle("&r&eGILDIE\u270b").setLore(this.sortGuilds()).build());
         this.setItem(29, new ItemBuilder(Item.STONE).setTitle("&r&eWYKOPANE BLOKI\u270b").setLore(this.sortBroken()).build());
+        this.setItem(30, new ItemBuilder(Item.SKULL).setTitle("&r&eSMIERCI\u270b").setLore(this.sortDeaths()).build());
+        this.setItem(32, new ItemBuilder(Item.GOLDEN_APPLE).setTitle("&r&eZJEDZONE REFILE\u270b").setLore(this.sortRefil()).build());
+        this.setItem(33, new ItemBuilder(Item.ENDER_PEARL).setTitle("&r&eRZUCONE PERLY\u270b").setLore(this.sortPearl()).build());
+        this.setItem(34, new ItemBuilder(Item.GOLDEN_APPLE_ENCHANTED).setTitle("&r&eZJEDZONE KOXY\u270b").setLore(this.sortKox()).build());
+        this.setItem(40, new ItemBuilder(Item.TOTEM).setTitle("&r&eZABOJSTWA\u270b").setLore(this.sortKills()).build());
     }
     
     @Override
@@ -114,6 +122,77 @@ public class Top extends DoubleChestFakeInventory
         LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
 
         for (final String s : this.deaths) {
+            final String[] split = s.split(Pattern.quote("|&|"));
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            ++b;
+
+        }
+        return x;
+    }
+    private String[] sortKox() {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
+        for (final String s : this.eatKox) {
+            final String[] split = s.split(Pattern.quote("|&|"));
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            ++b;
+
+        }
+        return x;
+    }
+
+    private String[] sortPearl() {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
+        for (final String s : this.throwPearl) {
+            final String[] split = s.split(Pattern.quote("|&|"));
+            map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
+        }
+        LinkedHashMap<String, Integer> linkedHashMap = sortValue(map);
+        final String[] x = new String[12];
+
+        int length = x.length;
+        for (int i = 0; i < length; i++) {
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+        }
+
+        int b = 1;
+        for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
+            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            ++b;
+
+        }
+        return x;
+    }
+
+    private String[] sortRefil() {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
+        for (final String s : this.eatRef) {
             final String[] split = s.split(Pattern.quote("|&|"));
             map.put(split[0].toUpperCase(), Integer.valueOf(split[1]));
         }

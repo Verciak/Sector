@@ -158,7 +158,7 @@ public class PlayerInteractListeners implements Listener
                     Util.sendMessage((CommandSender)p, Settings.getMessage("enchantdisabled"));
                     return;
                 }
-                new EnchantInventory(p, e.getItem(), books);
+                new EnchantInventory(p, e.getPlayer().getInventory().getItemInHand(), books);
             }
         }
     }

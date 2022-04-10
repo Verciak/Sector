@@ -286,7 +286,7 @@ public class CombatListener implements Listener
         } else {
             final User u2 = UserManager.getUser(p.getName());
             if (u2 != null) {
-                Util.sendInformation("CHAT||" + Settings.getMessage("killedunknown").replace("{PLAYER}", getNickname(true, u2)));
+                Util.sendInformation("" + Settings.getMessage("killedunknown").replace("{PLAYER}", getNickname(true, u2)));
                 u2.addDeaths(1);
                 u2.removePoints(50);
                 u2.clearAssistAttackers();

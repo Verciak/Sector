@@ -31,6 +31,28 @@ public abstract class ChestFakeInventory extends FakeInventory
         this.blockPositions.put(who, blocks);
         Server.getInstance().getScheduler().scheduleDelayedTask(() -> this.onFakeOpen(who, blocks), 3);
     }
+
+    public void setSmallEnchantGui() {
+        final int[] black = { 1, 2, 3, 4, 5, 6, 7, 9, 13, 17, 19, 20, 21, 23, 24, 25, 22 };
+        final int[] orange = { 0, 8, 11, 18, 26 };
+        for (final int b : black) {
+            this.setItem(b, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
+        }
+        for (final int b : orange) {
+            this.setItem(b, GlassColor.get(GlassColor.LIME).setCustomName(Util.fixColor("&r")));
+        }
+    }
+
+    public void setIncoServerGui() {
+        final int[] black = { 1, 2, 3, 5, 6, 7, 9, 13, 17, 19, 20, 21, 23, 24, 25, 22 };
+        final int[] orange = { 0, 4, 8, 18, 26, 10, 16, 22 };
+        for (final int b : black) {
+            this.setItem(b, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
+        }
+        for (final int b : orange) {
+            this.setItem(b, GlassColor.get(GlassColor.LIME).setCustomName(Util.fixColor("&r")));
+        }
+    }
     
     public void setSmallServerGui() {
         final int[] black = { 1, 2, 3, 5, 6, 7, 9, 13, 17, 19, 20, 21, 23, 24, 25, 22 };
@@ -46,6 +68,19 @@ public abstract class ChestFakeInventory extends FakeInventory
     public void fill() {
         for(int i = 0; i < this.getSize(); i++) {
             this.setItem(i, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
+        }
+    }
+
+    public void setCraftingGUI() {
+        final int[] array;
+        final int[] black = array = new int[] { 2,6,7,10,11,15,16,17,19,20,24,25,26,28,29,33,34,35,37,38,39,40,41,42,43,44,47,51,52 };
+        for (final int i : array) {
+            this.setItem(i, GlassColor.get(GlassColor.BLACK).setCustomName(Util.fixColor("&r")));
+        }
+        final int[] array2;
+        final int[] orange = array2 = new int[] { 1,3,5,8,46,48,50,53 };
+        for (final int j : array2) {
+            this.setItem(j, GlassColor.get(GlassColor.LIME).setCustomName(Util.fixColor("&r")));
         }
     }
     

@@ -92,6 +92,38 @@ public class User {
     private boolean isTrading = false;
     private Set<String> tradeInvites = ConcurrentHashMap.newKeySet();
     private String chapel;
+    private int eat_kox;
+    private int eat_ref;
+    private int throw_pearl;
+
+    public int getEat_kox() {
+        return eat_kox;
+    }
+
+    public void setEat_kox(int eat_kox) {
+        this.eat_kox = eat_kox;
+        Main.getProvider().update("UPDATE `users` SET `eat_kox` ='" + getEat_kox() + "' WHERE `nickname` ='" + getNickname() + "'");
+    }
+
+    public int getEat_ref() {
+        return eat_ref;
+    }
+
+    public void setEat_ref(int eat_ref) {
+        this.eat_ref = eat_ref;
+        Main.getProvider().update("UPDATE `users` SET `eat_ref` ='" + getEat_ref() + "' WHERE `nickname` ='" + getNickname() + "'");
+
+    }
+
+    public int getThrow_pearl() {
+        return throw_pearl;
+    }
+
+    public void setThrow_pearl(int throw_pearl) {
+        this.throw_pearl = throw_pearl;
+        Main.getProvider().update("UPDATE `users` SET `throw_pearl` ='" + getThrow_pearl() + "' WHERE `nickname` ='" + getNickname() + "'");
+
+    }
 
     public void setAcdata(ACData acdata) {
         this.acdata = acdata;
@@ -465,7 +497,10 @@ public class User {
                 "`IncognitoKill`," +
                 "`chapel`," +
                 "`location`," +
-                "`guildperms`) VALUES (" +
+                "`guildperms`," +
+                "`eat_kox`," +
+                "`eat_ref`," +
+                "`throw_pearl`) VALUES (" +
                 "NULL, " +
                 "'" + getNickname() + "'," +
                 "'" + getWings() + "'," +
@@ -511,7 +546,10 @@ public class User {
                 "'" + (isIncognitoKill() ? 1 : 0) + "'," +
                 "'" + getChapel() + "'," +
                 "'"+ getLocation() +"'," +
-                "'"+ getGuildPermissions(getPermissionString()) +"')");
+                "'"+ getGuildPermissions(getPermissionString()) +"'," +
+                "'"+ getEat_kox() +"'," +
+                "'"+ getEat_ref() +"'," +
+                "'"+ getThrow_pearl() +"')");
     }
 
     public User(ResultSet set) throws SQLException {
@@ -562,6 +600,9 @@ public class User {
         this.chapel = set.getString("chapel");
         this.location = set.getString("location");
         this.guildpermissions = getGuildPermissions(set.getString("guildperms"));
+        this.eat_kox = set.getInt("eat_kox");
+        this.eat_ref = set.getInt("eat_ref");
+        this.throw_pearl = set.getInt("throw_pearl");
     }
 
 
@@ -618,6 +659,9 @@ public class User {
         this.IncognitoKill = false;
         this.chapel = "";
         this.location = "false|^|" + ItemSerializer.serializeLocation(new Location(0.0D, 105.0D, 0.0D, 0.0D, 0.0D, player.getLevel()));
+        this.eat_kox = 0;
+        this.eat_ref = 0;
+        this.throw_pearl = 0;
         insert();
     }
 

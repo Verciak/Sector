@@ -123,6 +123,7 @@ public class Craftings extends DoubleChestFakeInventory
     }
     
     private void sendCrafting() {
+        this.setCraftingGUI();
         if (this.state == State.STONIARKA) {
             this.setItem(4, PItemsGUI.stoniarka);
             this.setItem(12, Item.get(1));

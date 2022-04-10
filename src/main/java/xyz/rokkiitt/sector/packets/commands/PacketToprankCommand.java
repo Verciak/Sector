@@ -13,4 +13,7 @@ public class PacketToprankCommand
     public List<String> time;
     public List<String> guild;
     public List<String> broken;
+    public List<String> eatKox;
+    public List<String> eatRef;
+    public List<String> throwPearl;
 }

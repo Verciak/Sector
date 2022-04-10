@@ -65,7 +65,10 @@ public class UserManager
                 "`IncognitoKill` int(100) NOT NULL," +
                 "`chapel` varchar(255) NOT NULL," +
                 "`location` varchar(255) NOT NULL," +
-                "`guildperms` varchar(255) NOT NULL);");
+                "`guildperms` varchar(255) NOT NULL," +
+                "`eat_kox` int(100) NOT NULL," +
+                "`eat_ref` int(100) NOT NULL," +
+                "`throw_pearl` int(100) NOT NULL);");
 
         try {
             ResultSet query = Main.getProvider().query("SELECT * FROM `users`");

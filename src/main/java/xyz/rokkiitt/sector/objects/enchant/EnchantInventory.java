@@ -47,7 +47,6 @@ public class EnchantInventory extends ChestFakeInventory implements Listener
     private final Item power2;
     private final Item power1;
     private final Item plomien1;
-    static Item bar;
     private final int books;
     private Item item;
     private final HashMap<Integer, EnchantAction> enchants;
@@ -105,19 +104,8 @@ public class EnchantInventory extends ChestFakeInventory implements Listener
     private void openPage() {
         this.enchants.clear();
         this.clearAll();
-        this.setItem(0, EnchantInventory.bar);
-        this.setItem(1, EnchantInventory.bar);
-        this.setItem(2, EnchantInventory.bar);
-        this.setItem(3, EnchantInventory.bar);
-        this.setItem(4, EnchantInventory.bar);
-        this.setItem(5, EnchantInventory.bar);
-        this.setItem(6, EnchantInventory.bar);
-        this.setItem(7, EnchantInventory.bar);
-        this.setItem(8, EnchantInventory.bar);
-        this.setItem(9, EnchantInventory.bar);
+        this.setSmallEnchantGui();
         this.setItem(10, this.item);
-        this.setItem(11, EnchantInventory.bar);
-        this.setItem(12, EnchantInventory.bar);
         if (this.pickaxe.contains(this.item.getId())) {
             if (this.books < 4) {
                 this.setItem(13, this.eff1);
@@ -328,16 +316,6 @@ public class EnchantInventory extends ChestFakeInventory implements Listener
                 this.enchants.put(15, new EnchantAction(Enchantment.getEnchantment(21).setLevel(1), 30));
             }
         }
-        this.setItem(17, EnchantInventory.bar);
-        this.setItem(18, EnchantInventory.bar);
-        this.setItem(19, EnchantInventory.bar);
-        this.setItem(20, EnchantInventory.bar);
-        this.setItem(21, EnchantInventory.bar);
-        this.setItem(22, EnchantInventory.bar);
-        this.setItem(23, EnchantInventory.bar);
-        this.setItem(24, EnchantInventory.bar);
-        this.setItem(25, EnchantInventory.bar);
-        this.setItem(26, EnchantInventory.bar);
         ((Player)this.holder).addWindow((Inventory)this);
     }
     
@@ -355,7 +333,7 @@ public class EnchantInventory extends ChestFakeInventory implements Listener
             final Item back = s.execute(e.getPlayer(), this.item.clone());
             int index = -1;
             for (final Map.Entry<Integer, Item> cont : e.getPlayer().getInventory().getContents().entrySet()) {
-                if (cont.getValue().equals((Object)this.item)) {
+                if (cont.getValue().equals(this.item)) {
                     index = cont.getKey();
                     break;
                 }
@@ -371,9 +349,5 @@ public class EnchantInventory extends ChestFakeInventory implements Listener
     public void onClose(final Player who) {
         HandlerList.unregisterAll((Listener)this);
         super.onClose(who);
-    }
-    
-    static {
-        EnchantInventory.bar = new ItemBuilder(101).setTitle(" ").build();
     }
 }

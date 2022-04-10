@@ -16,6 +16,7 @@ import xyz.rokkiitt.sector.config.Config;
 import xyz.rokkiitt.sector.database.mysql.MySQL;
 import xyz.rokkiitt.sector.database.threads.DatabaseThread;
 import xyz.rokkiitt.sector.database.threads.QueryThread;
+import xyz.rokkiitt.sector.listeners.InventoryClickListener;
 import xyz.rokkiitt.sector.objects.IncognitoInventory;
 import xyz.rokkiitt.sector.objects.ac.EatModule;
 import xyz.rokkiitt.sector.objects.ac.EspModule;
@@ -167,7 +168,45 @@ public class Main extends PluginBase
     private void registerListeners() {
         final long startTime = System.nanoTime();
         final PluginManager pm = this.getServer().getPluginManager();
-        final List<Listener> list = Arrays.asList(new PlayerLoginListener(), new DataPacketEvents(), new FakeInventoriesListener(), new MovementListener(), new ExplodeListener(), new SpawnListener(), new BucketsListeners(), new BlockUpdateListener(), new InteractListener(), new BreakListener(), new PlaceListener(), new PrePlayerCommandListener(), new PlayerInteractListeners(), new MoveHeartListener(), new PlayerTeleportListener(), new ChatListener(), new CombatListener(), new DropBreakListener(), new RepairItemListener(), new CraftingListener(), new InventoryOpenListener(), new InventoryPickupItemListener(), new SignChangeListener(), new RandomTPListener(), new ServerStopListener(), new InventoryClickListener(), new NetherListener(), new EatModule(), new SpeedmineModule(), new PhaseModule());
+        final List<Listener> list = Arrays.asList(
+                new InventoryClickListener(),
+                new KoxRefPeralListener(),
+                new PlayerLoginListener(),
+                new DataPacketEvents(),
+                new FakeInventoriesListener(),
+                new MovementListener(),
+                new ExplodeListener(),
+                new SpawnListener(),
+                new BucketsListeners(),
+                new BlockUpdateListener(),
+
+
+
+
+
+
+                new InteractListener(),
+                new BreakListener(),
+                new PlaceListener(),
+                new PrePlayerCommandListener(),
+                new PlayerInteractListeners(),
+                new MoveHeartListener(),
+                new PlayerTeleportListener(),
+                new ChatListener(),
+                new CombatListener(),
+                new DropBreakListener(),
+                new RepairItemListener(),
+                new CraftingListener(),
+                new InventoryOpenListener(),
+                new InventoryPickupItemListener(),
+                new SignChangeListener(),
+                new RandomTPListener(),
+                new ServerStopListener(),
+                new InventoryClickListener(),
+                new NetherListener(),
+                new EatModule(),
+                new SpeedmineModule(),
+                new PhaseModule());
         for (final Listener l : list) {
             pm.registerEvents(l, this);
         }

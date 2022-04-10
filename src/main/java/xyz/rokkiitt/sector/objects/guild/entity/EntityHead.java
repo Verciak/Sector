@@ -89,17 +89,19 @@ public class EntityHead extends EntityHuman
                         final int val2;
                         hp = (val2 = hp - val);
                         if (hp <= 0) {
-//                            Main.getNats().publish("guildpanel", "addheart||" + u.tag);
+                            Guild ga = GuildManager.getGuild(u.getTag());
+                            ga.setHearts(ga.getHearts() + 1);
                             if (this.g.getHearts() <= 1) {
                                 GuildManager.deleteGuild(this.g);
-                                Util.sendInformation("CHAT||" + Settings.getMessage("guilddestroyed").replace("{PLAYER}", ((Player)damager).getName()).replace("{TAG}", this.g.getTag()));
+
+                                Util.sendInformation(Settings.getMessage("guilddestroyed").replace("{PLAYER}", ((Player)damager).getName()).replace("{TAG}", this.g.getTag()));
                                 return false;
                             }
                             final Guild g = this.g;
                             g.setHearts(g.getHearts() - 1);
                             this.g.setHeartProtectionTime(System.currentTimeMillis() + Time.HOUR.getTime(24));
                             g.setHearthp(100);
-                            Util.sendInformation("CHAT||" + Settings.getMessage("guildtaken").replace("{PLAYER}", ((Player)damager).getName()).replace("{TAG}", this.g.getTag()));
+                            Util.sendInformation(Settings.getMessage("guildtaken").replace("{PLAYER}", ((Player)damager).getName()).replace("{TAG}", this.g.getTag()));
                         }
                         else {
                             this.g.setHeartRegen(System.currentTimeMillis() + 15000L);

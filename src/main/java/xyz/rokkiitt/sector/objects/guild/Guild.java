@@ -306,7 +306,7 @@ public class Guild
     
     public void setHeartProtectionTime(final long id) {
         this.HeartProtectionTime = id;
-        Main.getProvider().update("UPDATE `users` SET `heartprot` ='" + getHeartProtectionTime()+"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `heartprot` ='" + getHeartProtectionTime()+"' WHERE `tag` ='" + getTag() + "'");
 
     }
     
@@ -316,7 +316,7 @@ public class Guild
     
     public void setGuildProtectionTime(final long id) {
         this.GuildProtectionTime = id;
-        Main.getProvider().update("UPDATE `users` SET `guildprot` ='" + getGuildProtectionTime()+"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `guildprot` ='" + getGuildProtectionTime()+"' WHERE `tag` ='" + getTag() + "'");
 
     }
     
@@ -359,7 +359,7 @@ public class Guild
 
     public void setTag(String tag) {
         this.tag = tag;
-        Main.getProvider().update("UPDATE `users` SET `tag` ='" + getTag()+"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `tag` ='" + getTag()+"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -369,7 +369,7 @@ public class Guild
 
     public void setName(String name) {
         this.name = name;
-        Main.getProvider().update("UPDATE `users` SET `name` ='" + getName()+"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `name` ='" + getName()+"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -379,7 +379,7 @@ public class Guild
 
     public void setLeader(String leader) {
         this.leader = leader;
-        Main.getProvider().update("UPDATE `users` SET `leader` ='" + getLeader()+"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `leader` ='" + getLeader()+"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -389,7 +389,7 @@ public class Guild
 
     public void setMembers(Set<String> members) {
         this.members = members;
-        Main.getProvider().update("UPDATE `users` SET `members` ='" + JsonStream.serialize(getMembers())+"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `members` ='" + JsonStream.serialize(getMembers())+"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -399,7 +399,7 @@ public class Guild
 
     public void setSkarbiec(GuildTreasureGUI skarbiec) {
         this.skarbiec = skarbiec;
-        Main.getProvider().update("UPDATE `users` SET `skarbiec` ='" + ItemSerializer.getStringFromItemMap(getSkarbiec().getContents()) +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `skarbiec` ='" + ItemSerializer.getStringFromItemMap(getSkarbiec().getContents()) +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -425,7 +425,7 @@ public class Guild
 
     public void setPenaltytnt(long penaltytnt) {
         this.penaltytnt = penaltytnt;
-        Main.getProvider().update("UPDATE `users` SET `penaltytnt` ='" + getPenaltytnt() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `penaltytnt` ='" + getPenaltytnt() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -435,7 +435,7 @@ public class Guild
 
     public void setHoppers(int hoppers) {
         this.hoppers = hoppers;
-        Main.getProvider().update("UPDATE `users` SET `hoppers` ='" + getHoppers() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `hoppers` ='" + getHoppers() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -445,7 +445,7 @@ public class Guild
 
     public void setCollections(Set<Collection> collections) {
         this.collections = collections;
-        Main.getProvider().update("UPDATE `users` SET `collections` ='" + Collection.serialize(getCollections()) +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `collections` ='" + Collection.serialize(getCollections()) +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -455,7 +455,7 @@ public class Guild
 
     public void setHearttype(String hearttype) {
         this.hearttype = hearttype;
-        Main.getProvider().update("UPDATE `users` SET `hearttype` ='" + getHearttype() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `hearttype` ='" + getHearttype() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -465,7 +465,7 @@ public class Guild
 
     public void setHeartcolor(String heartcolor) {
         this.heartcolor = heartcolor;
-        Main.getProvider().update("UPDATE `users` SET `heartcolor` ='" + getHeartcolor() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `heartcolor` ='" + getHeartcolor() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -475,7 +475,7 @@ public class Guild
 
     public void setHearts(int hearts) {
         this.hearts = hearts;
-        Main.getProvider().update("UPDATE `users` SET `hearts` ='" + getHearts() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `hearts` ='" + getHearts() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -493,7 +493,7 @@ public class Guild
 
     public void setCenterx(int centerx) {
         this.centerx = centerx;
-        Main.getProvider().update("UPDATE `users` SET `centerx` ='" + getCenterx() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `centerx` ='" + getCenterx() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -503,7 +503,7 @@ public class Guild
 
     public void setCenterz(int centerz) {
         this.centerz = centerz;
-        Main.getProvider().update("UPDATE `users` SET `centerz` ='" + getCenterz() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `centerz` ='" + getCenterz() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -513,7 +513,7 @@ public class Guild
 
     public void setSize(int size) {
         this.size = size;
-        Main.getProvider().update("UPDATE `users` SET `size` ='" + getSize() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `size` ='" + getSize() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -593,7 +593,7 @@ public class Guild
 
     public void setCreateTime(long createTime) {
         this.createTime = createTime;
-        Main.getProvider().update("UPDATE `users` SET `createTime` ='" + getCreateTime() +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `createTime` ='" + getCreateTime() +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 

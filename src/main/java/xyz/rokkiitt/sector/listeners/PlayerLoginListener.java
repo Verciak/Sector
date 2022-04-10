@@ -281,9 +281,17 @@ public class PlayerLoginListener implements Listener {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+
+
         final Player p = e.getPlayer();
         TeleportManager.removePlayer(p);
         Permissions.removePermissions(p);
+
+
+
+
+
 
         final Guild g = GuildManager.getGuild(p.getLocation());
         if (g != null && g.getHeart().isInHeart(p.getLocation()) && g.getHead() != null) {
@@ -293,6 +301,7 @@ public class PlayerLoginListener implements Listener {
                 g.setHead(null);
             }
         }
+
         final User u = UserManager.getUser(p.getName());
         if (u != null) {
             u.setLocation("false|^|" + ItemSerializer.serializeLocation(p.getLocation()));
