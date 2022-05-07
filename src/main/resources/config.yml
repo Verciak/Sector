@@ -42,6 +42,8 @@ KIT_SVIP: 0
 KIT_SPONSOR: 0
 ENABLE_ITEMSHOP: false
 ENABLE_ITEMSHOP_ONLYRANKS: false
+repairsucces: "&7[&6✔&7]&a Naprawiles przedmioty."
+repairlvl: "&7[&4⚠&7]&c Nie posiadasz {LVL} na pasku exp."
 destinationsectoroffline: "&7[&4⚠&7]&c Sektor docelowy: &e{SECTOR} &cjest offline, zaczekaj az zostanie wlaczony!"
 randomtpsucces: "&7[&6✔&7]&f Przeteleportowano w losowe miejsce."
 commandpermission: "&7[&4⚠&7]&c Nie masz dostepu do tej komendy! [{PERM}]"

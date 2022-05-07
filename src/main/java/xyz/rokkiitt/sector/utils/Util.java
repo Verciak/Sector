@@ -1,6 +1,7 @@
 package xyz.rokkiitt.sector.utils;
 
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.item.EntityItem;
 import org.apache.commons.lang3.StringUtils;
 import xyz.rokkiitt.sector.objects.user.User;
 import xyz.rokkiitt.sector.objects.wings.Wings;
@@ -25,6 +26,29 @@ import cn.nukkit.utils.*;
 
 public class Util
 {
+    public static Util a;
+
+    public Util() {
+        a = this;
+    }
+    public static Util a() {
+        if (a == null);
+        return a;
+    }
+
+    public List b() {
+        ArrayList<Item> list = new ArrayList<>();
+        final Iterator<Level> iterator = Server.getInstance().getLevels().values().iterator();
+        while (iterator.hasNext()) {
+            for (Entity entity : (iterator.next()).getEntities()) {
+                if (entity instanceof EntityItem) {
+                    list.add(((EntityItem) entity).getItem());
+                }
+            }
+        }
+        return list;
+    }
+
     private static String[] names;
     
     public static String getRandomNickname() {

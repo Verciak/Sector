@@ -33,6 +33,9 @@ public class Guild
     private long GuildProtectionTime;
     private long HeartProtectionTime;
     private int hoppers;
+    private int points;
+    private int kills;
+    private int deaths;
     private Set<Collection> collections;
     private String hearttype;
     private String heartcolor;
@@ -407,6 +410,36 @@ public class Guild
         return pvp;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+        Main.getProvider().update("UPDATE `guilds` SET `points` ='" + getPoints()+"' WHERE `tag` ='" + getTag() + "'");
+
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+        Main.getProvider().update("UPDATE `guilds` SET `kills` ='" + getKills()+"' WHERE `tag` ='" + getTag() + "'");
+
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+        Main.getProvider().update("UPDATE `guilds` SET `deaths` ='" + getDeaths()+"' WHERE `tag` ='" + getTag() + "'");
+
+    }
+
     public void setPvp(boolean pvp) {
         this.pvp = pvp;
     }
@@ -660,7 +693,10 @@ public class Guild
                 "`hearts`, " +
                 "`skarbiec`, " +
                 "`collections`, " +
-                "`hoppers`) VALUES (" +
+                "`hoppers`," +
+                "`points`," +
+                "`kills`," +
+                "`deaths`) VALUES (" +
                 "NULL, " +
                 "'" + getTag() + "'," +
                 "'" + getName() + "'," +
@@ -679,7 +715,10 @@ public class Guild
                 "'" + getHearts() + "'," +
                 "'" + ItemSerializer.getStringFromItemMap(getSkarbiec().getContents()) + "'," +
                 "'" + Collection.serialize(getCollections()) + "'," +
-                "'" + getHoppers() + "')");
+                "'" + getHoppers() + "'," +
+                "'" + getPoints() + "'," +
+                "'" + getKills() + "'," +
+                "'" + getDeaths() + "')");
     }
 
     public Guild(ResultSet set) throws SQLException {
@@ -710,11 +749,17 @@ public class Guild
             this.collections.addAll(Collection.deserialize(set.getString("collections")));
         }
         this.hoppers = set.getInt("hoppers");
+        this.points = set.getInt("points");
+        this.kills = set.getInt("kills");
+        this.deaths = set.getInt("deaths");
     }
     
     public Guild(final String pd, final String name, final String leader, final int centerx, final int centerz, final int size, final String members, final int goldblocks, final String skarbiec, final long createTime, final long guildprot, final long heartprot, final long penalty, final String hearttype, final String heartcolor, final int hearts, final int hoppers, final String coll) {
         this.collections = ConcurrentHashMap.newKeySet();
         this.hearthp = 100;
+        this.points = 1000;
+        this.kills = 0;
+        this.deaths = 0;
         this.logblocks = new ConcurrentHashMap<>();
         this.isLogblockenabled = true;
         this.b = new ConcurrentHashMap<>();

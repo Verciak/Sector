@@ -1,6 +1,5 @@
 package xyz.rokkiitt.sector.commands.server;
 
-import bimopower.musiccontroller.api.MusicControllerApi;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import xyz.rokkiitt.sector.ServerCommand;
@@ -19,7 +18,7 @@ public class DropCommand extends ServerCommand
     public boolean onCommand(final Player p, final String[] args) {
         final User u = UserManager.getUser(p.getName());
         if (u != null) {
-            MusicControllerApi.play(p, "song.drop");
+//            MusicControllerApi.play(p, "song.drop");
             new MainDropInventory(p, u);
             return false;
         }

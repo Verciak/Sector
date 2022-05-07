@@ -4,6 +4,8 @@ import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.config.Config;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
 import xyz.rokkiitt.sector.objects.combat.CombatManager;
+import xyz.rokkiitt.sector.objects.guild.Guild;
+import xyz.rokkiitt.sector.objects.guild.GuildManager;
 import xyz.rokkiitt.sector.objects.teleport.TeleportManager;
 import xyz.rokkiitt.sector.objects.user.User;
 import xyz.rokkiitt.sector.objects.user.UserManager;
@@ -125,6 +127,18 @@ public class CombatListener implements Listener
             p.getCursorInventory().clearAll();
             p.setExperience(0, 0);
             e.setCancelled(true);
+            final Guild kg = GuildManager.getGuild(killer);
+            final Guild g = GuildManager.getGuild(p);
+
+            if (kg != null) {
+                kg.setPoints(kg.getPoints() + 25);
+                kg.setKills(kg.getKills() + 1);
+            }
+            if (g != null) {
+                g.setPoints(g.getPoints() - 15);
+                g.setDeaths(g.getDeaths() + 1);
+            }
+
             final Entity finalKiller = killer;
             Server.getInstance().getScheduler().scheduleDelayedTask(new Task() {
                 public void onRun(final int i) {

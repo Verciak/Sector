@@ -26,7 +26,7 @@ public class DropManager
     public static void load() {
         Main.getProvider().update("CREATE TABLE IF NOT EXISTS `drops` (" +
                 "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                "`drop` varchar(9000) NOT NULL);");
+                "`drop` TEXT NOT NULL);");
         DropManager.drops.clear();
         DropManager.dropsslot.clear();
         try {

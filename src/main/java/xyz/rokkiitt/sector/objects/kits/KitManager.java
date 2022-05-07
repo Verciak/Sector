@@ -27,8 +27,8 @@ public class KitManager
             case "player": {
                 Main.getProvider().update("CREATE TABLE IF NOT EXISTS `playerkit` (" +
                         "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                        "`drop` varchar(9000) NOT NULL," +
-                        "`item` varchar(9000) NOT NULL);");
+                        "`drop` TEXT NOT NULL," +
+                        "`item` TEXT NOT NULL);");
                 KitManager.player.clear();
                 try {
                     ResultSet query = Main.getProvider().query("SELECT * FROM `playerkit`");
@@ -49,8 +49,8 @@ public class KitManager
             case "vip": {
                 Main.getProvider().update("CREATE TABLE IF NOT EXISTS `vipkit` (" +
                         "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                        "`drop` varchar(9000) NOT NULL," +
-                        "`item` varchar(9000) NOT NULL);");
+                        "`drop` TEXT NOT NULL," +
+                        "`item` TEXT NOT NULL);");
                 KitManager.vip.clear();
                 try {
                     ResultSet query = Main.getProvider().query("SELECT * FROM `vipkit`");
@@ -71,8 +71,8 @@ public class KitManager
             case "svip": {
                 Main.getProvider().update("CREATE TABLE IF NOT EXISTS `svipkit` (" +
                         "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                        "`drop` varchar(9000) NOT NULL," +
-                        "`item` varchar(9000) NOT NULL);");
+                        "`drop` TEXT NOT NULL," +
+                        "`item` TEXT NOT NULL);");
                 KitManager.svip.clear();
                 try {
                     ResultSet query = Main.getProvider().query("SELECT * FROM `svipkit`");
@@ -93,8 +93,8 @@ public class KitManager
             case "sponsor": {
                 Main.getProvider().update("CREATE TABLE IF NOT EXISTS `sponsorkit` (" +
                         "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                        "`drop` varchar(9000) NOT NULL," +
-                        "`item` varchar(9000) NOT NULL);");
+                        "`drop` TEXT NOT NULL," +
+                        "`item` TEXT NOT NULL);");
                 KitManager.sponsor.clear();
                 try {
                     ResultSet query = Main.getProvider().query("SELECT * FROM `sponsorkit`");

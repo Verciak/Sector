@@ -1,12 +1,12 @@
 package xyz.rokkiitt.sector.listeners;
 
-import bimopower.musiccontroller.api.MusicControllerApi;
 import cn.nukkit.event.block.BlockPlaceEvent;
 import cn.nukkit.network.protocol.PlaySoundPacket;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.config.Config;
 import xyz.rokkiitt.sector.objects.PItemsGUI;
 import xyz.rokkiitt.sector.objects.Perms;
+import xyz.rokkiitt.sector.objects.anvil.AnvilFakeInventory;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
 import xyz.rokkiitt.sector.objects.cobblex.CobblexManager;
 import xyz.rokkiitt.sector.objects.combat.CombatManager;
@@ -126,6 +126,14 @@ public class PlayerInteractListeners implements Listener
             return;
         }
         if (b != null) {
+            if(b.getId() == BlockID.ANVIL){
+                if(CombatManager.isContains(p.getName())){
+                    e.setCancelled();
+                    return;
+                }
+                e.setCancelled(true);
+                new AnvilFakeInventory(p);
+            }
             if ((b.getId() == 58 || b.getId() == 130 || b.getId() == 116 || b.getId() == 54 || b.getId() == 146) && CombatManager.isContains(p.getName()) && e.getAction().equals((Object)PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)) {
                 e.setCancelled(true);
                 Util.sendMessage((CommandSender)p, Settings.getMessage("openincombat"));

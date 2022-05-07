@@ -942,7 +942,7 @@ public class User {
 
     public boolean hasPermission(String s) {
         for (String ss : this.guildpermissions) {
-            if (ss.equalsIgnoreCase(s))
+            if (ss.contains(s))
                 return true;
         }
         return false;

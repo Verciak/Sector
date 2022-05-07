@@ -1,5 +1,6 @@
 package xyz.rokkiitt.sector.tasks;
 
+import cn.nukkit.item.Item;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.config.Config;
 import xyz.rokkiitt.sector.objects.entity.Zombie;
@@ -24,6 +25,7 @@ public class SecondTask implements Runnable
     int countdown;
     int openedfor;
     int landtime;
+    public static  List<Item> items = new ArrayList<>();
     
     public SecondTask() {
         this.alerted = false;
@@ -73,16 +75,23 @@ public class SecondTask implements Runnable
         final Iterator<Level> w = Server.getInstance().getLevels().values().iterator();
         int amount = 0;
         while (w.hasNext()) {
-            final Entity[] entities;
-            final Entity[] ee = entities = w.next().getEntities();
+            final Entity[] entities = w.next().getEntities();
             for (final Entity e : entities) {
-                if (e instanceof EntityItem || e instanceof EntityXPOrb || e instanceof EntityEnderman || e instanceof EntityCreeper|| e instanceof Zombie) {
+                if (e instanceof EntityItem) {
+                    items.add(((EntityItem) e).getItem());
+                    ++amount;
+                }
+                if (e instanceof EntityXPOrb) {
                     ++amount;
                 }
             }
         }
         if (amount >= 500 && this.countdown > 1) {
+            items.clear();
             this.countdown = 15;
+        }
+        if (this.countdown == 16) {
+            items.clear();
         }
         if (this.countdown > 0) {
             if (this.countdown == 30 || this.countdown == 15 || this.countdown <= 3) {
@@ -95,7 +104,11 @@ public class SecondTask implements Runnable
                 final Entity[] entities2;
                 final Entity[] ee2 = entities2 = ww.next().getEntities();
                 for (final Entity e2 : entities2) {
-                    if (e2 instanceof EntityItem || e2 instanceof EntityXPOrb || e2 instanceof EntityEnderman || e2 instanceof EntityCreeper) {
+                    if (e2 instanceof EntityItem) {
+                        items.add(((EntityItem) e2).getItem());
+                        e2.close();
+                    }
+                    if (e2 instanceof EntityXPOrb) {
                         e2.close();
                     }
                 }

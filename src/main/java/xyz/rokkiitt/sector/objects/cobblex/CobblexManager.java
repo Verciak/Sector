@@ -22,8 +22,8 @@ public class CobblexManager
     public static void load() {
         Main.getProvider().update("CREATE TABLE IF NOT EXISTS `cxdrops` (" +
                 "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                "`drop` varchar(9000) NOT NULL," +
-                "`what` varchar(9000) NOT NULL);");
+                "`drop` TEXT NOT NULL," +
+                "`what` TEXT NOT NULL);");
         CobblexManager.pandora.clear();
         try {
             ResultSet query = Main.getProvider().query("SELECT * FROM `cxdrops`");

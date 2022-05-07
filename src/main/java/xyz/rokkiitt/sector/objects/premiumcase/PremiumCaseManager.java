@@ -28,8 +28,8 @@ public class PremiumCaseManager
     public static void load() {
         Main.getProvider().update("CREATE TABLE IF NOT EXISTS `pcdrops` (" +
                 "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                "`drop` varchar(9000) NOT NULL," +
-                "`item` varchar(9000) NOT NULL);");
+                "`drop` TEXT NOT NULL," +
+                "`item` TEXT NOT NULL);");
         PremiumCaseManager.pandora.clear();
         try {
             ResultSet query = Main.getProvider().query("SELECT * FROM `pcdrops`");

@@ -29,8 +29,8 @@ public class PandoraManager
     public static void load() {
         Main.getProvider().update("CREATE TABLE IF NOT EXISTS `pandoradrops` (" +
                 "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                "`drop` varchar(9000) NOT NULL," +
-                "`item` varchar(9000) NOT NULL);");
+                "`drop` TEXT NOT NULL," +
+                "`item` TEXT NOT NULL);");
         PandoraManager.pandora.clear();
         try {
             ResultSet query = Main.getProvider().query("SELECT * FROM `pandoradrops`");

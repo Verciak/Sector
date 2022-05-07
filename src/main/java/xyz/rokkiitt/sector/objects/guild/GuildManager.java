@@ -133,24 +133,27 @@ public class GuildManager {
     public static Guild loadGuilds() {
         Main.getProvider().update("CREATE TABLE IF NOT EXISTS `guilds` (" +
                 "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                "`tag` varchar(100) NOT NULL, " +
-                "`name` varchar(100) NOT NULL, " +
-                "`leader` varchar(100) NOT NULL, " +
+                "`tag` TEXT NOT NULL, " +
+                "`name` TEXT NOT NULL, " +
+                "`leader` TEXT NOT NULL, " +
                 "`centerx` int(100) NOT NULL, " +
                 "`centerz` int(100) NOT NULL, " +
                 "`size` int(100) NOT NULL, " +
-                "`members` varchar(8000) NOT NULL, " +
+                "`members` TEXT NOT NULL, " +
                 "`guildBalance` int(100) NOT NULL, " +
                 "`guildprot` bigint(22) NOT NULL, " +
                 "`heartprot` bigint(22) NOT NULL, " +
                 "`createTime` bigint(22) NOT NULL, " +
                 "`penaltytnt` bigint(22) NOT NULL, " +
-                "`heartcolor` varchar(100) NOT NULL, " +
-                "`hearttype` varchar(100) NOT NULL, " +
+                "`heartcolor` TEXT NOT NULL, " +
+                "`hearttype` TEXT NOT NULL, " +
                 "`hearts` int(100) NOT NULL, " +
-                "`skarbiec` varchar(8000) NOT NULL, " +
-                "`collections` varchar(8000) NOT NULL, " +
-                "`hoppers` int(255) NOT NULL);");
+                "`skarbiec` TEXT NOT NULL, " +
+                "`collections` TEXT NOT NULL, " +
+                "`hoppers` int(255) NOT NULL," +
+                "`points` int(255) NOT NULL," +
+                "`kills` int(255) NOT NULL," +
+                "`deaths` int(255) NOT NULL);");
         try {
             ResultSet query = Main.getProvider().query("SELECT * FROM `guilds`");
             while (query.next()) {

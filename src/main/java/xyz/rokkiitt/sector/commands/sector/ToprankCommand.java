@@ -1,6 +1,5 @@
 package xyz.rokkiitt.sector.commands.sector;
 
-import bimopower.musiccontroller.api.MusicControllerApi;
 import xyz.rokkiitt.sector.SectorCommand;
 import xyz.rokkiitt.sector.objects.Top;
 import xyz.rokkiitt.sector.objects.guild.Guild;

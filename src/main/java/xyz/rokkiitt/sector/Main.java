@@ -5,6 +5,7 @@ import xyz.rokkiitt.sector.commands.sector.ToprankCommand;
 import xyz.rokkiitt.sector.commands.sector.guilds.GuildCreateCommand;
 import xyz.rokkiitt.sector.commands.sector.guilds.GuildWarCommand;
 import xyz.rokkiitt.sector.commands.server.HelpCommand;
+import xyz.rokkiitt.sector.commands.server.TestCommand;
 import xyz.rokkiitt.sector.commands.server.admins.GamemodeCommand;
 import xyz.rokkiitt.sector.commands.server.admins.KillCommand;
 import xyz.rokkiitt.sector.commands.server.admins.StatusCommand;
@@ -105,15 +106,16 @@ public class Main extends PluginBase
         Main.provider = new MySQL();
         Main.database = new DatabaseThread();
         Main.query = new QueryThread();
-            this.registerRecipes();
-            this.registerEnchants();
-            this.registerEntity();
-            this.registerBlocks();
-            this.registerItems();
-            this.registerCommands();
-            this.registerTasks();
-            this.registerListeners();
-            this.registerManager();
+        Settings.set();
+        this.registerRecipes();
+        this.registerEnchants();
+        this.registerEntity();
+        this.registerBlocks();
+        this.registerItems();
+        this.registerCommands();
+        this.registerTasks();
+        this.registerListeners();
+        this.registerManager();
     }
     
     public void onDisable() {
@@ -234,7 +236,6 @@ public class Main extends PluginBase
         final long startTime = System.nanoTime();
         BlockFactory.registerBlock(46, TNT.class);
         BlockFactory.registerBlock(165, Slime.class);
-        BlockFactory.registerBlock(145, FixedAnvil.class);
         BlockFactory.registerBlock(12, FixedSand.class);
         BlockFactory.registerBlock(13, FixedGravel.class);
         BlockFactory.registerBlock(154, FixedHopper.class);
@@ -270,7 +271,7 @@ public class Main extends PluginBase
     
     private void registerCommands() {
         final long startTime = System.nanoTime();
-        List<Command> cmd = Arrays.asList(new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new IncognitoCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
+        List<Command> cmd = Arrays.asList(new TestCommand(), new AbbysCommand(), new AdminPanelCommand(), new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new IncognitoCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
                 new GodCommand(), new FlyCommand(), new BossCommand(), new VanishCommand(), new DropCommand(), new DepositCommand(), new KitCommand(), new HealCommand(), new FeedCommand(), new SpawnCommand(), new CxCommand(),
                 new HelpCommand(), new VipCommand(), new SvipCommand(), new SponsorCommand(), new YouTubeCommand(), new TnTCommand(), new StatuteCommand(), new AlertCommand(), new DescriptionCommand(), new RepairCommand(),
                 new TopCommand(), new EffectsCommand(), new HelpopCommand(), new ResetRankingCommand(), new EnderCommand(), new BlocksCommand(), new IgnoreCommand(), new UnIgnoreCommand(), new IgnoreListCommand(), new CraftingsCommand(),

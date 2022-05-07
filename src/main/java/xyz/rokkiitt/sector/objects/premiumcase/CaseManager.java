@@ -1,6 +1,5 @@
 package xyz.rokkiitt.sector.objects.premiumcase;
 
-import bimopower.musiccontroller.api.MusicControllerApi;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;

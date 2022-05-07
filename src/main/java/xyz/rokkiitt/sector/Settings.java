@@ -57,7 +57,6 @@ public class Settings {
     public static boolean ENABLE_ITEMSHOP_ONLYRANKS;
     public static boolean ENABLE_ENCHANT;
     public static Set<String> profanity;
-    public static Config pd = Main.getPlugin().getConfig();
 
     public static String getMessage(final String property) {
         if (Main.getPlugin().getConfig().getString(property) != null) {
@@ -66,7 +65,8 @@ public class Settings {
         return "&4Error: &cNie odnaleziono wiadomosci dla: " + property.toLowerCase();
     }
 
-    static {
+    public static void set() {
+        Config pd = Main.getPlugin().getConfig();
         Settings.ENABLE_GUILD = pd.getBoolean("enable_guild");
         Settings.ENABLE_TNT = pd.getBoolean("enable_tnt");
         Settings.ENABLE_ENCHANT = pd.getBoolean("ENABLE_ENCHANT");

@@ -45,7 +45,7 @@ public class EntityHead extends EntityHuman
         skin.setGeometryData("{\r\n\t\"format_version\": \"1.16.1\",\r\n\t\"minecraft:geometry\": [\r\n\t\t{\r\n\t\t\t\"description\": {\r\n\t\t\t\t\"identifier\": \"geometry.player_head\",\r\n\t\t\t\t\"texture_width\": 64,\r\n\t\t\t\t\"texture_height\": 64,\r\n\t\t\t\t\"visible_bounds_width\": 4,\r\n\t\t\t\t\"visible_bounds_height\": 3,\r\n\t\t\t\t\"visible_bounds_offset\": [0, 0, 0]\r\n\t\t\t},\r\n\t\t\t\"bones\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"name\": \"root\",\r\n\t\t\t\t\t\"pivot\": [0, 0, 0]\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"name\": \"waist\",\r\n\t\t\t\t\t\"parent\": \"root\",\r\n\t\t\t\t\t\"pivot\": [0, 12, 0]\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"name\": \"body\",\r\n\t\t\t\t\t\"parent\": \"waist\",\r\n\t\t\t\t\t\"pivot\": [0, 24, 0]\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"name\": \"head\",\r\n\t\t\t\t\t\"parent\": \"body\",\r\n\t\t\t\t\t\"pivot\": [0, 24, 0],\r\n\t\t\t\t\t\"cubes\": [\r\n\t\t\t\t\t\t{\"origin\": [-4, 1, -4], \"size\": [8, 8, 8], \"uv\": [0, 0]}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"name\": \"hat\",\r\n\t\t\t\t\t\"parent\": \"head\",\r\n\t\t\t\t\t\"pivot\": [0, 24, 0],\r\n\t\t\t\t\t\"cubes\": [\r\n\t\t\t\t\t\t{\"origin\": [-4, 1, -4], \"size\": [8, 8, 8], \"inflate\": 0.5, \"uv\": [32, 0]}\r\n\t\t\t\t\t]\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t]\r\n}");
         final CompoundTag skinTag = new CompoundTag().putByteArray("Data", skin.getSkinData().data).putInt("SkinImageWidth", skin.getSkinData().width).putInt("SkinImageHeight", skin.getSkinData().height).putString("ModelId", skin.getSkinId()).putString("CapeId", skin.getCapeId()).putByteArray("CapeData", skin.getCapeData().data).putInt("CapeImageWidth", skin.getCapeData().width).putInt("CapeImageHeight", skin.getCapeData().height).putByteArray("SkinResourcePatch", skin.getSkinResourcePatch().getBytes(StandardCharsets.UTF_8)).putByteArray("GeometryData", skin.getGeometryData().getBytes(StandardCharsets.UTF_8)).putByteArray("AnimationData", skin.getAnimationData().getBytes(StandardCharsets.UTF_8)).putBoolean("PremiumSkin", skin.isPremium()).putBoolean("PersonaSkin", skin.isPersona()).putBoolean("CapeOnClassicSkin", skin.isCapeOnClassic());
         nbt.putCompound("Skin", skinTag);
-        nbt.putString("NameTag", Util.fixColor(g.getHeartcolor() + g.getTag().toUpperCase() + "\n" + getHeartString(g) + "\n" + getTimeString(g)));
+        nbt.putString("NameTag", Util.fixColor(g.getHeartcolor() + g.getTag().toUpperCase() + " - " + g.getName() +"\n"+ g.getHeartcolor() + g.getPoints() +"\n" + getHeartString(g) + "\n" + getTimeString(g)));
         return nbt;
     }
     
@@ -135,7 +135,7 @@ public class EntityHead extends EntityHuman
             this.teleport(new Vector3(this.getLocation().getX(), this.getLocation().getY() + 0.01, this.getLocation().getZ()), PlayerTeleportEvent.TeleportCause.PLUGIN);
         }
         if (this.ticksLived % 20 == 0) {
-            this.setNameTag(Util.fixColor(this.g.getHeartcolor() + this.g.getTag().toUpperCase() + "\n" + this.getHeartString() + "\n" + this.getTimeString()));
+            this.setNameTag(Util.fixColor(this.g.getHeartcolor() + this.g.getTag().toUpperCase() + " - " + g.getName() +"\n"+ g.getHeartcolor() + g.getPoints() +"\n" + this.getHeartString() + "\n" + this.getTimeString()));
             this.g.heartRegen();
             final Map<Integer, Player> b = new ConcurrentHashMap<Integer, Player>(this.getViewers());
             for (final Map.Entry<Integer, Player> p : b.entrySet()) {

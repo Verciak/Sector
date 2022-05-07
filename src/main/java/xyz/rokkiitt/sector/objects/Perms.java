@@ -82,7 +82,8 @@ public enum Perms
     CMD_BAN("cmd.ban"), 
     CMD_IPMANAGE("cmd.ipmanage"), 
     CMD_KEYS("cmd.keys"), 
-    CMD_SERVICES("cmd.servies"), 
+    CMD_SERVICES("cmd.servies"),
+    CMDADMINPANEL("cmd.adminpanel"),
     CMD_WL("cmd.wl");
 
     private final String perms;

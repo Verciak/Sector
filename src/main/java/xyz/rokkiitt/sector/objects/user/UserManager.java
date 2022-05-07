@@ -21,10 +21,10 @@ public class UserManager
     public static void loadUsers() {
         Main.getProvider().update("CREATE TABLE IF NOT EXISTS `users` (" +
                 "`id` int(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
-                "`nickname` varchar(100) NOT NULL, " +
-                "`wings` varchar(100) NOT NULL, " +
-                "`rank` varchar(100) NOT NULL, " +
-                "`tag` varchar(100) NOT NULL, " +
+                "`nickname` TEXT NOT NULL, " +
+                "`wings` TEXT NOT NULL, " +
+                "`rank` TEXT NOT NULL, " +
+                "`tag` TEXT NOT NULL, " +
                 "`allypvp` int(100) NOT NULL, " +
                 "`pvp` int(100) NOT NULL, " +
                 "`isGod` int(100) NOT NULL, " +
@@ -33,8 +33,8 @@ public class UserManager
                 "`assist` int(100) NOT NULL, " +
                 "`points` int(100) NOT NULL, " +
                 "`isVanish` int(100) NOT NULL, " +
-                "`protection` varchar(100) NOT NULL, " +
-                "`turbodrop` varchar(100) NOT NULL, " +
+                "`protection` TEXT NOT NULL, " +
+                "`turbodrop` TEXT NOT NULL, " +
                 "`egapple` int(100) NOT NULL, " +
                 "`gapple` int(100) NOT NULL, " +
                 "`arrows` int(100) NOT NULL, " +
@@ -51,21 +51,21 @@ public class UserManager
                 "`onlinetime` int(100) NOT NULL, " +
                 "`onlinesession` int(100) NOT NULL," +
                 "`firstLogin` int(100) NOT NULL," +
-                "`mutetime` varchar(255) NOT NULL," +
+                "`mutetime` TEXT NOT NULL," +
                 "`alertsenabled` int(100) NOT NULL," +
                 "`goldblocks` int(100) NOT NULL," +
                 "`placed` int(100) NOT NULL, " +
                 "`broken` int(100) NOT NULL, " +
-                "`homes` varchar(255) NOT NULL, " +
-                "`waypoints` varchar(255) NOT NULL, " +
+                "`homes` TEXT NOT NULL, " +
+                "`waypoints` TEXT NOT NULL, " +
                 "`isIncognito` int(100) NOT NULL, " +
-                "`incognito` varchar(255) NOT NULL, " +
+                "`incognito` TEXT NOT NULL, " +
                 "`IncognitoAlliance` int(100) NOT NULL, " +
                 "`IncognitoDead` int(100) NOT NULL," +
                 "`IncognitoKill` int(100) NOT NULL," +
-                "`chapel` varchar(255) NOT NULL," +
-                "`location` varchar(255) NOT NULL," +
-                "`guildperms` varchar(255) NOT NULL," +
+                "`chapel` TEXT NOT NULL," +
+                "`location` TEXT NOT NULL," +
+                "`guildperms` TEXT NOT NULL," +
                 "`eat_kox` int(100) NOT NULL," +
                 "`eat_ref` int(100) NOT NULL," +
                 "`throw_pearl` int(100) NOT NULL);");

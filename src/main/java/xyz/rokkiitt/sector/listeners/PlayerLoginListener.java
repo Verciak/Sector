@@ -45,18 +45,18 @@ public class PlayerLoginListener implements Listener {
     @EventHandler
     public void onJoin(final PlayerJoinEvent e) {
         e.setJoinMessage("");
-        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958721718388654114/DO8k2jBPB2_Oy7_MCbGjLSsc8zfO8V-p4aPa3_cGBvUYfx57oRj8IONjvEwIrAOUKiCJ");
-        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
-        embedObject.setAuthor("LOGI JOIN", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
-        embedObject.setColor(new Color(0x00FF00));
-        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** dolaczyl na serwer!");
-        embedObject.setTitle("");
-        webhook.addEmbed(embedObject);
-        try {
-            webhook.execute();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+//        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958721718388654114/DO8k2jBPB2_Oy7_MCbGjLSsc8zfO8V-p4aPa3_cGBvUYfx57oRj8IONjvEwIrAOUKiCJ");
+//        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+//        embedObject.setAuthor("LOGI JOIN", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
+//        embedObject.setColor(new Color(0x00FF00));
+//        embedObject.setDescription("Gracz **" + e.getPlayer().getName() + "** dolaczyl na serwer!");
+//        embedObject.setTitle("");
+//        webhook.addEmbed(embedObject);
+//        try {
+//            webhook.execute();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -269,6 +269,9 @@ public class PlayerLoginListener implements Listener {
     @EventHandler
     public void onQuit(final PlayerQuitEvent e) {
         e.setQuitMessage("");
+        if(!Server.getInstance().isRunning()){
+            return;
+        }
         DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/958722112493875250/SaJ12Vw5aTO2X0rUL71dICuorBrgJHtOTivhl582vHMEmrhdkHEZWDvshYymILuvoWT2");
         DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
         embedObject.setAuthor("LOGI LEFT", "", "http://cravatar.eu/avatar/"+ e.getPlayer().getName() +"/64.png");
