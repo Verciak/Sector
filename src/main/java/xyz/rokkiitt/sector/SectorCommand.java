@@ -35,18 +35,18 @@ public abstract class SectorCommand extends Command
         }
         this.onCommand((Player)sender, args);
         String cmd = StringUtils.join(args, " ");
-        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/957107354380406784/zN2FnI_Mo6XItWf-urM1SB5t0ASZzQGh_S0j7aqafozrl6ar_qbpYeVascPBUZ2wqK6L");
-        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
-        embedObject.setAuthor("LOGI KOMEND", "", "http://cravatar.eu/avatar/"+ sender.getName() +"/64.png");
-        embedObject.setColor(new Color(0x00FF00));
-        embedObject.setDescription("Gracz **" + sender.getName() + "** uzyl komendy: **/"+ getName() +" " + cmd + "**");
-        embedObject.setTitle("");
-        webhook.addEmbed(embedObject);
-        try {
-            webhook.execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/957107354380406784/zN2FnI_Mo6XItWf-urM1SB5t0ASZzQGh_S0j7aqafozrl6ar_qbpYeVascPBUZ2wqK6L");
+//        DiscordWebhook.EmbedObject embedObject = new DiscordWebhook.EmbedObject();
+//        embedObject.setAuthor("LOGI KOMEND", "", "http://cravatar.eu/avatar/"+ sender.getName() +"/64.png");
+//        embedObject.setColor(new Color(0x00FF00));
+//        embedObject.setDescription("Gracz **" + sender.getName() + "** uzyl komendy: **/"+ getName() +" " + cmd + "**");
+//        embedObject.setTitle("");
+//        webhook.addEmbed(embedObject);
+//        try {
+//            webhook.execute();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         return true;
     }
     

@@ -141,7 +141,7 @@ public class DataPacketEvents implements Listener
     public String getIncognito(final String color, final Player p, final User u, final User u2, final boolean isAlliance, final boolean isGuild) {
         if (u2.isIncognito()) {
             if (p.hasPermission(Perms.INCOGNITOSEE.getPermission())) {
-                return "&8[&6" + u2.getNickname() + "&8]";
+                return "&8[&9" + u2.getNickname() + "&8]";
             }
             if (isGuild) {
                 return "&8[" + color + u2.getNickname() + "&8]";
@@ -158,7 +158,7 @@ public class DataPacketEvents implements Listener
             if (!p.hasPermission(Perms.INCOGNITOSEE.getPermission())) {
                 return "";
             }
-            return "&8[&6" + u2.getNickname() + "&8]";
+            return "&8[&9" + u2.getNickname() + "&8]";
         }
     }
     

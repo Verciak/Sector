@@ -16,9 +16,10 @@ public class KoxRefPeralListener implements Listener {
     public void onClickPearl(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         User u = UserManager.getUser(p.getName());
-        if ((p.getInventory().getItemInHand().getId() == Item.ENDER_PEARL && e.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_AIR || e.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)) {
-            u.setThrow_pearl(u.getThrow_pearl() + 1);
-            return;
+        if (p.getInventory().getItemInHand().getId() == Item.ENDER_PEARL) {
+            if (e.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_AIR || e.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+                u.setThrow_pearl(u.getThrow_pearl() + 1);
+            }
         }
     }
 

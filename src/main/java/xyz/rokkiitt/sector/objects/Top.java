@@ -30,7 +30,7 @@ public class Top extends DoubleChestFakeInventory
     private final List<String> throwPearl;
     
     public Top(final Player p, final PacketToprankCommand pa) {
-        super(null, Util.fixColor("&6Rankingi"));
+        super(null, Util.fixColor("&9Rankingi"));
         this.holder = (InventoryHolder)p;
         this.points = pa.points;
         this.kills = pa.kills;
@@ -50,15 +50,15 @@ public class Top extends DoubleChestFakeInventory
         this.clearAll();
         this.fill();
         this.setServerGui();
-        this.setItem(13, new ItemBuilder(Item.SKULL, 1, 3).setTitle("&r&ePUNKTY\u270b").setLore(this.sortPoints()).build());
-        this.setItem(22, new ItemBuilder(Item.GOLDEN_SWORD).setTitle("&r&eASYSTY\u270b").setLore(this.sortAssists()).build());
-        this.setItem(28, new ItemBuilder(Item.CLOCK).setTitle("&r&eSPEDZONY CZAS\u270b").setLore(this.sortTime()).build());
-        this.setItem(29, new ItemBuilder(Item.STONE).setTitle("&r&eWYKOPANE BLOKI\u270b").setLore(this.sortBroken()).build());
-        this.setItem(30, new ItemBuilder(Item.SKULL).setTitle("&r&eSMIERCI\u270b").setLore(this.sortDeaths()).build());
-        this.setItem(32, new ItemBuilder(Item.GOLDEN_APPLE).setTitle("&r&eZJEDZONE REFILE\u270b").setLore(this.sortRefil()).build());
-        this.setItem(33, new ItemBuilder(Item.ENDER_PEARL).setTitle("&r&eRZUCONE PERLY\u270b").setLore(this.sortPearl()).build());
-        this.setItem(34, new ItemBuilder(Item.GOLDEN_APPLE_ENCHANTED).setTitle("&r&eZJEDZONE KOXY\u270b").setLore(this.sortKox()).build());
-        this.setItem(40, new ItemBuilder(Item.TOTEM).setTitle("&r&eZABOJSTWA\u270b").setLore(this.sortKills()).build());
+        this.setItem(13, new ItemBuilder(Item.SKULL, 1, 3).setTitle("&r&l&9PUNKTY\u270b").setLore(this.sortPoints()).build());
+        this.setItem(22, new ItemBuilder(Item.GOLDEN_SWORD).setTitle("&r&l&9ASYSTY\u270b").setLore(this.sortAssists()).build());
+        this.setItem(28, new ItemBuilder(Item.CLOCK).setTitle("&r&l&9SPEDZONY CZAS\u270b").setLore(this.sortTime()).build());
+        this.setItem(29, new ItemBuilder(Item.STONE).setTitle("&r&l&9WYKOPANE BLOKI\u270b").setLore(this.sortBroken()).build());
+        this.setItem(30, new ItemBuilder(Item.SKULL).setTitle("&r&l&9SMIERCI\u270b").setLore(this.sortDeaths()).build());
+        this.setItem(32, new ItemBuilder(Item.GOLDEN_APPLE).setTitle("&r&l&9ZJEDZONE REFILE\u270b").setLore(this.sortRefil()).build());
+        this.setItem(33, new ItemBuilder(Item.ENDER_PEARL).setTitle("&r&l&9RZUCONE PERLY\u270b").setLore(this.sortPearl()).build());
+        this.setItem(34, new ItemBuilder(Item.GOLDEN_APPLE_ENCHANTED).setTitle("&r&l&9ZJEDZONE KOXY\u270b").setLore(this.sortKox()).build());
+        this.setItem(40, new ItemBuilder(Item.TOTEM).setTitle("&r&l&9ZABOJSTWA\u270b").setLore(this.sortKills()).build());
     }
     
     @Override
@@ -82,12 +82,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-                x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+                x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
                 ++b;
 
         }
@@ -106,12 +106,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }
@@ -130,12 +130,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }
@@ -153,12 +153,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }
@@ -177,12 +177,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }
@@ -201,12 +201,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }
@@ -225,12 +225,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }
@@ -249,12 +249,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + Util.formatTime(Long.parseLong(String.valueOf(s.getValue()))) + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + Util.formatTime(Long.parseLong(String.valueOf(s.getValue()))) + "&8]\u270b";
             ++b;
 
         }
@@ -273,12 +273,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }
@@ -297,12 +297,12 @@ public class Top extends DoubleChestFakeInventory
 
         int length = x.length;
         for (int i = 0; i < length; i++) {
-            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&40000&8]\u270b" : "";
+            x[i] = i > 0 && i <= length - 2 ? "&r&8>> &FBRAK &8[&90000&8]\u270b" : "";
         }
 
         int b = 1;
         for (final Map.Entry<String, Integer> s : linkedHashMap.entrySet()) {
-            x[b] = "&r&8>> &f" + b + ". &e" + s.getKey().toUpperCase() + " &8[&4" + s.getValue() + "&8]\u270b";
+            x[b] = "&r&8>> &f" + b + ". &7" + s.getKey().toUpperCase() + " &8[&9" + s.getValue() + "&8]\u270b";
             ++b;
 
         }

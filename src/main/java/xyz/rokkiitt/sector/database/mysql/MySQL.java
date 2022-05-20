@@ -12,9 +12,9 @@ public class MySQL
         try {
             final HikariConfig config = new HikariConfig();
             config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            config.setJdbcUrl("jdbc:mysql://localhost:3306/mc?serverTimezone=UTC&useLegacyDatetimeCode=false");
-            config.setUsername("newuser");
-            config.setPassword("Dominik69_69!");
+            config.setJdbcUrl("jdbc:mysql://mysql.titanaxe.com:3306/srv218219?serverTimezone=UTC&useLegacyDatetimeCode=false");
+            config.setUsername("srv218219");
+            config.setPassword("7oqlsPkv");
             config.addDataSourceProperty("characterEncoding", "utf8");
             config.addDataSourceProperty("useUnicode", "true");
             config.addDataSourceProperty("cachePrepStmts", true);

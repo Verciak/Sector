@@ -7,6 +7,8 @@ import xyz.rokkiitt.sector.Main;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
 import xyz.rokkiitt.sector.objects.combat.CombatManager;
+import xyz.rokkiitt.sector.objects.guild.Guild;
+import xyz.rokkiitt.sector.objects.guild.GuildManager;
 import xyz.rokkiitt.sector.objects.home.PlayerHomeData;
 import xyz.rokkiitt.sector.objects.meteorite.MeteoriteManager;
 import xyz.rokkiitt.sector.objects.teleport.TeleportManager;
@@ -24,17 +26,13 @@ public class HalfSecTask extends Task
 {
     public void onRun(final int tick) {
         for (final Player p : Server.getInstance().getOnlinePlayers().values()) {
-            if (!Cooldown.getInstance().has(p, "removeMeta")) {
-                p.getServer().removePlayerListData(p.getUniqueId());
-                Cooldown.getInstance().add(p, "removeMeta", 5.0f);
-            }
             final User user = UserManager.getUser(p.getName());
             Main.getProvider().update("UPDATE `users` SET `homes` ='" + PlayerHomeData.serialize(user) + "' WHERE `nickname` ='" + p.getName() + "'");
             Main.getProvider().update("UPDATE `users` SET `waypoints` ='" + WaypointData.serialize(user) + "' WHERE `nickname` ='" + p.getName() + "'");
             if (user != null) {
                 if(Server.getInstance().isRunning()) {
                     user.setLocation("false|^|" + ItemSerializer.serializeLocation(p.getLocation()));
-                    final StringJoiner nn = new StringJoiner(Util.fixColor(" &6| "));
+                    final StringJoiner nn = new StringJoiner(Util.fixColor(" &9| "));
                     if (Settings.FREEZE_TIME >= System.currentTimeMillis()) {
                         if (user.hasProtection()) {
                             user.setProtection(user.getProtection() + 500L);
@@ -60,6 +58,7 @@ public class HalfSecTask extends Task
                         } else if (user.getProtection() + 700L >= System.currentTimeMillis()) {
                             Util.changeNametag(p);
                         }
+
                         if (CombatManager.isContains(p.getName())) {
                             long time = CombatManager.getTime(p).longValue();
                             if (time <= System.currentTimeMillis()) {

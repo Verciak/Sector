@@ -34,11 +34,11 @@ public class MainDropInventory extends DoubleChestFakeInventory {
     private final Player who;
 
     public MainDropInventory(final Player p, final User u) {
-        super(null, Util.fixColor("&6MENU DROPU"));
+        super(null, Util.fixColor("&9MENU DROPU"));
         this.who = p;
         this.u = u;
-        this.refreshGui();
-        p.addWindow((Inventory) this);
+        refreshGui();
+        p.addWindow(this);
     }
 
     @Override
@@ -69,23 +69,23 @@ public class MainDropInventory extends DoubleChestFakeInventory {
         this.setServerGui();
         this.setItem(22,
                 new ItemBuilder(Item.STONE)
-                        .setTitle("&r&l&6DROP Z KAMIENIA")
+                        .setTitle("&r&l&9DROP Z KAMIENIA")
                         .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
         this.setItem(24,
                 new ItemBuilder(Item.DRAGON_EGG)
-                        .setTitle("&r&l&6DROP Z PANDORY")
+                        .setTitle("&r&l&9DROP Z PANDORY")
                         .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
         this.setItem(39,
                 new ItemBuilder(Item.MOSSY_STONE)
-                        .setTitle("&r&l&6DROP Z COBBLEXA")
+                        .setTitle("&r&l&9DROP Z COBBLEXA")
                         .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
         this.setItem(20,
                 new ItemBuilder(Item.CHEST)
-                        .setTitle("&r&l&6DROP Z PREMIUMCASE")
+                        .setTitle("&r&l&9DROP Z PREMIUMCASE")
                         .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
         this.setItem(41,
                 new ItemBuilder(Item.CHORUS_FRUIT)
-                        .setTitle("&r&l&6DROP Z METEORYTU")
+                        .setTitle("&r&l&9DROP Z METEORYTU")
                         .setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Kliknij, aby zobaczyc drop!"})).build());
     }
 }

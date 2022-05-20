@@ -1,18 +1,16 @@
 package xyz.rokkiitt.sector;
 
-import xyz.rokkiitt.sector.commands.sector.IncognitoCommand;
-import xyz.rokkiitt.sector.commands.sector.ToprankCommand;
-import xyz.rokkiitt.sector.commands.sector.guilds.GuildCreateCommand;
-import xyz.rokkiitt.sector.commands.sector.guilds.GuildWarCommand;
-import xyz.rokkiitt.sector.commands.server.HelpCommand;
-import xyz.rokkiitt.sector.commands.server.TestCommand;
-import xyz.rokkiitt.sector.commands.server.admins.GamemodeCommand;
-import xyz.rokkiitt.sector.commands.server.admins.KillCommand;
-import xyz.rokkiitt.sector.commands.server.admins.StatusCommand;
-import xyz.rokkiitt.sector.commands.server.admins.StopCommand;
-import xyz.rokkiitt.sector.commands.server.admins.TimeCommand;
-import xyz.rokkiitt.sector.commands.server.admins.WeatherCommand;
-import xyz.rokkiitt.sector.commands.server.guild.GuildHomeCommand;
+import xyz.rokkiitt.sector.commands.*;
+import xyz.rokkiitt.sector.commands.HelpCommand;
+import xyz.rokkiitt.sector.commands.SpawnCommand;
+import xyz.rokkiitt.sector.commands.admins.*;
+import xyz.rokkiitt.sector.commands.admins.GamemodeCommand;
+import xyz.rokkiitt.sector.commands.admins.KillCommand;
+import xyz.rokkiitt.sector.commands.admins.StatusCommand;
+import xyz.rokkiitt.sector.commands.admins.StopCommand;
+import xyz.rokkiitt.sector.commands.admins.TimeCommand;
+import xyz.rokkiitt.sector.commands.admins.WeatherCommand;
+import xyz.rokkiitt.sector.commands.guild.*;
 import xyz.rokkiitt.sector.config.Config;
 import xyz.rokkiitt.sector.database.mysql.MySQL;
 import xyz.rokkiitt.sector.database.threads.DatabaseThread;
@@ -24,11 +22,8 @@ import xyz.rokkiitt.sector.objects.ac.EspModule;
 import xyz.rokkiitt.sector.objects.ac.PhaseModule;
 import xyz.rokkiitt.sector.objects.ac.SpeedmineModule;
 import xyz.rokkiitt.sector.objects.antigrief.AntiGrief;
-import xyz.rokkiitt.sector.objects.backup.BackupInventory;
 import xyz.rokkiitt.sector.objects.enchants.CustomKnockback;
 import xyz.rokkiitt.sector.objects.entity.Zombie;
-import xyz.rokkiitt.sector.objects.entity.blockentity.ChestTile;
-import xyz.rokkiitt.sector.objects.entity.blockentity.FixedHopperTile;
 import xyz.rokkiitt.sector.objects.guild.Guild;
 import xyz.rokkiitt.sector.objects.guild.GuildManager;
 import xyz.rokkiitt.sector.objects.guild.GuildPanelGUI;
@@ -48,11 +43,6 @@ import xyz.rokkiitt.sector.objects.waypoint.Waypoint;
 import xyz.rokkiitt.sector.tasks.*;
 import xyz.rokkiitt.sector.utils.BlockFactory;
 import xyz.rokkiitt.sector.utils.Util;
-import xyz.rokkiitt.sector.commands.server.*;
-import xyz.rokkiitt.sector.commands.server.admins.*;
-import xyz.rokkiitt.sector.commands.server.guild.GuildCollectionCommand;
-import xyz.rokkiitt.sector.commands.server.guild.GuildRegenerationCommand;
-import xyz.rokkiitt.sector.commands.server.guild.GuildTreasureCommand;
 import cn.nukkit.*;
 import cn.nukkit.block.*;
 import cn.nukkit.entity.mob.*;
@@ -66,7 +56,6 @@ import xyz.rokkiitt.sector.listeners.guild.*;
 import xyz.rokkiitt.sector.listeners.*;
 import cn.nukkit.plugin.*;
 import xyz.rokkiitt.sector.objects.entity.projectile.*;
-import cn.nukkit.blockentity.*;
 import xyz.rokkiitt.sector.objects.block.*;
 import cn.nukkit.potion.*;
 import cn.nukkit.item.food.*;
@@ -91,7 +80,6 @@ public class Main extends PluginBase
     public static Set<IncognitoInventory> incognitos;
     public static Set<LogblockInventory> logs;
     public static Set<ItemshopInventory> items;
-    public static Set<BackupInventory> backups;
     private static long tntPerSecondTime;
     public static int tntPerSecond;
     
@@ -181,12 +169,6 @@ public class Main extends PluginBase
                 new SpawnListener(),
                 new BucketsListeners(),
                 new BlockUpdateListener(),
-
-
-
-
-
-
                 new InteractListener(),
                 new BreakListener(),
                 new PlaceListener(),
@@ -226,8 +208,8 @@ public class Main extends PluginBase
         Entity.registerEntity(Egg.class.getSimpleName(), Egg.class);
         Entity.registerEntity(EnderPearl.class.getSimpleName(), EnderPearl.class);
         Entity.registerEntity("Arrow", Arrow.class);
-        BlockEntity.registerBlockEntity("Chest", ChestTile.class);
-        BlockEntity.registerBlockEntity("Hopper", FixedHopperTile.class);
+//        BlockEntity.registerBlockEntity("Chest", ChestTile.class);
+//        BlockEntity.registerBlockEntity("Hopper", FixedHopperTile.class);
         final long endTime = System.nanoTime();
         this.getLogger().info("Registered 12 entities in {S}ms".replace("{S}", String.valueOf((endTime - startTime) / 1000000L)));
     }
@@ -271,14 +253,14 @@ public class Main extends PluginBase
     
     private void registerCommands() {
         final long startTime = System.nanoTime();
-        List<Command> cmd = Arrays.asList(new TestCommand(), new AbbysCommand(), new AdminPanelCommand(), new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new IncognitoCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
+        List<Command> cmd = Arrays.asList(new GuildInfoCommand(),new GuildFFACommand(), new GuildExpandCommand(), new GuildCommand(), new GuildDeleteCommand(), new TestCommand(), new AdminPanelCommand(), new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
                 new GodCommand(), new FlyCommand(), new BossCommand(), new VanishCommand(), new DropCommand(), new DepositCommand(), new KitCommand(), new HealCommand(), new FeedCommand(), new SpawnCommand(), new CxCommand(),
                 new HelpCommand(), new VipCommand(), new SvipCommand(), new SponsorCommand(), new YouTubeCommand(), new TnTCommand(), new StatuteCommand(), new AlertCommand(), new DescriptionCommand(), new RepairCommand(),
                 new TopCommand(), new EffectsCommand(), new HelpopCommand(), new ResetRankingCommand(), new EnderCommand(), new BlocksCommand(), new IgnoreCommand(), new UnIgnoreCommand(), new IgnoreListCommand(), new CraftingsCommand(),
                 new InvseeCommand(), new EnderseeCommand(), new AlertACCommand(), new PermsListCommand(), new RandomTpCommand(), new WingsCommand(), new StopCommand(), new GcCommand(), new TimingsCommand("timings"),
                 new StatusCommand(), new KillCommand(), new TimeCommand(), new GamemodeCommand(), new WeatherCommand(), new DifficultyCommand("difficulty"),
                 new ModifyCommand(), new HomeCommand(), new SetHomeCommand(), new DelHomeCommand(), new WaypointCommand(),
-                new ItemshopCommand(),new SetGroupCommand(), new WorkbenchCommand(), new BackupCommand(), new TradeCommand(), new GuildCollectionCommand());
+                new ItemshopCommand(),new SetGroupCommand(), new WorkbenchCommand(), new TradeCommand(), new GuildCollectionCommand());
         for (Command c : cmd){
             ServerCommand.registerCommand(c);
     }
@@ -306,16 +288,16 @@ public class Main extends PluginBase
         final Map<Character, Item> ingredients = new CharObjectHashMap<Item>();
         ingredients.put('A', Item.get(41));
         ingredients.put('B', Item.get(260));
-        Server.getInstance().addRecipe(new ShapedRecipe(Item.get(466), new String[] { "AAA", "ABA", "AAA" }, ingredients, new ArrayList()));
+        Server.getInstance().getCraftingManager().registerRecipe(419 , new ShapedRecipe(Item.get(466), new String[] { "AAA", "ABA", "AAA" }, ingredients, new ArrayList()));
         ingredients.clear();
         ingredients.put('A', Item.get(49));
         ingredients.put('B', Item.get(368));
-        Server.getInstance().addRecipe(new ShapedRecipe(Item.get(130), new String[] { "AAA", "ABA", "AAA" }, ingredients, new ArrayList()));
+        Server.getInstance().getCraftingManager().registerRecipe(419 , new ShapedRecipe(Item.get(130), new String[] { "AAA", "ABA", "AAA" }, ingredients, new ArrayList()));
         ingredients.clear();
         ingredients.put('A', Item.get(20));
         ingredients.put('B', Item.get(397, 1));
         ingredients.put('C', Item.get(49));
-        Server.getInstance().addRecipe(new ShapedRecipe(Item.get(138), new String[] { "AAA", "BBB", "CCC" }, ingredients, new ArrayList()));
+        Server.getInstance().getCraftingManager().registerRecipe(419 , new ShapedRecipe(Item.get(138), new String[] { "AAA", "BBB", "CCC" }, ingredients, new ArrayList()));
         Server.getInstance().getCraftingManager().rebuildPacket();
     }
     
@@ -352,6 +334,5 @@ public class Main extends PluginBase
         Main.incognitos = ConcurrentHashMap.newKeySet();
         Main.logs = ConcurrentHashMap.newKeySet();
         Main.items = ConcurrentHashMap.newKeySet();
-        Main.backups = ConcurrentHashMap.newKeySet();
     }
 }

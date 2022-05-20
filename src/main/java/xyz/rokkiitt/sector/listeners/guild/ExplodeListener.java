@@ -72,6 +72,7 @@ public class ExplodeListener implements Listener
                             ((ChestTile)tile).unlock();
                         }
                     }
+
                     if (!g.getHeart().isInHeart(loc)) {
                         if ((g.getGuildProtectionTime() <= System.currentTimeMillis() && Settings.ENABLE_TNT) || g.getPenaltytnt() >= System.currentTimeMillis()) {
                             g.setExplodeTime(System.currentTimeMillis() + Time.SECOND.getTime(60));
@@ -79,6 +80,7 @@ public class ExplodeListener implements Listener
                             if (this.dissalowed.contains(block.getId())) {
                                 continue;
                             }
+                            System.out.printf("id" + block.getId());
                             g.rAddBlock(block);
                         }
                         else {

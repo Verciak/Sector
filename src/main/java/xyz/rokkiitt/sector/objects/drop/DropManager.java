@@ -91,7 +91,7 @@ public class DropManager
         }
         if (drop.size() == 1) {
             final TemporaryDrop d2 = drop.get(0);
-            p.sendTip(Util.fixColor("&fTrafiles na: &6{WHAT}&f. &8(&e{AMOUNT} szt.&8) &e+{EXP} {STATUS}".replace("{STATUS}", d2.enabled ? "" : "&cWYLACZONE").replace("{EXP}", d2.exp + "").replace("{AMOUNT}", d2.item.getCount() + "").replace("{WHAT}", PolishItemNames.getPolishName(d2.item))));
+            p.sendTip(Util.fixColor("&fTrafiles na: &9{WHAT}&f. &8(&e{AMOUNT} szt.&8) &e+{EXP} {STATUS}".replace("{STATUS}", d2.enabled ? "" : "&cWYLACZONE").replace("{EXP}", d2.exp + "").replace("{AMOUNT}", d2.item.getCount() + "").replace("{WHAT}", PolishItemNames.getPolishName(d2.item))));
             if (d2.enabled) {
                 Util.giveItem(p, d2.item);
             }
@@ -100,7 +100,7 @@ public class DropManager
         else if (drop.size() > 1) {
             Collections.shuffle(drop);
             final TemporaryDrop d2 = drop.get(RandomUtil.getRandInt(0, drop.size() - 1));
-            p.sendTip(Util.fixColor("&fTrafiles na: &6{WHAT}&f. &8(&e{AMOUNT} szt.&8) &e+{EXP} {STATUS}".replace("{STATUS}", d2.enabled ? "" : "&cWYLACZONE").replace("{EXP}", d2.exp + "").replace("{AMOUNT}", d2.item.getCount() + "").replace("{WHAT}", PolishItemNames.getPolishName(d2.item))));
+            p.sendTip(Util.fixColor("&fTrafiles na: &9{WHAT}&f. &8(&e{AMOUNT} szt.&8) &e+{EXP} {STATUS}".replace("{STATUS}", d2.enabled ? "" : "&cWYLACZONE").replace("{EXP}", d2.exp + "").replace("{AMOUNT}", d2.item.getCount() + "").replace("{WHAT}", PolishItemNames.getPolishName(d2.item))));
             if (d2.enabled) {
                 Util.giveItem(p, d2.item);
             }

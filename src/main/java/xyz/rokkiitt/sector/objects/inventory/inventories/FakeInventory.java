@@ -20,17 +20,17 @@ public abstract class FakeInventory extends ContainerInventory
     protected final Map<Player, List<BlockVector3>> blockPositions;
     private boolean closed;
     protected String title;
-    
+
     public FakeInventory(final InventoryType type, final InventoryHolder holder, final String title) {
         super(holder, type);
         this.blockPositions = new HashMap<Player, List<BlockVector3>>();
         this.closed = false;
         this.title = ((title == null) ? type.getDefaultTitle() : title);
     }
-    
+
     @EventHandler
     protected abstract void onSlotChange(final FakeSlotChangeEvent p0);
-    
+
     public void onOpen(final Player who) {
         Preconditions.checkState(!this.closed, (Object)"Already closed");
         this.viewers.add(who);
@@ -41,7 +41,7 @@ public abstract class FakeInventory extends ContainerInventory
         this.blockPositions.put(who, blocks);
         this.onFakeOpen(who, blocks);
     }
-    
+
     protected void onFakeOpen(final Player who, final List<BlockVector3> blocks) {
         final BlockVector3 blockPosition = blocks.isEmpty() ? FakeInventory.ZERO : blocks.get(0);
         final ContainerOpenPacket containerOpen = new ContainerOpenPacket();
@@ -53,9 +53,9 @@ public abstract class FakeInventory extends ContainerInventory
         who.dataPacket((DataPacket)containerOpen);
         this.sendContents(who);
     }
-    
+
     protected abstract List<BlockVector3> onOpenBlock(final Player p0);
-    
+
     public void onClose(final Player who) {
         super.onClose(who);
         FakeInventory.open.remove(who, this);
@@ -66,7 +66,7 @@ public abstract class FakeInventory extends ContainerInventory
                 Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
                     Vector3 blockPosition = blocks.get(index).asVector3();
                     UpdateBlockPacket updateBlock = new UpdateBlockPacket();
-                    updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.getLevel().getBlock(blockPosition).getFullId());
+                    updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.protocol, who.getLevel().getBlock(blockPosition).getFullId());
                     updateBlock.flags = 11;
                     updateBlock.x = blockPosition.getFloorX();
                     updateBlock.y = blockPosition.getFloorY();
@@ -77,34 +77,34 @@ public abstract class FakeInventory extends ContainerInventory
             }
         }
     }
-    
+
     public List<BlockVector3> getPosition(final Player player) {
         Preconditions.checkState(!this.closed, (Object)"Already closed");
         return this.blockPositions.getOrDefault(player, null);
     }
-    
+
     public boolean onSlotChange(final Player source, final SlotChangeAction action) {
         final FakeSlotChangeEvent event = new FakeSlotChangeEvent(source, this, action);
         this.onSlotChange(event);
         return event.isCancelled();
     }
-    
+
     public void close() {
         Preconditions.checkState(!this.closed, (Object)"Already closed");
         this.getViewers().forEach(player -> player.removeWindow((Inventory)this));
         this.closed = true;
     }
-    
+
     public void clearAll() {
         for (int i = 0; i < this.getSize(); ++i) {
             this.setItem(i, Item.get(0));
         }
     }
-    
+
     public String getTitle() {
         return this.title;
     }
-    
+
     public void setTitle(final String title) {
         if (title == null) {
             this.title = this.type.getDefaultTitle();
@@ -113,7 +113,7 @@ public abstract class FakeInventory extends ContainerInventory
             this.title = title;
         }
     }
-    
+
     public Item[] addOneItem(final Item... slots) {
         final List<Item> itemSlots = new ArrayList<Item>();
         for (final Item slot : slots) {
@@ -150,7 +150,7 @@ public abstract class FakeInventory extends ContainerInventory
         }
         return itemSlots.toArray(new Item[0]);
     }
-    
+
     static {
         ZERO = new BlockVector3(0, 0, 0);
         open = new ConcurrentHashMap<Player, FakeInventory>();

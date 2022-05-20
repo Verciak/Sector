@@ -37,7 +37,6 @@ public class ItemshopInventory extends DoubleChestFakeInventory
         this.u = u;
         Main.items.add(this);
         final PacketItemshopLoad pa = new PacketItemshopLoad();
-//        pa.playersector = Config.getInstance().Sector;
         pa.player = p.getName();
         pa.items = "brak";
 //        Main.getNats().publish("hubguildpanel", "itemshop||" + JsonStream.serialize(pa));

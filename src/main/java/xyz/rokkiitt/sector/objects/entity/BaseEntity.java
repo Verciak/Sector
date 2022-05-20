@@ -179,7 +179,7 @@ public abstract class BaseEntity extends EntityCreature implements EntityAgeable
             ((EntityDamageByEntityEvent) source).setKnockBack(0.25F);
 
             Player p = (Player) ((EntityDamageByEntityEvent) source).getDamager();
-            p.sendTip(Util.fixColor("&r&c&l   BOSS\n&r&7&lHP: &6" + this.getHealth() + " &c\u2665 \n\n\n\n\n\n"));
+            p.sendTip(Util.fixColor("&r&c&l   BOSS\n&r&7&lHP: &9" + this.getHealth() + " &c\u2665 \n\n\n\n\n\n"));
         }
 
 
@@ -223,7 +223,7 @@ public abstract class BaseEntity extends EntityCreature implements EntityAgeable
         return false;
     }
 
-    protected float getMountedYOffset() {
+    public float getMountedYOffset() {
         return getHeight() * 0.75F;
     }
 

@@ -1,5 +1,6 @@
 package xyz.rokkiitt.sector.objects.inventory.inventories;
 
+import cn.nukkit.block.BlockID;
 import cn.nukkit.inventory.*;
 import cn.nukkit.*;
 import cn.nukkit.math.*;
@@ -16,11 +17,11 @@ public abstract class HopperFakeInventory extends FakeInventory
     public HopperFakeInventory(final InventoryHolder holder, final String title) {
         super(InventoryType.HOPPER, holder, title);
     }
-    
+
     HopperFakeInventory(final InventoryType type, final InventoryHolder holder, final String title) {
         super(type, holder, title);
     }
-    
+
     @Override
     public void onOpen(final Player who) {
         this.viewers.add(who);
@@ -28,17 +29,17 @@ public abstract class HopperFakeInventory extends FakeInventory
         this.blockPositions.put(who, blocks);
         Server.getInstance().getScheduler().scheduleDelayedTask(() -> this.onFakeOpen(who, blocks), 3);
     }
-    
+
     @Override
     protected List<BlockVector3> onOpenBlock(final Player who) {
         final BlockVector3 blockPosition = new BlockVector3((int)who.x, (int)who.y + 2, (int)who.z);
         this.placeChest(who, blockPosition);
         return Collections.singletonList(blockPosition);
     }
-    
+
     protected void placeChest(final Player who, final BlockVector3 pos) {
         final UpdateBlockPacket updateBlock = new UpdateBlockPacket();
-        updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(154, 0);
+        updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.protocol, 154, 0);
         updateBlock.flags = 11;
         updateBlock.x = pos.x;
         updateBlock.y = pos.y;
@@ -51,7 +52,7 @@ public abstract class HopperFakeInventory extends FakeInventory
         blockEntityData.namedTag = this.getNbt(pos);
         who.dataPacket((DataPacket)blockEntityData);
     }
-    
+
     private byte[] getNbt(final BlockVector3 pos) {
         final CompoundTag tag = new CompoundTag().putString("id", "Hopper").putInt("x", pos.x).putInt("y", pos.y).putInt("z", pos.z).putString("CustomName", (this.title == null) ? "Hopper" : this.title);
         try {

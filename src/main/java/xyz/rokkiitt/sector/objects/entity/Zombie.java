@@ -107,9 +107,9 @@ public class Zombie extends WalkingMonster implements EntityAgeable, EntitySmite
             this.close();
             return true;
         }
-        this.setNameTag(Util.fixColor("&r&c&lBOSS\n&r&7HP: &6" + this.getHealth() + " &c\u2665"));
+        this.setNameTag(Util.fixColor("&r&c&lBOSS\n&r&7HP: &9" + this.getHealth() + " &c\u2665"));
         this.setNameTagVisible();
-        this.setScoreTag(Util.fixColor("&r&c&lBOSS\n&r&7HP: &6" + this.getHealth() + " &c\u2665"));
+        this.setScoreTag(Util.fixColor("&r&c&lBOSS\n&r&7HP: &9" + this.getHealth() + " &c\u2665"));
 
         boolean hasUpdate = super.entityBaseTick(tickDiff);
         this.setOnFire(0);

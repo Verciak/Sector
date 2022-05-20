@@ -33,6 +33,7 @@ public class AnvilFakeInventory extends DoubleChestFakeInventory {
     protected void onSlotChange(final FakeSlotChangeEvent e) {
         int slot = e.getAction().getSlot();
         Player p = e.getPlayer();
+        e.setCancelled(true);
         if(slot == 24){
             if(p.getExperienceLevel() < 5){
                 close(p);
@@ -108,15 +109,15 @@ public class AnvilFakeInventory extends DoubleChestFakeInventory {
         }
         this.setServerGui();
         Item all_set = new Item(ItemID.IRON_CHESTPLATE, 0, 1);
-        all_set.setCustomName(Util.fixColor("&r&6&lNAPRAWA CALEJ ZBROJI"));
+        all_set.setCustomName(Util.fixColor("&r&9&lNAPRAWA CALEJ ZBROJI"));
         all_set.setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Koszt: &620 LVL", "&r&8>> &7Kilknij, aby naprawic zbroje!"}));
 
         Item all_eq = new Item(BlockID.ANVIL, 0, 1);
-        all_eq.setCustomName(Util.fixColor("&r&6&lNAPRAWA CALEGO EKWIPUNKU"));
+        all_eq.setCustomName(Util.fixColor("&r&9&lNAPRAWA CALEGO EKWIPUNKU"));
         all_eq.setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Koszt: &630 LVL", "&r&8>> &7Kilknij, aby naprawic caly ekwipunek!"}));
 
         Item item_hand = new Item(ItemID.IRON_SWORD, 0, 1);
-        item_hand.setCustomName(Util.fixColor("&r&6&lNAPRAWA ITEMU W RECE"));
+        item_hand.setCustomName(Util.fixColor("&r&9&lNAPRAWA ITEMU W RECE"));
         item_hand.setLore(Util.fixColor(new String[]{"\u270b", "&r&8>> &7Koszt: &65 LVL", "&r&8>> &7Kilknij, aby naprawic item w rece!"}));
 
         this.setItem(20, all_set);

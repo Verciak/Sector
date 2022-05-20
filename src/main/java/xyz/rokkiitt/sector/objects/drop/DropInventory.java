@@ -55,7 +55,7 @@ public class DropInventory extends DoubleChestFakeInventory
                     this.setItem(43, new ItemBuilder(4, 1).setTitle("&r&l&7Kamien").setLore(new String[] { "\u270b", "&r&8>> &fWypadanie: &e{STATUS}".replace("{STATUS}", this.u.hasDrop(43) ? "&cNie" : "&aTak") }).addGlow(!this.u.hasDrop(43)).build());
                     for (final Drop drop : DropManager.getItems()) {
                         final Item what = this.getCopyItem(drop.getWhat().clone());
-                        what.setCustomName(Util.fixColor("&r&6&l" + PolishItemNames.getPolishName(drop.getWhat())));
+                        what.setCustomName(Util.fixColor("&r&9&l" + PolishItemNames.getPolishName(drop.getWhat())));
                         what.setLore(this.parseLore(drop.getWhat().getLore(), DropInventory.DROP_STONE_LORE, drop, this.u));
                         if (!this.u.hasDrop(drop.getSlot()) && !what.hasEnchantments()) {
                             CompoundTag tag = what.getNamedTag();
@@ -74,7 +74,7 @@ public class DropInventory extends DoubleChestFakeInventory
                     this.setItem(43, new ItemBuilder(4, 1).setTitle("&r&l&7Kamien").setLore(new String[] { "\u270b", "&r&8>> &fWypadanie: &e{STATUS}".replace("{STATUS}", this.u.hasDrop(43) ? "&cNie" : "&aTak") }).addGlow(!this.u.hasDrop(43)).build());
                     for (final Drop drop : DropManager.getItems()) {
                         final Item what = this.getCopyItem(drop.getWhat().clone());
-                        what.setCustomName(Util.fixColor("&r&6&l" + PolishItemNames.getPolishName(drop.getWhat())));
+                        what.setCustomName(Util.fixColor("&r&9&l" + PolishItemNames.getPolishName(drop.getWhat())));
                         what.setLore(this.parseLore(drop.getWhat().getLore(), DropInventory.DROP_STONE_LORE, drop, this.u));
                         if (!this.u.hasDrop(drop.getSlot()) && !what.hasEnchantments()) {
                             CompoundTag tag = what.getNamedTag();
@@ -109,7 +109,7 @@ public class DropInventory extends DoubleChestFakeInventory
             this.setItem(43, new ItemBuilder(4, 1).setTitle("&r&l&7Kamien").setLore(new String[] { "\u270b","&r&8>> &fWypadanie: &e{STATUS}".replace("{STATUS}", this.u.hasDrop(43) ? "&cNie" : "&aTak") }).addGlow(!this.u.hasDrop(43)).build());
             for (final Drop drop : DropManager.getItems()) {
                 final Item what = this.getCopyItem(drop.getWhat().clone());
-                what.setCustomName(Util.fixColor("&r&6&l" + PolishItemNames.getPolishName(drop.getWhat())));
+                what.setCustomName(Util.fixColor("&r&9&l" + PolishItemNames.getPolishName(drop.getWhat())));
                 what.setLore(this.parseLore(drop.getWhat().getLore(), DropInventory.DROP_STONE_LORE, drop, this.u));
                 if (!this.u.hasDrop(drop.getSlot()) && !what.hasEnchantments()) {
                     CompoundTag tag = what.getNamedTag();

@@ -128,11 +128,11 @@ public class Explosion
         final double maxY = NukkitMath.ceilDouble(this.source.y + explosionSize + 1.0);
         final double minZ = NukkitMath.floorDouble(this.source.z - explosionSize - 1.0);
         final double maxZ = NukkitMath.ceilDouble(this.source.z + explosionSize + 1.0);
-        final SimpleAxisAlignedBB simpleAxisAlignedBB = new SimpleAxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+        final AxisAlignedBB AxisAlignedBB = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
         Server.getInstance().getScheduler().scheduleDelayedTask((Task)new Task() {
             public void onRun(final int i) {
                 final Entity[] nearbyEntities;
-                final Entity[] list = nearbyEntities = Explosion.this.level.getNearbyEntities((AxisAlignedBB)simpleAxisAlignedBB, (Explosion.this.what instanceof Entity) ? ((Entity)Explosion.this.what) : null);
+                final Entity[] list = nearbyEntities = Explosion.this.level.getNearbyEntities((AxisAlignedBB)AxisAlignedBB, (Explosion.this.what instanceof Entity) ? ((Entity)Explosion.this.what) : null);
                 for (final Entity entity : nearbyEntities) {
                     if (entity != null) {
                         final double distance = entity.distance((Vector3)Explosion.this.source) / explosionSize;

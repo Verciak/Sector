@@ -1,5 +1,6 @@
 package xyz.rokkiitt.sector.objects.inventory.inventories;
 
+import cn.nukkit.block.BlockID;
 import cn.nukkit.inventory.*;
 import cn.nukkit.*;
 import cn.nukkit.math.*;
@@ -38,7 +39,7 @@ public abstract class WBInventory extends FakeInventory
     
     protected void placeChest(final Player who, final BlockVector3 pos) {
         final UpdateBlockPacket updateBlock = new UpdateBlockPacket();
-        updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(58, 0);
+        updateBlock.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(who.protocol, BlockID.CHEST, 0);
         updateBlock.flags = 11;
         updateBlock.x = pos.x;
         updateBlock.y = pos.y;

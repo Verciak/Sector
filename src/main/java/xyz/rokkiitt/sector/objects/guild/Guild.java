@@ -336,7 +336,7 @@ public class Guild
     }
     
     public boolean addSize() {
-        return this.cuboid.addSize();
+        return this.cuboid.addSize(getTag());
     }
     
 //    public void queryDelete() {

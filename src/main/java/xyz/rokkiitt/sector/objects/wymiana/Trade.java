@@ -213,8 +213,8 @@ public class Trade extends DoubleChestFakeInventory
         for (final Integer s : sl) {
             this.setItem((int)s, this.szklo);
         }
-        this.setItem(3, new ItemBuilder(389).setTitle("&r&6" + this.p1.getName()).build());
-        this.setItem(5, new ItemBuilder(389).setTitle("&r&6" + this.p2.getName()).build());
+        this.setItem(3, new ItemBuilder(389).setTitle("&r&9" + this.p1.getName()).build());
+        this.setItem(5, new ItemBuilder(389).setTitle("&r&9" + this.p2.getName()).build());
         this.setItem(0, this.welna);
         this.setItem(8, this.welna);
     }

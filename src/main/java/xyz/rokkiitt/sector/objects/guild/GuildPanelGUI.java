@@ -173,7 +173,7 @@ public class GuildPanelGUI extends DoubleChestFakeInventory
         if (this.pages.size() > 0) {
             for (final String p : this.pages.get(page)) {
                 if (slot <= 36) {
-                    this.setItem(Util.getSlotInventory(slot), new ItemBuilder(397, 1, 3).setTitle("&r&6" + p.toUpperCase()).build());
+                    this.setItem(Util.getSlotInventory(slot), new ItemBuilder(397, 1, 3).setTitle("&r&9" + p.toUpperCase()).build());
                 }
                 ++slot;
             }

@@ -15,12 +15,13 @@ public class FakeInventories
         }
         return inventory.getPosition(player);
     }
-    
+
     public static Optional<FakeInventory> getFakeInventory(final Player player) {
         return Optional.ofNullable(FakeInventory.open.get(player));
     }
-    
+
     public static void removeFakeInventory(final FakeInventory inventory) {
         inventory.close();
     }
 }
+

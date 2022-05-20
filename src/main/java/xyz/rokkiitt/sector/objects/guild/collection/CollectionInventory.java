@@ -236,7 +236,7 @@ public class CollectionInventory extends DoubleChestFakeInventory
         }
         this.pages.size();
         for (final CollectionData log : this.pages.get(page)) {
-            this.addOneItem(new ItemBuilder(389).setTitle("&r&6" + log.who).setLore(new String[] { "", "&r&fWplacil: &e" + log.in, "&r&fWyplacil: &e" + log.out, "" }).build());
+            this.addOneItem(new ItemBuilder(389).setTitle("&r&9" + log.who).setLore(new String[] { "", "&r&fWplacil: &e" + log.in, "&r&fWyplacil: &e" + log.out, "" }).build());
         }
         this.selectedPage = page;
     }

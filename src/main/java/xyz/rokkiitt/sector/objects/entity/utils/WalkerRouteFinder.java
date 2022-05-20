@@ -2,7 +2,6 @@ package xyz.rokkiitt.sector.objects.entity.utils;
 
 import cn.nukkit.block.Block;
 import cn.nukkit.math.AxisAlignedBB;
-import cn.nukkit.math.SimpleAxisAlignedBB;
 import cn.nukkit.math.Vector3;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,8 +123,8 @@ public class WalkerRouteFinder extends SimpleRouteFinder {
     private boolean isPassable(Vector3 vector3) {
         double radius = (this.entity.getWidth() * this.entity.getScale() / 2.0F);
         float height = this.entity.getHeight() * this.entity.getScale();
-        SimpleAxisAlignedBB simpleAxisAlignedBB = new SimpleAxisAlignedBB(vector3.getX() - radius, vector3.getY(), vector3.getZ() - radius, vector3.getX() + radius, vector3.getY() + height, vector3.getZ() + radius);
-        return (!Utils.hasCollisionBlocks(this.level, (AxisAlignedBB)simpleAxisAlignedBB) &&
+        AxisAlignedBB AxisAlignedBB = new AxisAlignedBB(vector3.getX() - radius, vector3.getY(), vector3.getZ() - radius, vector3.getX() + radius, vector3.getY() + height, vector3.getZ() + radius);
+        return (!Utils.hasCollisionBlocks(this.level, (AxisAlignedBB)AxisAlignedBB) &&
                 !this.level.getBlock(vector3.add(0.0D, -1.0D, 0.0D), false).canPassThrough());
     }
 
@@ -323,8 +322,8 @@ public class WalkerRouteFinder extends SimpleRouteFinder {
         double radius = (this.entity.getWidth() * this.entity.getScale() / 2.0F) + 0.1D;
         double height = (this.entity.getHeight() * this.entity.getScale());
         for (Vector3 vector3 : list) {
-            SimpleAxisAlignedBB simpleAxisAlignedBB = new SimpleAxisAlignedBB(vector3.getX() - radius, vector3.getY(), vector3.getZ() - radius, vector3.getX() + radius, vector3.getY() + height, vector3.getZ() + radius);
-            if (Utils.hasCollisionBlocks(this.level, (AxisAlignedBB)simpleAxisAlignedBB))
+            AxisAlignedBB AxisAlignedBB = new AxisAlignedBB(vector3.getX() - radius, vector3.getY(), vector3.getZ() - radius, vector3.getX() + radius, vector3.getY() + height, vector3.getZ() + radius);
+            if (Utils.hasCollisionBlocks(this.level, (AxisAlignedBB)AxisAlignedBB))
                 return true;
             boolean xIsInt = (vector3.getX() % 1.0D == 0.0D);
             boolean zIsInt = (vector3.getZ() % 1.0D == 0.0D);

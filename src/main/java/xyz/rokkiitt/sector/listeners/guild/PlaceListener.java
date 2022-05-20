@@ -4,8 +4,10 @@ import java.util.*;
 import java.util.concurrent.*;
 import cn.nukkit.event.block.*;
 import cn.nukkit.command.*;
+import cn.nukkit.event.player.PlayerInteractEvent;
 import xyz.rokkiitt.sector.Settings;
 import xyz.rokkiitt.sector.config.Config;
+import xyz.rokkiitt.sector.listeners.PlayerInteractListeners;
 import xyz.rokkiitt.sector.objects.Perms;
 import xyz.rokkiitt.sector.objects.antigrief.AntiGrief;
 import xyz.rokkiitt.sector.objects.block.Cooldown;
@@ -35,7 +37,16 @@ public class PlaceListener implements Listener
     public PlaceListener() {
         this.times = new ConcurrentHashMap<UUID, Long>();
     }
-    
+
+
+
+    @EventHandler
+    public void onInt(PlayerInteractEvent e){
+        if(e.getAction() == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK){
+            e.setCancelled(true);
+        }
+    }
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBlockPlace(final BlockPlaceEvent e) {
         if (e.isCancelled()) {

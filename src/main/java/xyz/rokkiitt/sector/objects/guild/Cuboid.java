@@ -1,5 +1,6 @@
 package xyz.rokkiitt.sector.objects.guild;
 
+import xyz.rokkiitt.sector.Main;
 import xyz.rokkiitt.sector.Settings;
 import cn.nukkit.level.*;
 import cn.nukkit.*;
@@ -29,11 +30,13 @@ public class Cuboid
         this.centerZ = t;
     }
     
-    public boolean addSize() {
+    public boolean addSize(String tag) {
         if (this.size >= Settings.GUILD_SIZE_MAX) {
             return false;
         }
         this.size += Settings.GUILD_SIZE_ADD;
+        Main.getProvider().update("UPDATE `guilds` SET `size` ='" + getSize() +"' WHERE `tag` ='" + tag + "'");
+
         return true;
     }
     

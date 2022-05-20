@@ -146,7 +146,7 @@ public abstract class WalkingMonster extends WalkingEntity implements Monster {
             BossManager.deleteBoss(boss);
             for(Player p : Server.getInstance().getOnlinePlayers().values()){
                 if(getLastDamageCause() instanceof EntityDamageByEntityEvent){
-                    p.sendTitle(Util.fixColor("&r&c&lBOSS"), Util.fixColor("&r&7BOSS ZOSTAL ZABITY PRZEZ &6" + ((EntityDamageByEntityEvent) getLastDamageCause()).getDamager().getName()), 30, 80, 30);
+                    p.sendTitle(Util.fixColor("&r&c&lBOSS"), Util.fixColor("&r&7BOSS ZOSTAL ZABITY PRZEZ &9" + ((EntityDamageByEntityEvent) getLastDamageCause()).getDamager().getName()), 30, 80, 30);
                 }
             }
             return false;
