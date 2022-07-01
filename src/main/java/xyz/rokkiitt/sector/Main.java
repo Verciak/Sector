@@ -253,7 +253,7 @@ public class Main extends PluginBase
     
     private void registerCommands() {
         final long startTime = System.nanoTime();
-        List<Command> cmd = Arrays.asList(new GuildInfoCommand(),new GuildFFACommand(), new GuildExpandCommand(), new GuildCommand(), new GuildDeleteCommand(), new TestCommand(), new AdminPanelCommand(), new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
+        List<Command> cmd = Arrays.asList(new GuildFFCommand(),new GuildInfoCommand(),new GuildFFACommand(), new GuildExpandCommand(), new GuildCommand(), new GuildDeleteCommand(), new TestCommand(), new AdminPanelCommand(), new GuildHomeCommand(), new GuildCreateCommand(), new GuildWarCommand(), new ToprankCommand(), new CmdlistCommand(), new DirectionCommand(), new TestCommand(), new GuildRegenerationCommand(), new GuildTreasureCommand(), new TrashCommand(), new PItemsCommand(), new ClearCommand(),
                 new GodCommand(), new FlyCommand(), new BossCommand(), new VanishCommand(), new DropCommand(), new DepositCommand(), new KitCommand(), new HealCommand(), new FeedCommand(), new SpawnCommand(), new CxCommand(),
                 new HelpCommand(), new VipCommand(), new SvipCommand(), new SponsorCommand(), new YouTubeCommand(), new TnTCommand(), new StatuteCommand(), new AlertCommand(), new DescriptionCommand(), new RepairCommand(),
                 new TopCommand(), new EffectsCommand(), new HelpopCommand(), new ResetRankingCommand(), new EnderCommand(), new BlocksCommand(), new IgnoreCommand(), new UnIgnoreCommand(), new IgnoreListCommand(), new CraftingsCommand(),
@@ -290,6 +290,7 @@ public class Main extends PluginBase
         ingredients.put('B', Item.get(260));
         Server.getInstance().getCraftingManager().registerRecipe(419 , new ShapedRecipe(Item.get(466), new String[] { "AAA", "ABA", "AAA" }, ingredients, new ArrayList()));
         ingredients.clear();
+
         ingredients.put('A', Item.get(49));
         ingredients.put('B', Item.get(368));
         Server.getInstance().getCraftingManager().registerRecipe(419 , new ShapedRecipe(Item.get(130), new String[] { "AAA", "ABA", "AAA" }, ingredients, new ArrayList()));

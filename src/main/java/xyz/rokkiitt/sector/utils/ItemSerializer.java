@@ -4,6 +4,8 @@ import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Location;
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.output.JsonStream;
@@ -15,6 +17,49 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class ItemSerializer {
+    public static Item deserializeItem(String serialized) {
+        ByteArrayDataInput input = ByteStreams.newDataInput(serialized.getBytes());
+
+        Item item = Item.get(input.readInt(), input.readInt(), input.readInt());
+
+        String compoundTag = input.readUTF();
+
+        if(compoundTag.length() > 0)
+            item.setCompoundTag(compoundTag.getBytes());
+
+        return item;
+    }
+    public static Item[] deserializeItemArray(String serialized) {
+        ByteArrayDataInput input = ByteStreams.newDataInput(serialized.getBytes());
+
+        Item[] items = new Item[input.readInt()];
+
+        for(int i = 0; i < items.length; i++)
+            items[i] = deserializeItem(input.readUTF());
+
+        return items;
+    }
+    public static String serializeItem(Item item) {
+        ByteArrayDataOutput output = ByteStreams.newDataOutput();
+
+        output.writeInt(item.getId());
+        output.writeInt(item.getDamage());
+        output.writeInt(item.getCount());
+
+        output.writeUTF(item.hasCompoundTag() ? new String(item.getCompoundTag()) : "");
+
+        return new String(output.toByteArray());
+    }
+    public static String serializeItemArray(Item[] items) {
+        ByteArrayDataOutput output = ByteStreams.newDataOutput();
+
+        output.writeInt(items.length);
+
+        for(Item item : items)
+            output.writeUTF(serializeItem(item));
+
+        return new String(output.toByteArray());
+    }
 
     public static String itemToString(Item item) {
         return item.getId() + ":" +

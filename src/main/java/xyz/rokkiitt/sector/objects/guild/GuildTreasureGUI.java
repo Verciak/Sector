@@ -9,8 +9,11 @@ import java.util.*;
 
 public class GuildTreasureGUI extends DoubleChestFakeInventory
 {
-    public GuildTreasureGUI(final Map<Integer, Item> map) {
+    Guild g;
+
+    public GuildTreasureGUI(final Map<Integer, Item> map, Guild guild) {
         super(null, Util.fixColor("&6Skarbiec"));
+        this.g = guild;
         this.setContents((Map)map);
     }
     
@@ -19,5 +22,11 @@ public class GuildTreasureGUI extends DoubleChestFakeInventory
         final List<Player> copy = new ArrayList<Player>(this.viewers);
         copy.remove(e.getPlayer());
         this.sendContents((Collection)copy);
+    }
+
+    @Override
+    public void onClose(Player who) {
+        g.setSkarbiec(this);
+        super.onClose(who);
     }
 }

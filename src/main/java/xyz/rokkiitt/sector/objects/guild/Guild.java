@@ -17,6 +17,7 @@ import java.util.regex.*;
 import java.util.concurrent.*;
 import java.util.*;
 import cn.nukkit.block.*;
+import xyz.rokkiitt.sector.utils.InventoryUtil;
 import xyz.rokkiitt.sector.utils.ItemSerializer;
 
 public class Guild
@@ -402,7 +403,7 @@ public class Guild
 
     public void setSkarbiec(GuildTreasureGUI skarbiec) {
         this.skarbiec = skarbiec;
-        Main.getProvider().update("UPDATE `guilds` SET `skarbiec` ='" + ItemSerializer.getStringFromItemMap(getSkarbiec().getContents()) +"' WHERE `tag` ='" + getTag() + "'");
+        Main.getProvider().update("UPDATE `guilds` SET `skarbiec` ='" + ItemSerializer.serializeItemArray(InventoryUtil.inventoryContentsToItemArray(getSkarbiec().getContents())) +"' WHERE `tag` ='" + getTag() + "'");
 
     }
 
@@ -713,7 +714,7 @@ public class Guild
                 "'" + getHeartcolor() + "'," +
                 "'" + getHearttype() + "'," +
                 "'" + getHearts() + "'," +
-                "'" + ItemSerializer.getStringFromItemMap(getSkarbiec().getContents()) + "'," +
+                "'" + ItemSerializer.serializeItemArray(InventoryUtil.inventoryContentsToItemArray(getSkarbiec().getContents())) + "'," +
                 "'" + Collection.serialize(getCollections()) + "'," +
                 "'" + getHoppers() + "'," +
                 "'" + getPoints() + "'," +
@@ -743,7 +744,7 @@ public class Guild
         this.heartcolor = set.getString("heartcolor");
         this.hearttype = set.getString("hearttype");
         this.hearts = set.getInt("hearts");
-        this.skarbiec = new GuildTreasureGUI(set.getString("skarbiec").equalsIgnoreCase("brak") ? new HashMap<>() : ItemSerializer.getItemMapFromString(set.getString("skarbiec")));
+        this.skarbiec = new GuildTreasureGUI(set.getString("skarbiec").equalsIgnoreCase("brak") ? new HashMap<>() : InventoryUtil.itemArrayToInventoryContents(ItemSerializer.deserializeItemArray(set.getString("skarbiec"))), this);
         this.collections = ConcurrentHashMap.newKeySet();
         if (!set.getString("collections").equalsIgnoreCase("brak")) {
             this.collections.addAll(Collection.deserialize(set.getString("collections")));
@@ -778,7 +779,7 @@ public class Guild
         this.size = size;
         this.heart = new Heart(centerx, centerz, 4);
         this.regengui = new GuildRegenerationGUI(this);
-        this.skarbiec = new GuildTreasureGUI(skarbiec.equalsIgnoreCase("brak") ? new HashMap<Integer, Item>() : ItemSerializer.getItemMapFromString(skarbiec));
+        this.skarbiec = new GuildTreasureGUI(skarbiec.equalsIgnoreCase("brak") ? new HashMap<Integer, Item>() : InventoryUtil.itemArrayToInventoryContents(ItemSerializer.deserializeItemArray(skarbiec)), this);
         this.isRegen = false;
         this.guildBalance = goldblocks;
         this.GuildProtectionTime = guildprot;

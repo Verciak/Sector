@@ -5,6 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.output.JsonStream;
+import org.apache.commons.lang3.StringUtils;
 import xyz.rokkiitt.sector.Main;
 import xyz.rokkiitt.sector.SectorCommand;
 import xyz.rokkiitt.sector.Settings;
@@ -14,7 +15,10 @@ import xyz.rokkiitt.sector.objects.guild.GuildManager;
 import xyz.rokkiitt.sector.objects.user.User;
 import xyz.rokkiitt.sector.objects.user.UserManager;
 import xyz.rokkiitt.sector.packets.PacketStatsCommand;
+import xyz.rokkiitt.sector.utils.Time;
 import xyz.rokkiitt.sector.utils.Util;
+
+import java.util.Set;
 
 public class GuildInfoCommand extends SectorCommand {
     public GuildInfoCommand() {
@@ -35,6 +39,11 @@ public class GuildInfoCommand extends SectorCommand {
                             .replace("{ZYCIA}", String.valueOf(g.getHearts()))
                             .replace("{POINTS}", String.valueOf(g.getPoints()))
                             .replace("{HP}", String.valueOf(g.getHearthp()))
+                            .replace("{KILLS}", String.valueOf(g.getKills()))
+                            .replace("{DEATHS}", String.valueOf(g.getDeaths()))
+                            .replace("{GUILDPROTTIME}", Util.formatTime(g.getGuildProtectionTime() - System.currentTimeMillis()))
+                            .replace("{HEARTHPROTTIME}", Util.formatTime(g.getHeartProtectionTime() - System.currentTimeMillis()))
+                            .replace("{MEMBERS}", StringUtils.join(getMemberList(g.getMembers()), "&8, "))
                     );
                 } else {
                     sendCorrectUsage(p);
@@ -50,4 +59,23 @@ public class GuildInfoCommand extends SectorCommand {
         }
         return false;
     }
+
+    public static String[] getMemberList(final Set<String> members) {
+        final String[] s = new String[members.size()];
+        int i = 0;
+        for (final String u : members) {
+            String color= "&c";
+            Player p = Server.getInstance().getPlayer(u);
+            if(p == null){
+                color = "&c";
+            }
+            if(p.isOnline()){
+                color = "&a";
+            }
+            s[i] = color + u;
+            ++i;
+        }
+        return s;
+    }
+
 }

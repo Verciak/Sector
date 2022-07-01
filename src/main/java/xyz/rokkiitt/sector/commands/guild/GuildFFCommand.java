@@ -16,9 +16,9 @@ import xyz.rokkiitt.sector.objects.user.UserManager;
 import xyz.rokkiitt.sector.packets.guild.commands.PacketGuildFF;
 import xyz.rokkiitt.sector.utils.Util;
 
-public class GuildFFACommand extends SectorCommand {
-    public GuildFFACommand() {
-        super("ffa", "przelacza tryb pvp w sojuszu", "/ffa", "", new String[0]);
+public class GuildFFCommand extends SectorCommand {
+    public GuildFFCommand() {
+        super("ff", "przelacza tryb pvp w gildii", "/ff", "", new String[0]);
     }
 
     public boolean onCommand(Player p, String[] args) {
@@ -28,19 +28,19 @@ public class GuildFFACommand extends SectorCommand {
         if (u != null) {
             if (u.getTag().equalsIgnoreCase("NIEPOSIADA"))
                 return Util.sendMessage((CommandSender)p, Settings.getMessage("donthaveguild"));
-            if (!u.hasPermission("9"))
-                return Util.sendMessage((CommandSender)p, Settings.getMessage("guildpermission").replace("{TYPE}", "zmiany pvp w sojuszu"));
-            if(GuildManager.getGuild(u.getTag()).isAllypvp() == false){
-                GuildManager.getGuild(u.getTag()).setAllypvp(true);
+            if (!u.hasPermission("8"))
+                return Util.sendMessage((CommandSender)p, Settings.getMessage("guildpermission").replace("{TYPE}", "zmiany pvp w gildii"));
+            if(GuildManager.getGuild(u.getTag()).isPvp() == false){
+                GuildManager.getGuild(u.getTag()).setPvp(true);
             }else {
-                GuildManager.getGuild(u.getTag()).setAllypvp(false);
+                GuildManager.getGuild(u.getTag()).setPvp(false);
             }
             for (User ua : UserManager.users) {
                 if (ua.getTag().equalsIgnoreCase(u.getTag())) {
                     Player pa = Server.getInstance().getPlayerExact(u.getNickname().toLowerCase());
                     if (pa != null)
-                        pa.sendTitle(Util.fixColor("&l&3Alliance Fire"), Util.fixColor("&fOgien sojuszniczy zostal {STATUS} &fprzez &3{PLAYER}"
-                                .replace("{PLAYER}", p.getName()).replace("{STATUS}", GuildManager.getGuild(u.getTag()).isAllypvp() ? "&awlaczony" : "&cwylaczony")));
+                        pa.sendTitle(Util.fixColor("&l&3Friendly Fire"), Util.fixColor("&fOgien gildyjny zostal {STATUS} &fprzez &3{PLAYER}"
+                                .replace("{PLAYER}", p.getName()).replace("{STATUS}", GuildManager.getGuild(u.getTag()).isPvp() ? "&awlaczony" : "&cwylaczony")));
                 }
             }
             return false;
@@ -49,3 +49,4 @@ public class GuildFFACommand extends SectorCommand {
         return false;
     }
 }
+

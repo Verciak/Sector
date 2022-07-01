@@ -685,6 +685,14 @@ guildinfocmd: |-
   GILDIA: {TAG} - {NAME}
   LIDER: {LEADER}
   ROZMIAR: {SIZE}
+  ZYCIA: {ZYCIA}
+  HP: {HP}
+  POINTS: {POINTS}
+  KILLS: {KILLS}
+  DEATHS: {DEATHS}
+  GUILDPROTTIME: {GUILDPROTTIME}
+  HEARTHPROTTIME: {HEARTHPROTTIME}
+  MEMBERS: {MEMBERS}
 vippermissions: "vip|&|cmd.repair|&|cmd.repairall|&|cmd.enderchest|&|cmd.workbench|&|vip.kit"
 svippermissions: "svip|&|cmd.repair|&|cmd.repairall|&|cmd.enderchest|&|cmd.workbench|&|svip.kit"
 sponsorpermissions: "sponsor|&|cmd.repair|&|cmd.repairall|&|cmd.enderchest|&|cmd.workbench|&|sponsor.kit"
